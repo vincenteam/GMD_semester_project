@@ -1,0 +1,25 @@
+puzzle rooms
+when you die your body stay on place and becomes a game object (fill holes, push button ...)
+you can pile up bodies to make stairs
+
+die when you want / die only with in game interaction
+dies count limit
+resest button (to avoid softlock)
+
+booster, bumpers (time your death mid air to land on somthing)
+
+grinders that make the bodies deasapear at a certain rate / instant deasapear
+energy fields activating at a given interval, all the bodies in its range deasapear
+
+compacter that reduce the size of a hole to make the player able to fill it(walls get colser)
+
+enemy that shoot you, bodies block projectiles, diferrent types of prjectiles, some can push bodies
+projectiles can push the player alive (need to avoid holes)
+
+diferrent speeds for levels, some full puzzle where you can take the time to think, and some action oriented where you have to run through the entire level
+
+on action level: mid level you need to die and instant respawn, and you do it again, but your death changed the level design (button kill all enemies, but they fall and you need to avoid their corpses/corpses block a grinder.../ )
+
+
+if you need a lot of bodies to do something and its to boring to walk from spawn each time, a button that makes you able to do the same path you did on your last life instantly as long as the level did not change
+making the player able to move spawn point
