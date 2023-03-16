@@ -1,21 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 1;
     [SerializeField] private float jumpHeight = 1;
 
-    private Rigidbody rg;
+    private Rigidbody rb;
     [SerializeField] private CollisionDetector groundDetector;
 
     [SerializeField] private float leftRightSpeed = 1;
     [SerializeField] private float forwardSpeed = 1;
+    [SerializeField] private float maxSpeed = 1;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        rg = gameObject.GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        
+        // rotation hell
+        gameObject.GetComponent<Rigidbody>();
+        rb.inertiaTensorRotation = Quaternion.identity;
     }
 
     // Update is called once per frame
@@ -23,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && groundDetector.Grounded)
         {
-            rg.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
+            rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
         }
         
         /*Vector3 targetVelocity = new Vector3(0, 0, 0);
@@ -49,19 +57,23 @@ public class PlayerController : MonoBehaviour
         rg.velocity = targetVelocity;
         //rg.MovePosition(transform.position + move * Time.deltaTime);*/
         
+        
         float moveForward = Input.GetAxis("Forward");
         if(moveForward != 0 )
         {
-            rg.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
+            rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
         }
         
         float moveRightLeft = Input.GetAxis("RightLeft");
         if (moveRightLeft != 0)
         {
-            rg.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
+            rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
         }
         
         Quaternion q = Quaternion.Euler(0, Input.GetAxis("Mouse X")*360*rotateSpeed*Time.deltaTime, 0);
-        rg.MoveRotation( transform.rotation*q);
+        rb.MoveRotation( transform.rotation*q);
+
+        Vector3 vel = rb.velocity;
+        rb.velocity = new Vector3(Mathf.Clamp(vel.x, -maxSpeed, maxSpeed), vel.y, Mathf.Clamp(vel.z, -maxSpeed, maxSpeed));
     }
 }
