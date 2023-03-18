@@ -7,18 +7,25 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float rotateSpeed = 1;
     [SerializeField] private float jumpHeight = 1;
+    [SerializeField] private float sensitivityY = 0.1f; 
 
     private Rigidbody rb;
+    [SerializeField] private Transform head;
     [SerializeField] private CollisionDetector groundDetector;
 
     [SerializeField] private float leftRightSpeed = 1;
     [SerializeField] private float forwardSpeed = 1;
     [SerializeField] private float maxSpeed = 1;
-    
+    float yAccumulator; // this is a member variable, NOT a local!
+ 
+    [SerializeField] float Snappiness = 5.0f;
     
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
         rb = gameObject.GetComponent<Rigidbody>();
         
         // rotation hell
@@ -72,6 +79,22 @@ public class PlayerController : MonoBehaviour
         
         Quaternion q = Quaternion.Euler(0, Input.GetAxis("Mouse X")*360*rotateSpeed*Time.deltaTime, 0);
         rb.MoveRotation( transform.rotation*q);
+        
+        
+        float inputY = Input.GetAxis("Mouse Y");
+        yAccumulator = Mathf.Lerp( yAccumulator, inputY, Snappiness * Time.deltaTime);
+        Vector3 r = new Vector3(yAccumulator*360*rotateSpeed*sensitivityY, 0, 0);
+        if (head.localRotation.x*360 + r.x > 180 || head.localRotation.x*360 + r.x < -180)
+        {
+            print("out");
+        }
+        else
+        {
+            head.Rotate(r, Space.Self);
+        }
+        
+        print(r + " " +head.localRotation);
+        //head.localRotation = new Quaternion(Mathf.Clamp(head.rotation.x, -0.5f, 0.5f), head.localRotation.y, head.localRotation.z, 1);
 
         Vector3 vel = rb.velocity;
         rb.velocity = new Vector3(Mathf.Clamp(vel.x, -maxSpeed, maxSpeed), vel.y, Mathf.Clamp(vel.z, -maxSpeed, maxSpeed));
