@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    private bool grounded = false;
+    private int collisionCount;
 
     public bool Grounded
     {
-        get => grounded;
+        get => collisionCount > 0;
     }
     // Start is called before the first frame update
     void Start()
@@ -26,11 +26,11 @@ public class CollisionDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        grounded = true;
+        collisionCount++;
     }
 
     void OnTriggerExit(Collider other)
     {
-        grounded = false;
+        collisionCount--;
     }
 }

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSpeed = 1;
     float yAccumulator; // this is a member variable, NOT a local!
  
-    [SerializeField] float Snappiness = 5.0f;
+    [SerializeField] float Snappiness = 10.0f;
     
     // Start is called before the first frame update
     void Start()
@@ -40,31 +40,8 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
         }
-        
-        /*Vector3 targetVelocity = new Vector3(0, 0, 0);
-        
-        float moveForward = Input.GetAxis("Forward");
-        //Vector3 move = new Vector3(0, 0, 0);
-        if(moveForward != 0 )
-        {
-            targetVelocity.z = moveForward * forwardSpeed;
-            //move += moveForward * forwardSpeed * transform.forward;
-            //rg.AddForce(moveForward * forwardSpeed  *Time.deltaTime * transform.forward);
-            //rg.velocity = moveForward * forwardSpeed * Time.deltaTime * transform.forward;
-        }
-        
-        float moveRightLeft = Input.GetAxis("RightLeft");
-        if (moveRightLeft != 0)
-        {
-            targetVelocity.x = moveRightLeft * leftRightSpeed;
-            //rg.AddForce(moveRightLeft * leftRightSpeed *Time.deltaTime * transform.right);
-        }
 
-        targetVelocity.y = rg.velocity.y;
-        rg.velocity = targetVelocity;
-        //rg.MovePosition(transform.position + move * Time.deltaTime);*/
-        
-        
+
         float moveForward = Input.GetAxis("Forward");
         if(moveForward != 0 )
         {
@@ -84,17 +61,19 @@ public class PlayerController : MonoBehaviour
         float inputY = Input.GetAxis("Mouse Y");
         yAccumulator = Mathf.Lerp( yAccumulator, inputY, Snappiness * Time.deltaTime);
         Vector3 r = new Vector3(yAccumulator*360*rotateSpeed*sensitivityY, 0, 0);
-        if (head.localRotation.x*360 + r.x > 180 || head.localRotation.x*360 + r.x < -180)
+        
+        if (head.localRotation.x*360 + r.x > 180)
         {
-            print("out");
+            head.localRotation = new Quaternion(0.5f, head.localRotation.y, head.localRotation.z, head.localRotation.w);
+        }else if ( head.localRotation.x*360 + r.x < -180)
+        {
+            head.localRotation = new Quaternion(-0.5f, head.localRotation.y, head.localRotation.z, head.localRotation.w);
         }
         else
         {
             head.Rotate(r, Space.Self);
         }
-        
-        print(r + " " +head.localRotation);
-        //head.localRotation = new Quaternion(Mathf.Clamp(head.rotation.x, -0.5f, 0.5f), head.localRotation.y, head.localRotation.z, 1);
+
 
         Vector3 vel = rb.velocity;
         rb.velocity = new Vector3(Mathf.Clamp(vel.x, -maxSpeed, maxSpeed), vel.y, Mathf.Clamp(vel.z, -maxSpeed, maxSpeed));
