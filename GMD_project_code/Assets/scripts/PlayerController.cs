@@ -39,17 +39,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && groundDetector.Grounded)
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
+            groundDetector.ForceCollisionOut();
         }
 
 
         float moveForward = Input.GetAxis("Forward");
-        if(moveForward != 0 )
+        if(moveForward != 0 && rb.velocity.z < maxSpeed && rb.velocity.z > -maxSpeed)
         {
             rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
         }
         
         float moveRightLeft = Input.GetAxis("RightLeft");
-        if (moveRightLeft != 0)
+        if (moveRightLeft != 0 && rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
         {
             rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
         }
@@ -73,9 +74,5 @@ public class PlayerController : MonoBehaviour
         {
             head.Rotate(r, Space.Self);
         }
-
-
-        Vector3 vel = rb.velocity;
-        rb.velocity = new Vector3(Mathf.Clamp(vel.x, -maxSpeed, maxSpeed), vel.y, Mathf.Clamp(vel.z, -maxSpeed, maxSpeed));
     }
 }

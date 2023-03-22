@@ -7,10 +7,11 @@ using UnityEngine;
 public class CollisionDetector : MonoBehaviour
 {
     private int collisionCount;
-
+    private bool grounded = false;
+    
     public bool Grounded
     {
-        get => collisionCount > 0;
+        get => grounded;
     }
     // Start is called before the first frame update
     void Start()
@@ -24,13 +25,20 @@ public class CollisionDetector : MonoBehaviour
         
     }
 
+    public void ForceCollisionOut()
+    {
+        grounded = false;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         collisionCount++;
+        grounded = true;
     }
 
     void OnTriggerExit(Collider other)
     {
         collisionCount--;
+        grounded = collisionCount > 0;
     }
 }
