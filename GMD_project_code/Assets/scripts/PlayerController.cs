@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour
         float moveForward = Input.GetAxis("Forward");
         if(moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
         {
-            print("addforce" + vel.z);
             rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
         }
         
