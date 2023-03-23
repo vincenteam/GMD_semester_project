@@ -42,18 +42,39 @@ public class PlayerController : MonoBehaviour
             groundDetector.ForceCollisionOut();
         }
 
+        //if (groundDetector.Grounded)
+        //{
+            /*Vector3 vel = transform.InverseTransformDirection(rb.velocity);
+            float moveForward = Input.GetAxis("Forward");
+            if(moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
+            {
+                rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed, ForceMode.VelocityChange);
+            }
+            
+            float moveRightLeft = Input.GetAxis("RightLeft");
+            if (moveRightLeft != 0 && vel.x < maxSpeed && vel.x > -maxSpeed)
+            {
+                rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed, ForceMode.VelocityChange);
+            }*/
+        //}
+        
         Vector3 vel = transform.InverseTransformDirection(rb.velocity);
         float moveForward = Input.GetAxis("Forward");
-        if(moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
+        if (moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
         {
-            rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
+            Vector3 new_vel = transform.InverseTransformDirection(rb.velocity);
+            new_vel.z = maxSpeed*Mathf.Sign(moveForward);
+            rb.velocity = transform.TransformVector(new_vel);
         }
         
         float moveRightLeft = Input.GetAxis("RightLeft");
         if (moveRightLeft != 0 && vel.x < maxSpeed && vel.x > -maxSpeed)
         {
-            rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
+            Vector3 new_vel = transform.InverseTransformDirection(rb.velocity);
+            new_vel.x = maxSpeed*Mathf.Sign(moveRightLeft);
+            rb.velocity = transform.TransformVector(new_vel);
         }
+        
         
         Quaternion q = Quaternion.Euler(0, Input.GetAxis("Mouse X")*360*rotateSpeed*Time.deltaTime, 0);
         rb.MoveRotation( transform.rotation*q);
