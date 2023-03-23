@@ -42,15 +42,16 @@ public class PlayerController : MonoBehaviour
             groundDetector.ForceCollisionOut();
         }
 
-
+        Vector3 vel = transform.InverseTransformDirection(rb.velocity);
         float moveForward = Input.GetAxis("Forward");
-        if(moveForward != 0 && rb.velocity.z < maxSpeed && rb.velocity.z > -maxSpeed)
+        if(moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
         {
+            print("addforce" + vel.z);
             rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
         }
         
         float moveRightLeft = Input.GetAxis("RightLeft");
-        if (moveRightLeft != 0 && rb.velocity.x < maxSpeed && rb.velocity.x > -maxSpeed)
+        if (moveRightLeft != 0 && vel.x < maxSpeed && vel.x > -maxSpeed)
         {
             rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
         }
