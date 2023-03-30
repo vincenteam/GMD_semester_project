@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder;
+using Math = UnityEngine.ProBuilder.Math;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +21,12 @@ public class PlayerController : MonoBehaviour
     float yAccumulator; // this is a member variable, NOT a local!
  
     [SerializeField] float Snappiness = 10.0f;
+
+    private float moveForward;
+    private float moveRightLeft;
+    private float mouseY;
+    private float mouseX;
+    private bool jumpInput;
     
     // Start is called before the first frame update
     void Start()
@@ -33,34 +41,67 @@ public class PlayerController : MonoBehaviour
         rb.inertiaTensorRotation = Quaternion.identity;
     }
 
+    private void Update()
+    {
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+        float rglft = Input.GetAxis("RightLeft");
+        if (rglft != 0)
+        {
+            moveRightLeft = rglft < 0 ? -1 : 1;    
+        }
+        else
+        {
+            moveRightLeft = 0;
+        }
+        
+        float forward = Input.GetAxis("Forward");
+        if (forward != 0)
+        {
+            moveForward = forward < 0 ? -1 : 1;    
+        }
+        else
+        {
+            moveForward = 0;
+        }
+        
+        jumpInput = Input.GetButtonDown("Jump");
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetButtonDown("Jump") && groundDetector.Grounded)
+        if (jumpInput && groundDetector.Grounded)
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
             groundDetector.ForceCollisionOut();
         }
 
+        
+        //movement
         Vector3 vel = transform.InverseTransformDirection(rb.velocity);
-        float moveForward = Input.GetAxis("Forward");
-        if(moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
+
+        float forward_percent = Mathf.Abs(maxSpeed*moveForward - Mathf.Clamp(vel.z, -maxSpeed, maxSpeed))/ (maxSpeed*2);
+        if(moveForward != 0)
         {
-            rb.AddRelativeForce(new Vector3(0, 0, moveForward) * forwardSpeed);
+            rb.AddRelativeForce(forward_percent * forwardSpeed * new Vector3(0, 0, moveForward), ForceMode.Acceleration);
         }
+
         
-        float moveRightLeft = Input.GetAxis("RightLeft");
-        if (moveRightLeft != 0 && vel.x < maxSpeed && vel.x > -maxSpeed)
+        float rglft_percent = Mathf.Abs(maxSpeed*moveRightLeft - Mathf.Clamp(vel.x, -maxSpeed, maxSpeed))/ (maxSpeed*2);
+        if (moveRightLeft != 0)
         {
-            rb.AddRelativeForce(new Vector3(moveRightLeft,0,0) * leftRightSpeed);
+            rb.AddRelativeForce(rglft_percent * leftRightSpeed * new Vector3(moveRightLeft, 0, 0),
+                ForceMode.Acceleration);
         }
-        
-        Quaternion q = Quaternion.Euler(0, Input.GetAxis("Mouse X")*360*rotateSpeed*Time.deltaTime, 0);
-        rb.MoveRotation( transform.rotation*q);
-        
-        
-        float inputY = Input.GetAxis("Mouse Y");
-        yAccumulator = Mathf.Lerp( yAccumulator, inputY, Snappiness * Time.deltaTime);
+
+
+        // rotation
+        Quaternion q = Quaternion.Euler(0, mouseX*360*rotateSpeed*Time.deltaTime, 0);
+        rb.MoveRotation(transform.rotation * q);
+
+
+        yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
         Vector3 r = new Vector3(yAccumulator*360*rotateSpeed*sensitivityY, 0, 0);
         
         if (head.localRotation.x*360 + r.x > 180)

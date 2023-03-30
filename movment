@@ -1,0 +1,4 @@
+axis buttons -> create acceleration/inertia ??
+colleting input in Update
+checking for speed limit must take care of the sign of velocity
+addforce % difference between veleocity and target velocity
