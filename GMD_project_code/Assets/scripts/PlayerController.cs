@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && groundDetector.Grounded)
         {
+            print("jump");
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
             groundDetector.ForceCollisionOut();
         }
@@ -62,17 +63,27 @@ public class PlayerController : MonoBehaviour
         float moveForward = Input.GetAxis("Forward");
         if (moveForward != 0 && vel.z < maxSpeed && vel.z > -maxSpeed)
         {
+            print("forward");
             Vector3 new_vel = transform.InverseTransformDirection(rb.velocity);
             new_vel.z = maxSpeed*Mathf.Sign(moveForward);
             rb.velocity = transform.TransformVector(new_vel);
+        }
+        else
+        {
+            print("forward too fast " + moveForward);
         }
         
         float moveRightLeft = Input.GetAxis("RightLeft");
         if (moveRightLeft != 0 && vel.x < maxSpeed && vel.x > -maxSpeed)
         {
+            print("rightleft");
             Vector3 new_vel = transform.InverseTransformDirection(rb.velocity);
             new_vel.x = maxSpeed*Mathf.Sign(moveRightLeft);
             rb.velocity = transform.TransformVector(new_vel);
+        }
+        else
+        {
+            print("rglf too fast " + moveRightLeft);
         }
         
         
