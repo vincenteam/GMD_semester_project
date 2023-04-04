@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform head;
     [SerializeField] private CollisionDetector groundDetector;
 
+    [SerializeField] private Alive lifeEvents;
+
     [SerializeField] private float leftRightSpeed = 1;
     [SerializeField] private float forwardSpeed = 1;
     [SerializeField] private float maxSpeed = 1;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private float mouseY;
     private float mouseX;
     private bool jumpInput;
+
+    private bool deathInput;
     
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,6 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         
         // rotation hell
-        gameObject.GetComponent<Rigidbody>();
         rb.inertiaTensorRotation = Quaternion.identity;
     }
 
@@ -45,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+        
         float rglft = Input.GetAxis("RightLeft");
         if (rglft != 0)
         {
@@ -66,11 +70,19 @@ public class PlayerController : MonoBehaviour
         }
         
         jumpInput = Input.GetButtonDown("Jump");
-    }
 
-    // Update is called once per frame
+        deathInput = Input.GetButtonDown("Death");
+    }
+    
     void FixedUpdate()
     {
+        if (deathInput)
+        {
+            print("f");
+            this.enabled = false;
+            lifeEvents.Die();
+        }
+
         if (jumpInput && groundDetector.Grounded)
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
@@ -102,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
 
         yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
-        Vector3 r = new Vector3(yAccumulator*360*rotateSpeed*sensitivityY, 0, 0);
+        Vector3 r = new Vector3(yAccumulator*360*-rotateSpeed*sensitivityY, 0, 0);
         
         if (head.localRotation.x*360 + r.x > 180)
         {

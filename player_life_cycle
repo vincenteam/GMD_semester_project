@@ -1,0 +1,11 @@
+when die
+    create body
+    notify lifeCycle manager
+        look for player spawn point
+            make spawn
+        get new player back
+        call camera change
+    destroy
+    
+
+somewhere, unplug inputs when the player is dead
