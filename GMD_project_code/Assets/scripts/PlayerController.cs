@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Transform head;
     [SerializeField] private CollisionDetector groundDetector;
+    [SerializeField] private JumpControl _jumpControl;
 
     [SerializeField] private Alive lifeEvents;
 
@@ -28,18 +29,22 @@ public class PlayerController : MonoBehaviour
     private float moveRightLeft;
     private float mouseY;
     private float mouseX;
-    private bool jumpInput;
+    private bool jumpInput = false;
+    private bool jumpBtnDown = false;
+    private bool jumpBtnUp = false;
 
     private bool deathInput;
     
     // Start is called before the first frame update
     void Start()
     {
+        _jumpControl = gameObject.GetComponent<JumpControl>();
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
         rb = gameObject.GetComponent<Rigidbody>();
-        
+
         // rotation hell
         rb.inertiaTensorRotation = Quaternion.identity;
     }
@@ -68,8 +73,9 @@ public class PlayerController : MonoBehaviour
         {
             moveForward = 0;
         }
-        
-        jumpInput = Input.GetButtonDown("Jump");
+
+        if (Input.GetButtonDown("Jump")) jumpBtnDown = true;
+        if (Input.GetButtonUp("Jump")) jumpBtnUp = true;
 
         deathInput = Input.GetButtonDown("Death");
     }
@@ -78,18 +84,27 @@ public class PlayerController : MonoBehaviour
     {
         if (deathInput)
         {
-            print("f");
-            this.enabled = false;
+            enabled = false;
             lifeEvents.Die();
         }
 
-        if (jumpInput && groundDetector.Grounded)
+        bool grounded = groundDetector.Grounded;
+        
+        //print(jumpBtnDown + " " + jumpBtnUp + " " + grounded);
+        if (jumpBtnDown && grounded)
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
+            print("add force "+ rb.velocity);
             groundDetector.ForceCollisionOut();
         }
 
-        
+        if (jumpBtnDown && jumpBtnUp && !grounded)
+        {
+            jumpBtnDown = false;
+            jumpBtnUp = false;
+        }
+
+
         //movement
         Vector3 vel = transform.InverseTransformDirection(rb.velocity);
 

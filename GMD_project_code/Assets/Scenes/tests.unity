@@ -240,6 +240,7 @@ MonoBehaviour:
   sensitivityY: 0.01
   head: {fileID: 0}
   groundDetector: {fileID: 0}
+  _jumpControl: {fileID: 0}
   lifeEvents: {fileID: 0}
   leftRightSpeed: 100
   forwardSpeed: 100
