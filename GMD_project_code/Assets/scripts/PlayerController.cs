@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
             jumpBtnUp = false;
         }
 
-
         //movement
         Vector3 vel = transform.InverseTransformDirection(rb.velocity);
 
