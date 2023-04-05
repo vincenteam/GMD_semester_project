@@ -13,32 +13,28 @@ public class CollisionDetector : MonoBehaviour
     {
         get => grounded;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ForceCollisionOut()
     {
+        print("force out " + collisionCount);
         grounded = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
         collisionCount++;
+        print("enter " + collisionCount);
         grounded = true;
     }
 
     void OnTriggerExit(Collider other)
     {
         collisionCount--;
+        print("exit " + collisionCount);
+        if (collisionCount < 0)
+        {
+            print("niggatif");
+        }
         grounded = collisionCount > 0;
     }
 }

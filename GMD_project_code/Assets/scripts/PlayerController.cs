@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Transform head;
     [SerializeField] private CollisionDetector groundDetector;
+    [SerializeField] private JumpControl _jumpControl;
+
+    [SerializeField] private Alive lifeEvents;
 
     [SerializeField] private float leftRightSpeed = 1;
     [SerializeField] private float forwardSpeed = 1;
     [SerializeField] private float maxSpeed = 1;
-    float yAccumulator; // this is a member variable, NOT a local!
+    float yAccumulator;
  
     [SerializeField] float Snappiness = 10.0f;
 
@@ -26,18 +29,23 @@ public class PlayerController : MonoBehaviour
     private float moveRightLeft;
     private float mouseY;
     private float mouseX;
-    private bool jumpInput;
+    private bool jumpInput = false;
+    private bool jumpBtnDown = false;
+    private bool jumpBtnUp = false;
+
+    private bool deathInput;
     
     // Start is called before the first frame update
     void Start()
     {
+        _jumpControl = gameObject.GetComponent<JumpControl>();
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
         rb = gameObject.GetComponent<Rigidbody>();
-        
+
         // rotation hell
-        gameObject.GetComponent<Rigidbody>();
         rb.inertiaTensorRotation = Quaternion.identity;
     }
 
@@ -45,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+        
         float rglft = Input.GetAxis("RightLeft");
         if (rglft != 0)
         {
@@ -64,20 +73,38 @@ public class PlayerController : MonoBehaviour
         {
             moveForward = 0;
         }
-        
-        jumpInput = Input.GetButtonDown("Jump");
-    }
 
-    // Update is called once per frame
+        if (Input.GetButtonDown("Jump")) jumpBtnDown = true;
+        if (Input.GetButtonUp("Jump")) jumpBtnUp = true;
+
+        deathInput = Input.GetButtonDown("Death");
+    }
+    
     void FixedUpdate()
     {
-        if (jumpInput && groundDetector.Grounded)
+        if (deathInput)
+        {
+            enabled = false;
+            lifeEvents.Die();
+        }
+
+        bool grounded = groundDetector.Grounded;
+        
+        //print(jumpBtnDown + " " + jumpBtnUp + " " + grounded);
+        if (jumpBtnDown && grounded)
         {
             rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
+            print("add force "+ rb.velocity);
             groundDetector.ForceCollisionOut();
         }
 
-        
+        if (jumpBtnDown && jumpBtnUp && !grounded)
+        {
+            jumpBtnDown = false;
+            jumpBtnUp = false;
+        }
+
+
         //movement
         Vector3 vel = transform.InverseTransformDirection(rb.velocity);
 
@@ -102,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
 
         yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
-        Vector3 r = new Vector3(yAccumulator*360*rotateSpeed*sensitivityY, 0, 0);
+        Vector3 r = new Vector3(yAccumulator*360*-rotateSpeed*sensitivityY, 0, 0);
         
         if (head.localRotation.x*360 + r.x > 180)
         {
