@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float leftRightSpeed = 1;
     [SerializeField] private float forwardSpeed = 1;
     [SerializeField] private float maxSpeed = 1;
-    float yAccumulator; // this is a member variable, NOT a local!
+    float yAccumulator;
  
     [SerializeField] float Snappiness = 10.0f;
 

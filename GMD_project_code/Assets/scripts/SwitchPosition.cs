@@ -23,22 +23,26 @@ public class SwitchPosition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos.Add(new SwitchPosition.Placement( new Vector3(0.247999996f,0.5f,-0.231000006f), new Quaternion(0, 180, 0, 0)));
-        pos.Add(new SwitchPosition.Placement( new Vector3(0.309830904f,2.23320103f,2.87866449f), new Quaternion(0.00801466685f,0.955599427f,-0.293402433f,0.0260875877f)));
+        pos.Add(new SwitchPosition.Placement( new Vector3(0.247999996f,0.5f,-0.231000006f), new Quaternion(0, 0, 0, 0)));
+        pos.Add(new SwitchPosition.Placement(new Vector3(0, 1, -5), new Quaternion(0.239380822f,0,0,0.970925748f)));
         
         nbPos = pos.Count;
         transform.localPosition = pos[currentPos%nbPos].p;
-        transform.rotation = pos[currentPos%nbPos].r;
+        transform.localRotation = pos[currentPos%nbPos].r;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetButtonDown("CameraSwitch"))
         {
-            currentPos++;
-            transform.localPosition = pos[currentPos%nbPos].p;
-            transform.rotation = pos[currentPos%nbPos].r;
+            Next();
         }
+    }
+
+    void Next()
+    {
+        currentPos++;
+        transform.localPosition = pos[currentPos%nbPos].p;
+        transform.localRotation = pos[currentPos%nbPos].r;
     }
 }

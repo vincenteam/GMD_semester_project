@@ -41,7 +41,6 @@ public class PlayerLifeCycleManager : MonoBehaviour
 
     private void EnablePlayer()
     {
-        print("enable");
         newPlayer.SetActive(true);
     }
 }

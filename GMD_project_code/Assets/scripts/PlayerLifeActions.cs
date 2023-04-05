@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLifeActions : MonoBehaviour
 {
     [SerializeField] private Alive lifeEvents;
-    [SerializeField] private GameObject body;
+    [SerializeField] private GameObject body; // prefab
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,7 @@ public class PlayerLifeActions : MonoBehaviour
 
     private void OnDeath()
     {
+        
         Instantiate(body, transform.position, transform.rotation);
         // animation
         //...

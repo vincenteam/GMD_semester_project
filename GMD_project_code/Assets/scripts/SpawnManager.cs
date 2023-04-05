@@ -12,6 +12,6 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject Spawn(GameObject go)
     {
-        return Instantiate(go);
+        return Instantiate(go, transform.position, transform.rotation);
     }
 }

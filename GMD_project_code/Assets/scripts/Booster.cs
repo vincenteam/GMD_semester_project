@@ -19,11 +19,9 @@ public class Booster : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("collide");
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            print("rb found");
             Vector3 force = transform.forward;
             rb.AddForce(force*30, ForceMode.Impulse);
         }
