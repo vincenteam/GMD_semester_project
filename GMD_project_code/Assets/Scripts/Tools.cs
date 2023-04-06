@@ -17,7 +17,8 @@ public class Tools
             }
             if (child.childCount > 0)
             {
-                return GetTransformByTag(child, tagSearched);
+                Transform found = GetTransformByTag(child, tagSearched);
+                if (found is not null) return found;
             }
         }
 

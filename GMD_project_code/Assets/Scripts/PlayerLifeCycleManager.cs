@@ -22,17 +22,17 @@ public class PlayerLifeCycleManager : MonoBehaviour
     }
 
     public void OnDeath()
-    {        
+    {
         if (_spawn)
         {
              newPlayer = _spawn.Spawn(player);
              newPlayer.SetActive(false);
              
-             Alive player_life = newPlayer.GetComponent<Alive>();
-             if (player_life is not null)
+             Alive playerLife = newPlayer.GetComponent<Alive>();
+             if (playerLife is not null)
              {
-                 player_life.OnDeath += OnDeath;
-                 player_life.OnDeathActionsExit += EnablePlayer;
+                 playerLife.OnDeath += OnDeath;
+                 playerLife.OnDeathActionsExit += EnablePlayer;
              }
              
              _cam.ChangeFollowTarget(newPlayer);

@@ -5,12 +5,10 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using Math = UnityEngine.ProBuilder.Math;
 
-public class PlayerController : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float sensitivityY = 0.1f;
 
-    [SerializeField] private Alive lifeEvents;
-    
     float yAccumulator;
  
     [SerializeField] float Snappiness = 10.0f;
@@ -41,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
     
     private ActionsDelegate _backward;
-    public ActionsDelegate OnBackWard
+    public ActionsDelegate OnBackward
     {
         get => _backward;
         set => _backward = value;
@@ -59,6 +57,13 @@ public class PlayerController : MonoBehaviour
     {
         get => _left;
         set => _left = value;
+    }
+    
+    private ActionsDelegate _suicide;
+    public ActionsDelegate OnSuicide
+    {
+        get => _suicide;
+        set => _suicide = value;
     }
     
     public delegate void RotationDelegate(float amount);
@@ -80,23 +85,6 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        CharacterMovement charMove = gameObject.GetComponent<CharacterMovement>();
-        if (charMove is not null)
-        {
-            _jump += charMove.Jump;
-            _forward += charMove.MoveForward;
-            _backward += charMove.MoveBackward;
-            _right += charMove.MoveRight;
-            _left += charMove.MoveLeft;
-            _rotateY += charMove.RotateY;
-        }
-        
-        HeadMovement headMove = Tools.GetGoWithComponent<HeadMovement>(gameObject.transform);
-        if (headMove is not null)
-        {
-            _rotateX += headMove.RotateX;
-        }
     }
 
     private void Update()
@@ -119,7 +107,7 @@ public class PlayerController : MonoBehaviour
         if (deathInput)
         {
             enabled = false;
-            lifeEvents.Die();
+            _suicide();
         }
         
         if (jumpBtnDown)

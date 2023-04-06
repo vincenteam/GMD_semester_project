@@ -37,7 +37,7 @@ public class FollowPlayer : MonoBehaviour
         locked = true;
     }
 
-    public void Unlock()
+    public void UnLock()
     {
         locked = false;
         if (targets.Count > 0)
