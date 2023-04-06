@@ -14,6 +14,14 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float forwardAcceleration;
     [SerializeField] private float leftRightAcceleration;
+    
+    public delegate void ActionsDelegate();
+    private ActionsDelegate _jump;
+    public ActionsDelegate OnJump
+    {
+        get => _jump;
+        set => _jump = value;
+    }
 
     private void Awake()
     {
@@ -31,6 +39,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         {
             rb.AddForce(jumpHeight * transform.up, ForceMode.Impulse);
             groundDetector.ForceCollisionOut();
+            _jump();
         }
     }
 

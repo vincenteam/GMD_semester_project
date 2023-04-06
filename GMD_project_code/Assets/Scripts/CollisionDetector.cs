@@ -9,6 +9,14 @@ public class CollisionDetector : MonoBehaviour
     private int collisionCount;
     private bool grounded = false;
     
+    public delegate void ActionsDelegate();
+    private ActionsDelegate _land;
+    public ActionsDelegate OnLand
+    {
+        get => _land;
+        set => _land = value;
+    }
+    
     public bool Grounded
     {
         get => grounded;
@@ -22,6 +30,10 @@ public class CollisionDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (collisionCount == 0)
+        {
+            _land();
+        }
         collisionCount++;
         print("enter " + collisionCount);
         grounded = true;

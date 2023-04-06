@@ -1,9 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int Jump = Animator.StringToHash("jump");
+
+    private Animator animator;
+    private static readonly int Land = Animator.StringToHash("land");
+
     void Awake()
     {
         PlayerInput playerInput = gameObject.GetComponent<PlayerInput>();
@@ -32,6 +38,21 @@ public class PlayerController : MonoBehaviour
             {
                 playerInput.OnSuicide += lifeActions.Suicide;
             }
+
+            animator = gameObject.GetComponent<Animator>();
+            if (animator is not null && charMove is not null)
+            {
+                charMove.OnJump += delegate { animator.SetTrigger(Jump); animator.ResetTrigger(Land); };
+            }
+        }
+    }
+
+    private void Start()
+    {
+        CollisionDetector groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
+        if (groundDetector is not null && animator is not null)
+        {
+            groundDetector.OnLand += delegate { animator.SetTrigger(Land); print("land");};
         }
     }
 }
