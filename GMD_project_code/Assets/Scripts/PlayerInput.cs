@@ -1,27 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder;
-using Math = UnityEngine.ProBuilder.Math;
 
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private float sensitivityY = 0.1f;
 
-    float yAccumulator;
+    private float _yAccumulator;
  
-    [SerializeField] float Snappiness = 10.0f;
+    [SerializeField] private float snappiness = 10.0f;
 
-    private float forwardInput;
-    private float rgtLftInput;
-    private float mouseY;
-    private float mouseX;
+    private float _forwardInput;
+    private float _rgtLftInput;
+    private float _mouseY;
+    private float _mouseX;
     
-    private bool jumpBtnDown = false;
-    private bool jumpBtnUp = false;
+    private bool _jumpBtnDown = false;
+    private bool _jumpBtnUp = false;
 
-    private bool deathInput;
+    private bool _deathInput;
     
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
@@ -89,58 +84,58 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
+        _mouseX = Input.GetAxis("Mouse X");
+        _mouseY = Input.GetAxis("Mouse Y");
         
-        rgtLftInput = Input.GetAxis("RightLeft");
+        _rgtLftInput = Input.GetAxis("RightLeft");
 
-        forwardInput = Input.GetAxis("Forward");
+        _forwardInput = Input.GetAxis("Forward");
 
-        if (Input.GetButtonDown("Jump")) jumpBtnDown = true;
-        if (Input.GetButtonUp("Jump")) jumpBtnUp = true;
+        if (Input.GetButtonDown("Jump")) _jumpBtnDown = true;
+        if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;
 
-        deathInput = Input.GetButtonDown("Death");
+        _deathInput = Input.GetButtonDown("Death");
     }
     
     void FixedUpdate()
     {
-        if (deathInput)
+        if (_deathInput)
         {
             enabled = false;
             _suicide();
         }
         
-        if (jumpBtnDown)
+        if (_jumpBtnDown)
         {
             _jump();
         }
-        if (jumpBtnDown && jumpBtnUp)
+        if (_jumpBtnDown && _jumpBtnUp)
         {
-            jumpBtnDown = false;
-            jumpBtnUp = false;
+            _jumpBtnDown = false;
+            _jumpBtnUp = false;
         }
 
         
-        if (forwardInput > 0)
+        if (_forwardInput > 0)
         {
             _forward();
-        }else if (forwardInput < 0)
+        }else if (_forwardInput < 0)
         {
             _backward();
         }
         
-        if (rgtLftInput > 0)
+        if (_rgtLftInput > 0)
         {
             _right();
-        }else if (rgtLftInput < 0)
+        }else if (_rgtLftInput < 0)
         {
             _left();
         }
         
         // rotation
-        _rotateY(mouseX); // if 0 dont invoke ?
+        _rotateY(_mouseX); // if 0 dont invoke ?
         
-        yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
-        _rotateX(yAccumulator*sensitivityY);
+        _yAccumulator = Mathf.Lerp( _yAccumulator, _mouseY, snappiness * Time.deltaTime);
+        _rotateX(_yAccumulator*sensitivityY);
     }
 }

@@ -40,10 +40,21 @@ public class PlayerLifeActions : MonoBehaviour
 
     private void OnDeath()
     {
+        //gameObject.layer = LayerMask.NameToLayer("Ignore_moving"); // still collide with the body (layer change happens too late ?)
+        foreach (Rigidbody rb in gameObject.GetComponentsInChildren<Rigidbody>())
+        {
+            rb.isKinematic = true;
+        }
+        foreach (Collider c in gameObject.GetComponentsInChildren<Collider>())
+        {
+            c.enabled = false;
+        }
+
+        
         _camView.SwitchTo("3person");
         Instantiate(body, transform.position, transform.rotation);
         
-        Invoke("TerminateDeath", 1.5f);
+        Invoke("TerminateDeath", 2.5f);
     }
 
     private void TerminateDeath()
