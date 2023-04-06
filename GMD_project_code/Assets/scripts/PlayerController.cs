@@ -7,46 +7,96 @@ using Math = UnityEngine.ProBuilder.Math;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float rotateSpeed = 1;
-    [SerializeField] private float jumpHeight = 1;
-    [SerializeField] private float sensitivityY = 0.1f; 
-
-    private Rigidbody rb;
-    [SerializeField] private Transform head;
-    [SerializeField] private CollisionDetector groundDetector;
-    [SerializeField] private JumpControl _jumpControl;
+    [SerializeField] private float sensitivityY = 0.1f;
 
     [SerializeField] private Alive lifeEvents;
-
-    [SerializeField] private float leftRightSpeed = 1;
-    [SerializeField] private float forwardSpeed = 1;
-    [SerializeField] private float maxSpeed = 1;
+    
     float yAccumulator;
  
     [SerializeField] float Snappiness = 10.0f;
 
-    private float moveForward;
-    private float moveRightLeft;
+    private float forwardInput;
+    private float rgtLftInput;
     private float mouseY;
     private float mouseX;
-    private bool jumpInput = false;
+    
     private bool jumpBtnDown = false;
     private bool jumpBtnUp = false;
 
     private bool deathInput;
     
-    // Start is called before the first frame update
+    public delegate void ActionsDelegate();
+    private ActionsDelegate _jump;
+    public ActionsDelegate OnJump
+    {
+        get => _jump;
+        set => _jump = value;
+    }
+    
+    private ActionsDelegate _forward;
+    public ActionsDelegate OnForward
+    {
+        get => _forward;
+        set => _forward = value;
+    }
+    
+    private ActionsDelegate _backward;
+    public ActionsDelegate OnBackWard
+    {
+        get => _backward;
+        set => _backward = value;
+    }
+    
+    private ActionsDelegate _right;
+    public ActionsDelegate OnRight
+    {
+        get => _right;
+        set => _right = value;
+    }
+
+    private ActionsDelegate _left;
+    public ActionsDelegate OnLeft
+    {
+        get => _left;
+        set => _left = value;
+    }
+    
+    public delegate void RotationDelegate(float amount);
+    private RotationDelegate _rotateY;
+    public RotationDelegate OnRotateY
+    {
+        get => _rotateY;
+        set => _rotateY = value;
+    }
+    
+    private RotationDelegate _rotateX;
+    public RotationDelegate OnRotateX
+    {
+        get => _rotateX;
+        set => _rotateX = value;
+    }
+    
     void Start()
     {
-        _jumpControl = gameObject.GetComponent<JumpControl>();
-        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        rb = gameObject.GetComponent<Rigidbody>();
 
-        // rotation hell
-        rb.inertiaTensorRotation = Quaternion.identity;
+        CharacterMovement charMove = gameObject.GetComponent<CharacterMovement>();
+        if (charMove is not null)
+        {
+            _jump += charMove.Jump;
+            _forward += charMove.MoveForward;
+            _backward += charMove.MoveBackward;
+            _right += charMove.MoveRight;
+            _left += charMove.MoveLeft;
+            _rotateY += charMove.RotateY;
+        }
+        
+        HeadMovement headMove = Tools.GetGoWithComponent<HeadMovement>(gameObject.transform);
+        if (headMove is not null)
+        {
+            _rotateX += headMove.RotateX;
+        }
     }
 
     private void Update()
@@ -54,25 +104,9 @@ public class PlayerController : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         
-        float rglft = Input.GetAxis("RightLeft");
-        if (rglft != 0)
-        {
-            moveRightLeft = rglft < 0 ? -1 : 1;    
-        }
-        else
-        {
-            moveRightLeft = 0;
-        }
-        
-        float forward = Input.GetAxis("Forward");
-        if (forward != 0)
-        {
-            moveForward = forward < 0 ? -1 : 1;    
-        }
-        else
-        {
-            moveForward = 0;
-        }
+        rgtLftInput = Input.GetAxis("RightLeft");
+
+        forwardInput = Input.GetAxis("Forward");
 
         if (Input.GetButtonDown("Jump")) jumpBtnDown = true;
         if (Input.GetButtonUp("Jump")) jumpBtnUp = true;
@@ -87,59 +121,38 @@ public class PlayerController : MonoBehaviour
             enabled = false;
             lifeEvents.Die();
         }
-
-        bool grounded = groundDetector.Grounded;
         
-        //print(jumpBtnDown + " " + jumpBtnUp + " " + grounded);
-        if (jumpBtnDown && grounded)
+        if (jumpBtnDown)
         {
-            rb.AddForce(jumpHeight*transform.up, ForceMode.Impulse);
-            print("add force "+ rb.velocity);
-            groundDetector.ForceCollisionOut();
+            _jump();
         }
-
-        if (jumpBtnDown && jumpBtnUp && !grounded)
+        if (jumpBtnDown && jumpBtnUp)
         {
             jumpBtnDown = false;
             jumpBtnUp = false;
         }
 
-        //movement
-        Vector3 vel = transform.InverseTransformDirection(rb.velocity);
-
-        float forward_percent = Mathf.Abs(maxSpeed*moveForward - Mathf.Clamp(vel.z, -maxSpeed, maxSpeed))/ (maxSpeed*2);
-        if(moveForward != 0)
-        {
-            rb.AddRelativeForce(forward_percent * forwardSpeed * new Vector3(0, 0, moveForward), ForceMode.Acceleration);
-        }
-
         
-        float rglft_percent = Mathf.Abs(maxSpeed*moveRightLeft - Mathf.Clamp(vel.x, -maxSpeed, maxSpeed))/ (maxSpeed*2);
-        if (moveRightLeft != 0)
+        if (forwardInput > 0)
         {
-            rb.AddRelativeForce(rglft_percent * leftRightSpeed * new Vector3(moveRightLeft, 0, 0),
-                ForceMode.Acceleration);
+            _forward();
+        }else if (forwardInput < 0)
+        {
+            _backward();
         }
-
-
+        
+        if (rgtLftInput > 0)
+        {
+            _right();
+        }else if (rgtLftInput < 0)
+        {
+            _left();
+        }
+        
         // rotation
-        Quaternion q = Quaternion.Euler(0, mouseX*360*rotateSpeed*Time.deltaTime, 0);
-        rb.MoveRotation(transform.rotation * q);
-
-
-        yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
-        Vector3 r = new Vector3(yAccumulator*360*-rotateSpeed*sensitivityY, 0, 0);
+        _rotateY(mouseX); // if 0 dont invoke ?
         
-        if (head.localRotation.x*360 + r.x > 180)
-        {
-            head.localRotation = new Quaternion(0.5f, head.localRotation.y, head.localRotation.z, head.localRotation.w);
-        }else if ( head.localRotation.x*360 + r.x < -180)
-        {
-            head.localRotation = new Quaternion(-0.5f, head.localRotation.y, head.localRotation.z, head.localRotation.w);
-        }
-        else
-        {
-            head.Rotate(r, Space.Self);
-        }
+        yAccumulator = Mathf.Lerp( yAccumulator, mouseY, Snappiness * Time.deltaTime);
+        _rotateX(yAccumulator*sensitivityY);
     }
 }

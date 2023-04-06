@@ -210,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3346832452723283395}
+  - component: {fileID: 5631027842569921464}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -233,6 +234,19 @@ Transform:
   m_Father: {fileID: 3346832454061106562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5631027842569921464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346832452723283404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f36e70e9e224524b87ef4254a5cd375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 0.2
 --- !u!1 &3346832454061106574
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,8 +262,8 @@ GameObject:
   - component: {fileID: 3346832454061106560}
   - component: {fileID: 3346832454061106561}
   - component: {fileID: 7007599173966604411}
-  - component: {fileID: 3192555506495567882}
   - component: {fileID: 827419624450678432}
+  - component: {fileID: 3192555506495567882}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -371,15 +385,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 0.2
-  jumpHeight: 5
   sensitivityY: 0.01
   head: {fileID: 3346832452723283395}
-  groundDetector: {fileID: 3346832454099278485}
-  _jumpControl: {fileID: 0}
   lifeEvents: {fileID: 3192555506495567882}
-  leftRightSpeed: 100
-  forwardSpeed: 100
-  maxSpeed: 6
   Snappiness: 15
 --- !u!114 &7007599173966604411
 MonoBehaviour:
@@ -395,18 +403,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeEvents: {fileID: 3192555506495567882}
   body: {fileID: 4506790581200680686, guid: ae14f216f1bcee59995af0c778619f9d, type: 3}
---- !u!114 &3192555506495567882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3346832454061106574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4483e7cb487ebcfb76494ccb50907f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &827419624450678432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +416,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 5
+  maxSpeed: 6
+  rotateSpeed: 0.2
+  forwardAcceleration: 100
+  leftRightAcceleration: 100
+--- !u!114 &3192555506495567882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346832454061106574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4483e7cb487ebcfb76494ccb50907f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3346832454099278480
 GameObject:
   m_ObjectHideFlags: 0
