@@ -6,14 +6,23 @@ using GMDProject;
 
 public class CharacterMovement : MonoBehaviour, ICharacterMovement
 {
-    private CollisionDetector groundDetector;
-    private Rigidbody rb;
+    private CollisionDetector _groundDetector;
+    private Rigidbody _rb;
 
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float rotateSpeed;
-    [SerializeField] private float forwardAcceleration;
-    [SerializeField] private float leftRightAcceleration;
+    [SerializeField] private float initialJumpHeight;
+    [SerializeField] private float initialMaxSpeed;
+    [SerializeField] private float initialRotateSpeed;
+    [SerializeField] private float initialForwardAcceleration;
+    [SerializeField] private float initialLeftRightAcceleration;
+
+    [SerializeField] private float airControl;
+    
+    
+    private float _jumpHeight;
+    private float _maxSpeed;
+    private float _rotateSpeed;
+    private float _forwardAcceleration;
+    private float _leftRightAcceleration;
     
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
@@ -25,20 +34,28 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void Awake()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        _jumpHeight = initialJumpHeight;
+        _maxSpeed = initialMaxSpeed;
+        _rotateSpeed = initialRotateSpeed;
+        _forwardAcceleration = initialForwardAcceleration;
+        _leftRightAcceleration = initialLeftRightAcceleration;
+        
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
+        _groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
+        _groundDetector.OnLand += SwitchToGroundControl;
     }
 
     public void Jump()
     {
-        if (groundDetector.Grounded)
+        if (_groundDetector.Grounded)
         {
-            rb.AddForce(jumpHeight * transform.up, ForceMode.Impulse);
-            groundDetector.ForceCollisionOut();
+            _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
+            _groundDetector.ForceCollisionOut();
+            SwitchToAirControl();
             _jump();
         }
     }
@@ -70,8 +87,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     public void RotateY(float amount)
     {
-        Quaternion q = Quaternion.Euler(0, amount*360*rotateSpeed*Time.deltaTime, 0); // timedeltatime should already be in amount
-        rb.MoveRotation(transform.rotation * q);
+        Quaternion q = Quaternion.Euler(0, amount*360*_rotateSpeed*Time.deltaTime, 0); // timedeltatime should already be in amount
+        _rb.MoveRotation(transform.rotation * q);
     }
 
     public void RotateZ(float amount)
@@ -81,24 +98,38 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void MoveBackFront(int direction)
     {
-        Vector3 vel = transform.InverseTransformDirection(rb.velocity);
+        Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
 
-        float forwardPercent = Mathf.Abs(maxSpeed*direction - Mathf.Clamp(vel.z, -maxSpeed, maxSpeed))/ (maxSpeed*2);
+        float forwardPercent = Mathf.Abs(_maxSpeed*direction - Mathf.Clamp(vel.z, -_maxSpeed, _maxSpeed))/ (_maxSpeed*2);
         if(direction != 0)
         {
-            rb.AddRelativeForce(forwardPercent * forwardAcceleration * new Vector3(0, 0, direction), ForceMode.Acceleration);
+            _rb.AddRelativeForce(forwardPercent * _forwardAcceleration * new Vector3(0, 0, direction), ForceMode.Acceleration);
         }
     }
 
     private void MoveRightLeft(int direction)
     {
-        Vector3 vel = transform.InverseTransformDirection(rb.velocity);
+        Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
         
-        float rglftPercent = Mathf.Abs(maxSpeed*direction - Mathf.Clamp(vel.x, -maxSpeed, maxSpeed))/ (maxSpeed*2);
+        float rglftPercent = Mathf.Abs(_maxSpeed*direction - Mathf.Clamp(vel.x, -_maxSpeed, _maxSpeed))/ (_maxSpeed*2);
         if (direction != 0)
         {
-            rb.AddRelativeForce(rglftPercent * leftRightAcceleration * new Vector3(direction, 0, 0),
+            _rb.AddRelativeForce(rglftPercent * _leftRightAcceleration * new Vector3(direction, 0, 0),
                 ForceMode.Acceleration);
         }
+    }
+
+    private void SwitchToAirControl()
+    {
+        _maxSpeed = initialMaxSpeed * airControl;
+        _forwardAcceleration = initialForwardAcceleration * airControl;
+        _leftRightAcceleration = initialLeftRightAcceleration * airControl;
+    }
+    
+    private void SwitchToGroundControl() // call major Tom
+    {
+        _maxSpeed = initialMaxSpeed;
+        _forwardAcceleration = initialForwardAcceleration;
+        _leftRightAcceleration = initialLeftRightAcceleration;
     }
 }
