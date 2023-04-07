@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class PlayerLifeActions : MonoBehaviour
 {
+    private static readonly int Suicide = Animator.StringToHash("suicide");
+    
     [SerializeField] private Alive lifeEvents;
     [SerializeField] private GameObject body; // prefab
 
-    
-    private Animator _animator;
-    
-    private FollowPlayer _camManager;
-    private SwitchPosition _camView;
-    
-    
-    private static readonly int Suicide = Animator.StringToHash("suicide");
+    private SkinManager _skinManager;
+    private MeshRenderer _renderer;
+    private static readonly int IsBody = Animator.StringToHash("isBody");
 
     private void Awake()
     {
-        _animator = gameObject.GetComponent<Animator>();
+        _skinManager = gameObject.GetComponent<SkinManager>();
+        _renderer = gameObject.GetComponent<MeshRenderer>();
     }
 
     void Start()
@@ -27,15 +25,11 @@ public class PlayerLifeActions : MonoBehaviour
         lifeEvents.OnSuicide += OnSuicide;
         lifeEvents.OnDeath += OnDeath;
         lifeEvents.Terminate = Destroy;
-        
-        GameObject camGo = Tools.GetTransformByTag(transform, "MainCamera").gameObject;
-        if (camGo) _camManager = camGo.GetComponent<FollowPlayer>();
-        if (camGo) _camView = camGo.GetComponent<SwitchPosition>();
     }
 
     private void OnSuicide()
     {
-        _animator.SetTrigger(Suicide);
+        _skinManager.AnimatorInstance.SetTrigger(Suicide);
     }
 
     private void OnDeath()
@@ -49,17 +43,30 @@ public class PlayerLifeActions : MonoBehaviour
         {
             c.enabled = false;
         }
+        
+        GameObject newBody = Instantiate(body, transform.position, transform.rotation);
+        newBody.SetActive(false);
+        
+        SkinManager bodySkinManager = newBody.GetComponent<SkinManager>();
+        MeshRenderer bodyRenderer = newBody.GetComponent<MeshRenderer>();
+        bodyRenderer.enabled = false;
+        bodySkinManager.ChangeSkin(_skinManager.SkinInstance);
 
+        //enable body at the end of suicide_in animation
+        NotifyEnd notifier = _skinManager.AnimatorInstance.GetBehaviour<NotifyEnd>();
+        notifier.OnAnimEnd += delegate
+        {
+            newBody.SetActive(true);
+            bodyRenderer.enabled = true;
+            _renderer.enabled = false;
+        };
         
-        _camView.SwitchTo("3person");
-        Instantiate(body, transform.position, transform.rotation);
-        
-        Invoke("TerminateDeath", 2.5f);
+
+        Invoke(nameof(TerminateDeath), 2.5f);
     }
 
     private void TerminateDeath()
     {
-        _camManager.UnLock();
         lifeEvents.TerminateDeath();
     }
 }

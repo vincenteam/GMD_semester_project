@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,21 +9,23 @@ public class PlayerController : MonoBehaviour
     private static readonly int Jump = Animator.StringToHash("jump");
     private static readonly int Land = Animator.StringToHash("land");
     private static readonly int MoveSpeed = Animator.StringToHash("moveSpeed");
-
     
-    private Animator _animator;
+    private SkinManager _skinManager;
     private PlayerInput _playerInput;
     private Rigidbody _rb;
-    
+
+    [SerializeField] private GameObject newSkin;
+
     void Awake()
     {
+        _skinManager = gameObject.GetComponent<SkinManager>();
+        
         _playerInput = gameObject.GetComponent<PlayerInput>();
-        _animator = gameObject.GetComponent<Animator>();
         _rb = gameObject.GetComponent<Rigidbody>();
         CharacterMovement charMove = gameObject.GetComponent<CharacterMovement>();
         Alive lifeActions = gameObject.GetComponent<Alive>();
-        
-        
+
+
         if (_playerInput is not null)
         {
             if (charMove is not null)
@@ -34,17 +37,24 @@ public class PlayerController : MonoBehaviour
                 _playerInput.OnLeft += charMove.MoveLeft;
                 _playerInput.OnRotateY += charMove.RotateY;
             }
-
             
             if (lifeActions is not null)
             {
                 _playerInput.OnSuicide += lifeActions.Suicide;
             }
+
+            if (_skinManager != null)
+            {
+                _playerInput.OnChangeSkin += delegate {_skinManager.ChangeSkin(newSkin);};
+            }
         }
         
-        if (_animator is not null && charMove is not null)
+        if (_skinManager is not null && charMove is not null)
         {
-            charMove.OnJump += delegate { _animator.SetTrigger(Jump); _animator.ResetTrigger(Land); };
+            charMove.OnJump += delegate { 
+                _skinManager.AnimatorInstance.SetTrigger(Jump);
+                _skinManager.AnimatorInstance.ResetTrigger(Land);
+            };
         }
         
         HeadMovement headMove = Tools.GetGoWithComponent<HeadMovement>(gameObject.transform);
@@ -58,14 +68,18 @@ public class PlayerController : MonoBehaviour
     {
         CollisionDetector groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
         
-        if (groundDetector is not null && _animator is not null)
+        if (groundDetector is not null && _skinManager is not null)
         {
-            groundDetector.OnLand += delegate { _animator.SetTrigger(Land);};
+            groundDetector.OnLand += delegate { _skinManager.AnimatorInstance.SetTrigger(Land);};
+            groundDetector.OnLeaveGround += delegate { 
+                _skinManager.AnimatorInstance.SetTrigger(Jump);
+                _skinManager.AnimatorInstance.ResetTrigger(Land);
+            };
         }
     }
 
     private void FixedUpdate()
     {
-        _animator.SetFloat(MoveSpeed, _rb.velocity.magnitude);
+        _skinManager.AnimatorInstance.SetFloat(MoveSpeed, _rb.velocity.magnitude);
     }
 }

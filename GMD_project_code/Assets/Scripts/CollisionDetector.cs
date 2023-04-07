@@ -31,7 +31,6 @@ public class CollisionDetector : MonoBehaviour
 
     public void ForceCollisionOut()
     {
-        print("force out " + collisionCount);
         LeaveGround();
     }
 

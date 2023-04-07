@@ -1,3 +1,9 @@
+when dying animation blink for a frame
+
+player jumping/cant move forward when going over transition between blocks even with no hight difference
+
+when switching direction with player animation go through idlestate
+ 
 super booster appening randomly ?
 
 super jump when moving and jumping simultaneously on superposed planes

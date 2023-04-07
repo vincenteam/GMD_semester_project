@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     private bool _jumpBtnUp = false;
 
     private bool _deathInput;
+    private bool _changeSkinInput;
     
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
@@ -61,6 +62,13 @@ public class PlayerInput : MonoBehaviour
         set => _suicide = value;
     }
     
+    private ActionsDelegate _changeSkin;
+    public ActionsDelegate OnChangeSkin
+    {
+        get => _changeSkin;
+        set => _changeSkin = value;
+    }
+    
     public delegate void RotationDelegate(float amount);
     private RotationDelegate _rotateY;
     public RotationDelegate OnRotateY
@@ -95,6 +103,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;
 
         _deathInput = Input.GetButtonDown("Death");
+        _changeSkinInput = Input.GetButtonDown("ChangeSkin");
     }
     
     void FixedUpdate()
@@ -104,6 +113,8 @@ public class PlayerInput : MonoBehaviour
             enabled = false;
             _suicide();
         }
+
+        if (_changeSkinInput) _changeSkin();
         
         if (_jumpBtnDown)
         {

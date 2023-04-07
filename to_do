@@ -1,5 +1,6 @@
 test build
 switch all internal references setup to Awake() instead of start
+change delegates to use events
 make body fall down when player die
 add models 
 add sound (only music ?)

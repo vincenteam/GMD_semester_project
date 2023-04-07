@@ -6,8 +6,9 @@ public class PlayerLifeCycleManager : MonoBehaviour
 {
     private SpawnManager _spawn;
     private FollowPlayer _cam;
+    private SwitchPosition _camView;
     [SerializeField] private GameObject player;
-    private GameObject newPlayer;
+    private GameObject _newPlayer;
     
     void Start()
     {
@@ -15,7 +16,11 @@ public class PlayerLifeCycleManager : MonoBehaviour
         if (spawnGo) _spawn = spawnGo.GetComponent<SpawnManager>();
         
         GameObject cam = GameObject.Find("Main Camera");
-        if (cam) _cam = cam.GetComponent<FollowPlayer>();
+        if (cam)
+        {
+            _cam = cam.GetComponent<FollowPlayer>();
+            _camView = cam.GetComponent<SwitchPosition>();
+        }
 
         OnDeath(); //tmp ?
         EnablePlayer();
@@ -25,22 +30,24 @@ public class PlayerLifeCycleManager : MonoBehaviour
     {
         if (_spawn)
         {
-             newPlayer = _spawn.Spawn(player);
-             newPlayer.SetActive(false);
+             _newPlayer = _spawn.Spawn(player);
+             _newPlayer.SetActive(false);
              
-             Alive playerLife = newPlayer.GetComponent<Alive>();
+             Alive playerLife = _newPlayer.GetComponent<Alive>();
              if (playerLife is not null)
              {
                  playerLife.OnDeath += OnDeath;
+                 playerLife.OnDeath += delegate { _camView.SwitchTo("3person"); };
                  playerLife.OnDeathActionsExit += EnablePlayer;
+                 playerLife.OnDeathActionsExit += _cam.UnLock;
              }
-             
-             _cam.ChangeFollowTarget(newPlayer);
+
+             _cam.ChangeFollowTarget(_newPlayer);
         }
     }
 
     private void EnablePlayer()
     {
-        newPlayer.SetActive(true);
+        _newPlayer.SetActive(true);
     }
 }
