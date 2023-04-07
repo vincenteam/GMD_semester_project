@@ -1,13 +1,15 @@
-death fall animation happening mid air instead of falling on ground
-
-freez between jump animation and mid air animation hapenning from time to time
-
 super booster appening randomly ?
 
 super jump when moving and jumping simultaneously on superposed planes
+
+unconsistent jump hight when jumping on bodies
 
 DONE player stuck when trying to move in contact with a wall (can "grab" the wall mid jump) | reducing friction on the side of the player, and adding second a collider to handle friction with the ground
 
 DONE infinite slide when taking boosters ? | adding friction
 
 DONE randomly unable to jump seems to happen only on planes | putting "feets" to the player to have collision only with a flat surface and not with the capsule, making the ground detector exeed the limit of the player by a little bit (if too much can cause another bug by detecting the ground when still moving down which cancel the jump + let the player stuck on the ground) 
+
+DONE freez between jump animation and mid air animation hapenning from time to time | vanished after tweaking some transitions
+
+DONE death fall animation happening mid air instead of falling on ground | bake into pose position and rotation of animation

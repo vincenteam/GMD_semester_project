@@ -1,4 +1,5 @@
-reduce air control 
+test build
+switch all internal references setup to Awake() instead of start
 make body fall down when player die
 add models 
 add sound (only music ?)
@@ -8,5 +9,4 @@ doors
 grinder
 enemy
 DONE bumper
-test build
-switch all internal references setup to Awake() instead of start
+DONE reduce air control 
