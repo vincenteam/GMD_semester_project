@@ -47,6 +47,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     {
         _groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
         _groundDetector.OnLand += SwitchToGroundControl;
+        _groundDetector.OnLeaveGround += SwitchToAirControl;
     }
 
     public void Jump()
@@ -55,7 +56,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         {
             _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
             _groundDetector.ForceCollisionOut();
-            SwitchToAirControl();
             _jump();
         }
     }
@@ -121,6 +121,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void SwitchToAirControl()
     {
+        print("switch air");
         _maxSpeed = initialMaxSpeed * airControl;
         _forwardAcceleration = initialForwardAcceleration * airControl;
         _leftRightAcceleration = initialLeftRightAcceleration * airControl;
@@ -128,6 +129,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     
     private void SwitchToGroundControl() // call major Tom
     {
+        print("switch ground");
         _maxSpeed = initialMaxSpeed;
         _forwardAcceleration = initialForwardAcceleration;
         _leftRightAcceleration = initialLeftRightAcceleration;

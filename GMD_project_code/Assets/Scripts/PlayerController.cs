@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         CollisionDetector groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
         if (groundDetector is not null && animator is not null)
         {
-            groundDetector.OnLand += delegate { animator.SetTrigger(Land); print("land");};
+            groundDetector.OnLand += delegate { animator.SetTrigger(Land);};
         }
     }
 }

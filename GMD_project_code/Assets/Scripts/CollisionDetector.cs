@@ -17,6 +17,13 @@ public class CollisionDetector : MonoBehaviour
         set => _land = value;
     }
     
+    private ActionsDelegate _leaveGround;
+    public ActionsDelegate OnLeaveGround
+    {
+        get => _leaveGround;
+        set => _leaveGround = value;
+    }
+    
     public bool Grounded
     {
         get => grounded;
@@ -25,28 +32,30 @@ public class CollisionDetector : MonoBehaviour
     public void ForceCollisionOut()
     {
         print("force out " + collisionCount);
-        grounded = false;
+        LeaveGround();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (collisionCount == 0)
-        {
-            _land();
-        }
+        if (collisionCount == 0) Land();
         collisionCount++;
-        print("enter " + collisionCount);
-        grounded = true;
     }
 
     void OnTriggerExit(Collider other)
     {
         collisionCount--;
-        print("exit " + collisionCount);
-        if (collisionCount < 0)
-        {
-            print("niggatif");
-        }
-        grounded = collisionCount > 0;
+        if (collisionCount == 0) LeaveGround();
+    }
+
+    private void LeaveGround()
+    {
+        if (grounded) _leaveGround();
+        grounded = false;
+    }
+
+    private void Land()
+    {
+        if (!grounded) _land(); 
+        grounded = true;
     }
 }
