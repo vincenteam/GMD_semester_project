@@ -10,6 +10,8 @@ DONE infinite slide when taking boosters ? | adding friction
 
 DONE randomly unable to jump seems to happen only on planes | putting "feets" to the player to have collision only with a flat surface and not with the capsule, making the ground detector exeed the limit of the player by a little bit (if too much can cause another bug by detecting the ground when still moving down which cancel the jump + let the player stuck on the ground) 
 
+DONE animations played multiple times | triggers can stack -> resettrigger
+
 DONE freez between jump animation and mid air animation hapenning from time to time | vanished after tweaking some transitions
 
 DONE death fall animation happening mid air instead of falling on ground | bake into pose position and rotation of animation

@@ -31,6 +31,14 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         get => _jump;
         set => _jump = value;
     }
+    
+    public delegate void MoveDelegate(float vel);
+    private MoveDelegate _move;
+    public MoveDelegate OnMove
+    {
+        get => _move;
+        set => _move = value;
+    }
 
     private void Awake()
     {
@@ -105,6 +113,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         {
             _rb.AddRelativeForce(forwardPercent * _forwardAcceleration * new Vector3(0, 0, direction), ForceMode.Acceleration);
         }
+        
+        //_move(vel.magnitude);
     }
 
     private void MoveRightLeft(int direction)
@@ -117,11 +127,12 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
             _rb.AddRelativeForce(rglftPercent * _leftRightAcceleration * new Vector3(direction, 0, 0),
                 ForceMode.Acceleration);
         }
+
+        //_move(vel.magnitude);
     }
 
     private void SwitchToAirControl()
     {
-        print("switch air");
         _maxSpeed = initialMaxSpeed * airControl;
         _forwardAcceleration = initialForwardAcceleration * airControl;
         _leftRightAcceleration = initialLeftRightAcceleration * airControl;
@@ -129,7 +140,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     
     private void SwitchToGroundControl() // call major Tom
     {
-        print("switch ground");
         _maxSpeed = initialMaxSpeed;
         _forwardAcceleration = initialForwardAcceleration;
         _leftRightAcceleration = initialLeftRightAcceleration;
