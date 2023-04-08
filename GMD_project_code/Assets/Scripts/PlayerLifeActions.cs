@@ -12,12 +12,13 @@ public class PlayerLifeActions : MonoBehaviour
 
     private SkinManager _skinManager;
     private MeshRenderer _renderer;
-    private static readonly int IsBody = Animator.StringToHash("isBody");
+    private Rigidbody _rb;
 
     private void Awake()
     {
         _skinManager = gameObject.GetComponent<SkinManager>();
         _renderer = gameObject.GetComponent<MeshRenderer>();
+        _rb = gameObject.GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -34,31 +35,32 @@ public class PlayerLifeActions : MonoBehaviour
 
     private void OnDeath()
     {
-        //gameObject.layer = LayerMask.NameToLayer("Ignore_moving"); // still collide with the body (layer change happens too late ?)
-        foreach (Rigidbody rb in gameObject.GetComponentsInChildren<Rigidbody>())
+        int layer = LayerMask.NameToLayer("Ignore_moving");
+        gameObject.layer = layer; // still collide with the body (layer change happens too late ?)
+        foreach (Transform child in transform)
         {
-            rb.isKinematic = true;
+            child.gameObject.layer = layer;
         }
-        foreach (Collider c in gameObject.GetComponentsInChildren<Collider>())
-        {
-            c.enabled = false;
-        }
-        
-        GameObject newBody = Instantiate(body, transform.position, transform.rotation);
-        newBody.SetActive(false);
-        
-        SkinManager bodySkinManager = newBody.GetComponent<SkinManager>();
-        MeshRenderer bodyRenderer = newBody.GetComponent<MeshRenderer>();
-        bodyRenderer.enabled = false;
-        bodySkinManager.ChangeSkin(_skinManager.SkinInstance);
 
+        GameObject newBody = Instantiate(body, transform.position, transform.rotation);
+        //MeshRenderer bodyRenderer = newBody.GetComponent<MeshRenderer>();
+
+        SkinManager bodySkinManager = newBody.GetComponent<SkinManager>();
+        Rigidbody rbBody = newBody.GetComponent<Rigidbody>();
+        
+        rbBody.AddForce(_rb.velocity, ForceMode.VelocityChange);
+        bodySkinManager.ChangeSkin(_skinManager.SkinInstance);
+        
+        SkinnedMeshRenderer[] renderers = newBody.GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (var rend in renderers) { rend.enabled = false; }
         //enable body at the end of suicide_in animation
         NotifyEnd notifier = _skinManager.AnimatorInstance.GetBehaviour<NotifyEnd>();
         notifier.OnAnimEnd += delegate
         {
-            newBody.SetActive(true);
-            bodyRenderer.enabled = true;
-            _renderer.enabled = false;
+            SkinnedMeshRenderer[] renderers = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var rend in renderers) { rend.enabled = false; }
+            renderers = newBody.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (var rend in renderers) { rend.enabled = true; }
         };
         
 
