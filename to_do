@@ -1,3 +1,4 @@
+freez animator on bodies
 test build
 switch all internal references setup to Awake() instead of start
 add models
@@ -6,6 +7,7 @@ start menu and level transition
 button
 doors
 enemy
+mapping
 DONE grinder
 DONE make body fall down when player die
 DONE bumper

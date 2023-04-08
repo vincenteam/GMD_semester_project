@@ -43,11 +43,6 @@ public class PlayerLifeActions : MonoBehaviour
             child.gameObject.layer = layer;
         }
 
-
-        
-        //SkinnedMeshRenderer[] renderers = newBody.GetComponentsInChildren<SkinnedMeshRenderer>();
-        //foreach (var rend in renderers) { rend.enabled = false; }
-        
         //enable body at the end of suicide_in animation
         NotifyEnd notifier = _skinManager.AnimatorInstance.GetBehaviour<NotifyEnd>();
         notifier.OnAnimEnd += delegate
@@ -65,7 +60,7 @@ public class PlayerLifeActions : MonoBehaviour
             rbBody.AddForce(_rb.velocity, ForceMode.VelocityChange);
         };
 
-        Invoke(nameof(TerminateDeath), 4.5f);
+        Invoke(nameof(TerminateDeath), 2.5f);
     }
 
     private void TerminateDeath()
