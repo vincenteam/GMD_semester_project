@@ -1,13 +1,12 @@
 test build
 switch all internal references setup to Awake() instead of start
-change delegates to use events
-make body fall down when player die
-add models 
+add models
 add sound (only music ?)
 start menu and level transition
 button
 doors
-grinder
 enemy
+DONE grinder
+DONE make body fall down when player die
 DONE bumper
 DONE reduce air control 

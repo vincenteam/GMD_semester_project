@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    private int collisionCount;
-    private bool grounded = false;
+    private int _collisionCount;
+    private bool _grounded = false;
     
     public delegate void ActionsDelegate();
     private ActionsDelegate _land;
@@ -26,7 +26,7 @@ public class CollisionDetector : MonoBehaviour
     
     public bool Grounded
     {
-        get => grounded;
+        get => _grounded;
     }
 
     public void ForceCollisionOut()
@@ -36,25 +36,25 @@ public class CollisionDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (collisionCount == 0) Land();
-        collisionCount++;
+        if (_collisionCount == 0) Land();
+        _collisionCount++;
     }
 
     void OnTriggerExit(Collider other)
     {
-        collisionCount--;
-        if (collisionCount == 0) LeaveGround();
+        _collisionCount--;
+        if (_collisionCount == 0) LeaveGround();
     }
 
     private void LeaveGround()
     {
-        if (grounded) _leaveGround();
-        grounded = false;
+        if (_grounded) _leaveGround();
+        _grounded = false;
     }
 
     private void Land()
     {
-        if (!grounded) _land(); 
-        grounded = true;
+        if (!_grounded) _land(); 
+        _grounded = true;
     }
 }
