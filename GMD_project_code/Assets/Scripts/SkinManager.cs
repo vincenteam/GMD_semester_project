@@ -52,10 +52,4 @@ public class SkinManager : MonoBehaviour
             _animatorController = _animator.runtimeAnimatorController;
         }
     }
-
-    public void ChangeAnimator(RuntimeAnimatorController controller)
-    {
-        _animator.runtimeAnimatorController = controller;
-        print("change animator");
-    }
 }

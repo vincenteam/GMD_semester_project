@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        CollisionDetector groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
+        CollisionDetector groundDetector = gameObject.GetComponentInChildren<CollisionDetector>();
         
         if (groundDetector is not null && _skinManager is not null)
         {

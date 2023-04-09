@@ -1,3 +1,4 @@
+ground detector : detecting the side where the collision comes from ?
 test build
 switch all internal references setup to Awake() instead of start
 add models

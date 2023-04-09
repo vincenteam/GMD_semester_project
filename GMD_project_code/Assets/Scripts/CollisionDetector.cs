@@ -55,6 +55,7 @@ public class CollisionDetector : MonoBehaviour
     private void Land()
     {
         if (!_grounded) _land(); 
+        print("land");
         _grounded = true;
     }
 }

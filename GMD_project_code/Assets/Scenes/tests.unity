@@ -552,7 +552,7 @@ PrefabInstance:
     - target: {fileID: 2269615601799991859, guid: c9d8cd1303fa39d46b1243d43b65132f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2269615601799991859, guid: c9d8cd1303fa39d46b1243d43b65132f,
         type: 3}
@@ -1415,7 +1415,7 @@ Transform:
   - {fileID: 341009918}
   - {fileID: 2089746994}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1477305456
 GameObject:
@@ -1514,6 +1514,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477305456}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1548125575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5728957101696861827, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_Name
+      value: Booster
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728957101696861855, guid: ba6e10ade6682f6b88761a5bcfd864dc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba6e10ade6682f6b88761a5bcfd864dc, type: 3}
 --- !u!1 &1651218579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,7 +1626,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763944795
 GameObject:
@@ -1589,7 +1658,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1763944797
 MonoBehaviour:
@@ -1824,7 +1893,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 27.7, y: 0, z: 0}
 --- !u!114 &1859641653
 MonoBehaviour:

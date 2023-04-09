@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void Start()
     {
-        _groundDetector = Tools.GetGoWithComponent<CollisionDetector>(gameObject.transform);
+        _groundDetector = gameObject.GetComponentInChildren<CollisionDetector>();
         _groundDetector.OnLand += SwitchToGroundControl;
         _groundDetector.OnLeaveGround += SwitchToAirControl;
     }
