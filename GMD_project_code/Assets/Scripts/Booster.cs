@@ -1,21 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Booster : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private float power;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,7 +10,7 @@ public class Booster : MonoBehaviour
         if (rb != null)
         {
             Vector3 force = transform.forward;
-            rb.AddForce(force*30, ForceMode.Impulse);
+            rb.AddForce(force*power, ForceMode.Impulse);
         }
     }
 

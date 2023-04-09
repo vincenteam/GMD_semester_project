@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialJumpHeight: 5
-  initialMaxSpeed: 6
+  initialMaxSpeed: 12
   initialRotateSpeed: 0.2
   initialForwardAcceleration: 100
   initialLeftRightAcceleration: 100

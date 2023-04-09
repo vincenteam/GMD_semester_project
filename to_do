@@ -1,4 +1,3 @@
-freez animator on bodies
 test build
 switch all internal references setup to Awake() instead of start
 add models
