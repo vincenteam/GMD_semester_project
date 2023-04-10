@@ -1,11 +1,15 @@
+going faster when running diagonally
+
+when dying on another body, player goes through it and the new body clip with the old one
+
 inconsistent input, sometimes keypress is not registered (press and realse before Fixed update)
 
-cant jump when on edges (feet are not touching the ground)
-
 player cant move forward when going over transition between blocks even with no height difference
+    player stuck in jump (ground detector stay in jump state)
+    
 
 when switching direction with player animation go through idlestate
- 
+
 super booster appening randomly ?
 
 super jump when moving and jumping simultaneously on superposed planes
@@ -27,3 +31,5 @@ DONE freez between jump animation and mid air animation hapenning from time to t
 DONE death fall animation happening mid air instead of falling on ground | bake into pose position and rotation of animation
 
 DONE when dying, animation blink for a frame | making an independant animator controller and making sure to switch to the right animator controller before enabeling the object
+
+DONE cant jump when on edges (feet are not touching the ground) | making the ground detector/feet closer to the size of the bodybox + detecting the side of the collision

@@ -6,7 +6,7 @@ using GMDProject;
 
 public class CharacterMovement : MonoBehaviour, ICharacterMovement
 {
-    private CollisionDetector _groundDetector;
+    private GroundDetector _groundDetector;
     private Rigidbody _rb;
 
     [SerializeField] private float initialJumpHeight;
@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void Start()
     {
-        _groundDetector = gameObject.GetComponentInChildren<CollisionDetector>();
+        _groundDetector = gameObject.GetComponentInChildren<GroundDetector>();
         _groundDetector.OnLand += SwitchToGroundControl;
         _groundDetector.OnLeaveGround += SwitchToAirControl;
     }
@@ -63,8 +63,8 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         if (_groundDetector.Grounded)
         {
             _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
-            _groundDetector.ForceCollisionOut();
-            _jump();
+            _groundDetector.ForceCollisionOut(); // useless now ?
+            //_jump();
         }
     }
 
@@ -113,8 +113,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         {
             _rb.AddRelativeForce(forwardPercent * _forwardAcceleration * new Vector3(0, 0, direction), ForceMode.Acceleration);
         }
-        
-        //_move(vel.magnitude);
     }
 
     private void MoveRightLeft(int direction)
@@ -127,8 +125,6 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
             _rb.AddRelativeForce(rglftPercent * _leftRightAcceleration * new Vector3(direction, 0, 0),
                 ForceMode.Acceleration);
         }
-
-        //_move(vel.magnitude);
     }
 
     private void SwitchToAirControl()

@@ -1,4 +1,6 @@
 ground detector : detecting the side where the collision comes from ?
+    faire une liste avec les machin qu'on collisione et on exit on cherche dans la liste pour les suppr 
+
 test build
 switch all internal references setup to Awake() instead of start
 add models

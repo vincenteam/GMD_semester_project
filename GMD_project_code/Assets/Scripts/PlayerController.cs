@@ -48,15 +48,7 @@ public class PlayerController : MonoBehaviour
                 _playerInput.OnChangeSkin += delegate {_skinManager.ChangeSkin(newSkin);};
             }
         }
-        
-        if (_skinManager is not null && charMove is not null)
-        {
-            charMove.OnJump += delegate { 
-                _skinManager.AnimatorInstance.SetTrigger(Jump);
-                _skinManager.AnimatorInstance.ResetTrigger(Land);
-            };
-        }
-        
+
         HeadMovement headMove = Tools.GetGoWithComponent<HeadMovement>(gameObject.transform);
         if (headMove is not null && _playerInput is not null)
         {
@@ -66,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        CollisionDetector groundDetector = gameObject.GetComponentInChildren<CollisionDetector>();
+        GroundDetector groundDetector = gameObject.GetComponentInChildren<GroundDetector>();
         
         if (groundDetector is not null && _skinManager is not null)
         {

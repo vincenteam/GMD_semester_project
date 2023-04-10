@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6143608744853637621}
   - component: {fileID: 3622111169954784403}
   - component: {fileID: 6396282159397729487}
+  - component: {fileID: 4258143684200948585}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -134,9 +135,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5000001
-  m_Height: 1.8553426
+  m_Height: 1.3008833
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.07232869, z: -0.00000011920929}
+  m_Center: {x: 0.000000059604645, y: 0.34955835, z: -0.00000011920929}
 --- !u!54 &3346832454061106560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -286,6 +287,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80cf49bb7da97fdddadfa9360202ebf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4258143684200948585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346832454061106574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68296c1f4a8afc9e882c2219ee7e915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feet: {fileID: 7604621656814553623}
+  groundTiltLimit: 45
 --- !u!1 &4999927153971690015
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4999927153971690015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -360,7 +375,7 @@ Transform:
   m_GameObject: {fileID: 5061498671117946857}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.9, z: 0}
-  m_LocalScale: {x: 0.95, y: 0.1, z: 0.95}
+  m_LocalScale: {x: 0.98, y: 0.1, z: 0.98}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3346832454061106562}
@@ -449,7 +464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8096760264257057662
 Transform:
   m_ObjectHideFlags: 0
