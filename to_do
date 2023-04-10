@@ -1,6 +1,3 @@
-ground detector : detecting the side where the collision comes from ?
-    faire une liste avec les machin qu'on collisione et on exit on cherche dans la liste pour les suppr 
-
 test build
 switch all internal references setup to Awake() instead of start
 add models
@@ -10,6 +7,8 @@ button
 doors
 enemy
 mapping
+change cam swap system to use multiple camMoutPoint instead positions list
+DONE ground detector : detecting the side where the collision comes from ?
 DONE grinder
 DONE make body fall down when player die
 DONE bumper
