@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GMDProject;
 
@@ -12,17 +10,19 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     [SerializeField] private float initialJumpHeight;
     [SerializeField] private float initialMaxSpeed;
     [SerializeField] private float initialRotateSpeed;
-    [SerializeField] private float initialForwardAcceleration;
-    [SerializeField] private float initialLeftRightAcceleration;
+    [SerializeField] private float initialAcceleration;
 
     [SerializeField] private float airControl;
-    
-    
+
+    private Vector3 _movement; // the final movement applied to rigidbody
+    private int _movingRigLft;
+    private int _movingForward;
+    private float _combinedMaxSpeed; // max speed when moving diagonally
+
     private float _jumpHeight;
     private float _maxSpeed;
     private float _rotateSpeed;
-    private float _forwardAcceleration;
-    private float _leftRightAcceleration;
+    private float _acceleration; // maximum acceleration by second
     
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
@@ -45,8 +45,9 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
         _jumpHeight = initialJumpHeight;
         _maxSpeed = initialMaxSpeed;
         _rotateSpeed = initialRotateSpeed;
-        _forwardAcceleration = initialForwardAcceleration;
-        _leftRightAcceleration = initialLeftRightAcceleration;
+        _acceleration = initialAcceleration;
+        
+        _combinedMaxSpeed = Mathf.Cos(MathF.PI/4) * _maxSpeed;
         
         _rb = gameObject.GetComponent<Rigidbody>();
     }
@@ -106,38 +107,64 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void MoveBackFront(int direction)
     {
-        Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
-
-        float forwardPercent = Mathf.Abs(_maxSpeed*direction - Mathf.Clamp(vel.z, -_maxSpeed, _maxSpeed))/ (_maxSpeed*2);
-        if(direction != 0)
-        {
-            _rb.AddRelativeForce(forwardPercent * _forwardAcceleration * new Vector3(0, 0, direction), ForceMode.Acceleration);
-        }
+        _movingForward = direction;
     }
 
     private void MoveRightLeft(int direction)
     {
-        Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
-        
-        float rglftPercent = Mathf.Abs(_maxSpeed*direction - Mathf.Clamp(vel.x, -_maxSpeed, _maxSpeed))/ (_maxSpeed*2);
-        if (direction != 0)
-        {
-            _rb.AddRelativeForce(rglftPercent * _leftRightAcceleration * new Vector3(direction, 0, 0),
-                ForceMode.Acceleration);
-        }
+        _movingRigLft = direction;
     }
 
     private void SwitchToAirControl()
     {
         _maxSpeed = initialMaxSpeed * airControl;
-        _forwardAcceleration = initialForwardAcceleration * airControl;
-        _leftRightAcceleration = initialLeftRightAcceleration * airControl;
+        _acceleration = initialAcceleration * airControl;
     }
     
     private void SwitchToGroundControl() // call major Tom
     {
         _maxSpeed = initialMaxSpeed;
-        _forwardAcceleration = initialForwardAcceleration;
-        _leftRightAcceleration = initialLeftRightAcceleration;
+        _acceleration = initialAcceleration;
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 force = new Vector3();
+
+        bool forward = Convert.ToBoolean(_movingForward);
+        bool rgtLft = Convert.ToBoolean(_movingRigLft);
+        
+        if (forward && rgtLft)
+        {
+            Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
+            float forwardPercent = Mathf.Abs(_combinedMaxSpeed*_movingForward - Mathf.Clamp(vel.z, -_combinedMaxSpeed, _combinedMaxSpeed))/ _combinedMaxSpeed;
+            float rgtLftPercent = Mathf.Abs(_combinedMaxSpeed*_movingRigLft - Mathf.Clamp(vel.x, -_combinedMaxSpeed, _combinedMaxSpeed))/ _combinedMaxSpeed;
+
+            // add directions
+            force.z = forwardPercent * _combinedMaxSpeed * _movingForward;
+            force.x = rgtLftPercent * _combinedMaxSpeed * _movingRigLft;
+            
+        }else if (forward)
+        {
+            Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
+            
+            float forwardPercent = Mathf.Abs(_maxSpeed*_movingForward - Mathf.Clamp(vel.z, -_maxSpeed, _maxSpeed))/ _maxSpeed;
+            force.z = forwardPercent * _maxSpeed * _movingForward;
+        }else if (rgtLft)
+        {
+            Vector3 vel = transform.InverseTransformDirection(_rb.velocity);
+            
+            float rgtLftPercent = Mathf.Abs(_maxSpeed*_movingRigLft - Mathf.Clamp(vel.x, -_maxSpeed, _maxSpeed))/ _maxSpeed;
+            force.x = rgtLftPercent * _maxSpeed * _movingRigLft;
+        }
+
+        if (forward || rgtLft)
+        {
+            Vector3.ClampMagnitude(force, _acceleration * Time.deltaTime);
+            _rb.AddRelativeForce(force, ForceMode.VelocityChange);    
+            
+            _movingForward = 0;
+            _movingRigLft = 0;
+        }
     }
 }

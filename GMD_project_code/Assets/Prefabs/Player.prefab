@@ -243,10 +243,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialJumpHeight: 5
-  initialMaxSpeed: 12
+  initialMaxSpeed: 8
   initialRotateSpeed: 0.2
-  initialForwardAcceleration: 100
-  initialLeftRightAcceleration: 100
+  initialAcceleration: 70
   airControl: 0.4
 --- !u!114 &6143608744853637621
 MonoBehaviour:

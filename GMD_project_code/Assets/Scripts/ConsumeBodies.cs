@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ConsumeBodies : MonoBehaviour
 {
@@ -62,6 +59,6 @@ public class ConsumeBodies : MonoBehaviour
             yield return null;
         }
         print("coroutine end");
-        //Destroy(col.gameObject);
+        Destroy(col.gameObject);
     }
 }
