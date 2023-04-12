@@ -1,5 +1,3 @@
-when dying on another body, player goes through it and the new body clip with the old one
-
 inconsistent input, sometimes keypress is not registered (press and realse before Fixed update)
 
 player cant move forward when going over transition between blocks even with no height difference
@@ -30,3 +28,5 @@ DONE when dying, animation blink for a frame | making an independant animator co
 DONE cant jump when on edges (feet are not touching the ground) | making the ground detector/feet closer to the size of the bodybox + detecting the angle of the collision
 
 DONE going faster when running diagonally | change target speed when moving in two directions
+
+DONE when dying on another body, player goes through it and the new body clip with the old one | making the rigidbody of player kinematic just after instanciating the body

@@ -36,21 +36,17 @@ public class PlayerLifeActions : MonoBehaviour
 
     private void OnDeath()
     {
-        int layer = LayerMask.NameToLayer("Ignore_moving");
-        gameObject.layer = layer;
-        foreach (Transform child in transform)
-        {
-            child.gameObject.layer = layer;
-        }
-
         //enable body at the end of suicide_in animation
         NotifyEnd notifier = _skinManager.AnimatorInstance.GetBehaviour<NotifyEnd>();
         notifier.OnAnimEnd += delegate
-        {
-            _skinManager.SkinInstance.SetActive(false);
-            
+        {        
+            int layer = LayerMask.NameToLayer("Ignore_moving");
+            gameObject.layer = layer;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = layer;
+            }
             GameObject newBody = Instantiate(body, transform.position, transform.rotation);
-            
 
             SkinManager bodySkinManager = newBody.GetComponent<SkinManager>();
             Rigidbody rbBody = newBody.GetComponent<Rigidbody>();
@@ -58,6 +54,10 @@ public class PlayerLifeActions : MonoBehaviour
             bodySkinManager.ChangeSkin(_skinManager.SkinInstance);
             bodySkinManager.SkinInstance.SetActive(true);
             rbBody.AddForce(_rb.velocity, ForceMode.VelocityChange);
+
+            
+            _rb.isKinematic = true;
+            _skinManager.SkinInstance.SetActive(false);
         };
 
         Invoke(nameof(TerminateDeath), 2.5f);
