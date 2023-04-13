@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private float moveRightLeft;
     private float mouseY;
     private float mouseX;
-    private bool jumpInput = false;
+    //private bool jumpInput = false;
     private bool jumpBtnDown = false;
     private bool jumpBtnUp = false;
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ButtonPressed : MonoBehaviour
 {
-    [SerializeField] private GameObject reactingObject;
+    [SerializeField] private ButtonInterface reactingObject;
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter()
     {
         print("collided with button");
-        //faire appeler React() de l'interface par le reactingObject (quand je ne serais pas carsick)
+        reactingObject.React();
     }
 }
