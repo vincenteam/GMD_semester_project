@@ -35,7 +35,7 @@ public class GroundDetector : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("new collision " + collision.collider.name);
+        //print("new collision " + collision.collider.name);
         Collider coll = collision.collider;
         if (_individualColliderCount.ContainsKey(coll))
         {
@@ -55,7 +55,7 @@ public class GroundDetector : MonoBehaviour
                 Debug.DrawRay(contact.point, contact.normal, Color.blue, 1);
 
                 float angle = Vector3.Angle(contact.normal, transform.up);
-                print("angle " + angle);
+                //print("angle " + angle);
                 if (-groundTiltLimit < angle && angle < groundTiltLimit)
                 {
                     
@@ -63,7 +63,7 @@ public class GroundDetector : MonoBehaviour
                     //{
                     //print("match " + _groundColliders.Find(delegate(Collider collider1) { return collider1 == collision.collider; }));
                     _groundColliders.Add(coll);
-                    print("ground collision ");
+                    //print("ground collision ");
                     
                         if (_collisionCount == 0) Land();
                         _collisionCount++;
@@ -72,7 +72,7 @@ public class GroundDetector : MonoBehaviour
                 }
                 else
                 {
-                    print("feet collide wall");
+                    //print("feet collide wall");
                 }
             }
         }
@@ -90,9 +90,9 @@ public class GroundDetector : MonoBehaviour
         {
             _groundColliders.Remove(coll);
             _collisionCount--;
-            print("collision out " + _collisionCount + " collider " + other.gameObject.name);
+            //print("collision out " + _collisionCount + " collider " + other.gameObject.name);
             if (_collisionCount == 0) LeaveGround();
-            if(_collisionCount < 0) print("negative collision count");
+            //if(_collisionCount < 0) print("negative collision count");
         }
     }
 
@@ -111,7 +111,7 @@ public class GroundDetector : MonoBehaviour
     private void Land()
     {
         if (!_grounded) _land(); 
-        print("land");
+        //print("land");
         _grounded = true;
     }
 }

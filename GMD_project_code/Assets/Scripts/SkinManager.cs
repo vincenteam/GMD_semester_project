@@ -45,6 +45,7 @@ public class SkinManager : MonoBehaviour
         _animator = newSkin.GetComponent<Animator>();
         if (_keepAnimatorController && _animatorController is not null)
         {
+            //Destroy(_animator.runtimeAnimatorController);
             _animator.runtimeAnimatorController = _animatorController;
         }
         else

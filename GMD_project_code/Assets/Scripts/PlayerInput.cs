@@ -110,7 +110,6 @@ public class PlayerInput : MonoBehaviour
     {
         if (_deathInput)
         {
-            enabled = false;
             _suicide();
         }
 

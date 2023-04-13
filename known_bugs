@@ -9,7 +9,9 @@ super jump when moving and jumping simultaneously on superposed planes
 
 unconsistent jump height when jumping on bodies
 
-DONE player jumping when going over transition between blocks even with no height difference |  ??? generaly cleaner aregment of player colidders
+when changing animator controller on an animator, sometimes the old animator stay somewhere and keep firing events of animation clips
+
+DONE player jumping when going over transition between blocks even with no height difference | ??? generaly cleaner aregment of player colidders
 
 DONE player stuck when trying to move in contact with a wall (can "grab" the wall mid jump) | reducing friction on the side of the player, and adding second a collider to handle friction with the ground
 

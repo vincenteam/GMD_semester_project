@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        HeadMovement headMove = Tools.GetGoWithComponent<HeadMovement>(gameObject.transform);
+        HeadMovement headMove = gameObject.GetComponentInChildren<HeadMovement>();
         if (headMove is not null && _playerInput is not null)
         {
             _playerInput.OnRotateX += headMove.RotateX;
