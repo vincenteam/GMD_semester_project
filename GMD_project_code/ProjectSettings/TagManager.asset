@@ -6,15 +6,16 @@ TagManager:
   tags:
   - CamMountPoint
   - Body
+  - Skin
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
-  - 
-  - 
+  - Ignore_moving
+  - Level
   - 
   - 
   - 
