@@ -102,8 +102,8 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonDown("Jump")) _jumpBtnDown = true;
         if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;
 
-        _deathInput = Input.GetButtonDown("Death");
-        _changeSkinInput = Input.GetButtonDown("ChangeSkin");
+        _deathInput = Input.GetButtonDown("Death") || _deathInput;
+        _changeSkinInput = Input.GetButtonDown("ChangeSkin") || _changeSkinInput;
     }
     
     void FixedUpdate()
@@ -111,9 +111,14 @@ public class PlayerInput : MonoBehaviour
         if (_deathInput)
         {
             _suicide();
+            _deathInput = false;
         }
 
-        if (_changeSkinInput) _changeSkin();
+        if (_changeSkinInput)
+        {
+            _changeSkin();
+            _changeSkinInput = false;
+        }
         
         if (_jumpBtnDown)
         {
