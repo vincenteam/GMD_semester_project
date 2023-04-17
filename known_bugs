@@ -1,7 +1,7 @@
 player cant move forward when going over transition between blocks even with no height difference
     player stuck in jump (ground detector stay in jump state)
 
-super booster appening randomly ?
+super booster happening randomly ?
 
 super jump when moving and jumping simultaneously on superposed planes
 
