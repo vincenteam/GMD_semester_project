@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialJumpHeight: 5
   initialMaxSpeed: 8
-  initialRotateSpeed: 0.2
+  initialRotateSpeed: 1
   initialAcceleration: 50
   airControl: 0.4
 --- !u!114 &6143608744853637621
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87479f2b1406cab8dbda87436ecd0659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityY: 0.01
+  sensitivityY: 0.3
   snappiness: 10
 --- !u!114 &6396282159397729487
 MonoBehaviour:
