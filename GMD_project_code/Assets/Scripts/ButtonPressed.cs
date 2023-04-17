@@ -1,14 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ButtonPressed : MonoBehaviour
 {
-    [SerializeField] private ButtonInterface reactingObject;
-    
-    private void OnCollisionEnter()
+    public delegate void Delegate();
+    private Delegate _pressed;
+
+    public Delegate OnPressed
     {
-        print("collided with button");
-        reactingObject.React();
+        get => _pressed;
+        set => _pressed += value;
+    }
+
+    public void Pressed()
+    {
+        _pressed();
+    }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        if (_pressed != null)
+        {
+            Pressed();
+        }
+        print("collision with button !");
     }
 }
