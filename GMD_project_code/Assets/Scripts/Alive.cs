@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Alive: MonoBehaviour
 {
+    // booleans to make sure some actions are performed only once
+    private bool _suicided = false;
+    private bool _dead = false;
+    
     public delegate void ActionsDelegate();
     public delegate void TerminateDelegate(GameObject go);
     
@@ -37,13 +41,21 @@ public class Alive: MonoBehaviour
 
     public void Suicide()
     {
-        _suicide();
-        Die();
+        if (!_suicided)
+        {
+            _suicided = true;
+            _suicide();
+            Die();   
+        }
     }
 
     public void Die()
     {
-        _onDeath();
+        if (!_dead) // you can only die once
+        {
+            _dead = true;
+            _onDeath();
+        }
     }
 
     public void TerminateDeath()
