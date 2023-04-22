@@ -85,13 +85,7 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
         {
             child.gameObject.layer = layer;
         }
-        _rb.isKinematic = true;
 
-        if (_deathClip != null)
-        {
-            _deathClip.events = Array.Empty<AnimationEvent>();
-        }
-        
         _deathClip = null;
         _deathClipEvent = null;
         
@@ -103,7 +97,7 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
         bodySkinManager.SkinInstance.SetActive(true);
         
         rbBody.AddForce(_rb.velocity, ForceMode.VelocityChange);
-        
+        _rb.isKinematic = true;
         
         _skinManager.SkinInstance.SetActive(false);
     }

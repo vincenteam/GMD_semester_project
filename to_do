@@ -3,6 +3,10 @@ switch all internal references setup to Awake() instead of start
 add models
 add sound (only music ?)
 start menu and level transition
+    playerpreferences
+    key binding
+    mouse sensitivity
+    sound volume
 button
 doors
 enemy

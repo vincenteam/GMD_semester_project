@@ -1,15 +1,11 @@
-inconsistent input, sometimes keypress is not registered (press and realse before Fixed update)
-
 player cant move forward when going over transition between blocks even with no height difference
     player stuck in jump (ground detector stay in jump state)
 
-super booster appening randomly ?
+super booster happening randomly ?
 
 super jump when moving and jumping simultaneously on superposed planes
 
-unconsistent jump height when jumping on bodies
-
-when changing animator controller on an animator, sometimes the old animator stay somewhere and keep firing events of animation clips
+when changing animator controller on an animator, sometimes the old animator stay somewhere and keep firing events of animation clips (tmp fix by removing events before change)
 
 DONE player jumping when going over transition between blocks even with no height difference | ??? generaly cleaner aregment of player colidders
 
@@ -32,3 +28,7 @@ DONE cant jump when on edges (feet are not touching the ground) | making the gro
 DONE going faster when running diagonally | change target speed when moving in two directions
 
 DONE when dying on another body, player goes through it and the new body clip with the old one | making the rigidbody of player kinematic just after instanciating the body
+
+DONE inconsistent input, sometimes keypress is not registered (press and realse before Fixed update) | keep input at true until fixedupdate run the assiated code and put it at false
+
+DONE unconsistent jump height when jumping on bodies | fix velocity at 0 before applying the force for the jump

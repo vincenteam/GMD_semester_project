@@ -13,14 +13,14 @@ public class ConsumeBodies : MonoBehaviour
     {
         Collider col = gameObject.GetComponent<Collider>();
         _center = new Vector3(0, col.bounds.size.y/2, 0);
-        print("center " + _center);
+        //print("center " + _center);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(bodiesTag))
         {
-            print("start running");
+            //print("start running");
             collision.rigidbody.isKinematic = true;
             StartCoroutine(ConsumeBody(collision.collider));
         }
@@ -29,7 +29,7 @@ public class ConsumeBodies : MonoBehaviour
     private IEnumerator ConsumeBody(Collider col)
     {
         var bounds = col.bounds;
-        print("bounds " + bounds.size.y);
+        //print("bounds " + bounds.size.y);
         Vector3 targetPoint = _center;
         float targetPointYShift = transform.InverseTransformPoint(col.transform.position).y;
 
@@ -44,10 +44,10 @@ public class ConsumeBodies : MonoBehaviour
             float linearFunc = centerAttraction * (elapsedTime + 1) + 1f;
             derivedAccumulator += linearFunc*Time.deltaTime*consumeRate;
             targetPoint.y = targetPointYShift - (derivedAccumulator);
-            print( "linear " + linearFunc + " target point " + targetPoint.y);
+            //print( "linear " + linearFunc + " target point " + targetPoint.y);
             
             Vector3 direction = targetPoint - transform.InverseTransformPoint(col.transform.position);
-            print(direction);
+            //print(direction);
             direction = Vector3.ClampMagnitude(direction, 1);
             direction = transform.TransformDirection(direction);
             
@@ -58,7 +58,7 @@ public class ConsumeBodies : MonoBehaviour
             
             yield return null;
         }
-        print("coroutine end");
+        //print("coroutine end");
         Destroy(col.gameObject);
     }
 }

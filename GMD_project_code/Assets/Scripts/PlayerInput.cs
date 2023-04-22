@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] private float sensitivityY = 0.1f;
+    [SerializeField] private float mouseSensitivity;
+    private float _sensitivityY;
+    private float _sensitivityX;
 
     private float _yAccumulator;
- 
+    private float _xAccumulator;
+
     [SerializeField] private float snappiness = 10.0f;
 
     private float _forwardInput;
@@ -102,8 +105,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetButtonDown("Jump")) _jumpBtnDown = true;
         if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;
 
-        _deathInput = Input.GetButtonDown("Death");
-        _changeSkinInput = Input.GetButtonDown("ChangeSkin");
+        _deathInput = Input.GetButtonDown("Death") || _deathInput;
+        _changeSkinInput = Input.GetButtonDown("ChangeSkin") || _changeSkinInput;
+
+        _sensitivityX = mouseSensitivity * 20; // ???
+        _sensitivityY = mouseSensitivity;
     }
     
     void FixedUpdate()
@@ -111,9 +117,14 @@ public class PlayerInput : MonoBehaviour
         if (_deathInput)
         {
             _suicide();
+            _deathInput = false;
         }
 
-        if (_changeSkinInput) _changeSkin();
+        if (_changeSkinInput)
+        {
+            _changeSkin();
+            _changeSkinInput = false;
+        }
         
         if (_jumpBtnDown)
         {
@@ -143,9 +154,10 @@ public class PlayerInput : MonoBehaviour
         }
         
         // rotation
-        _rotateY(_mouseX); // if 0 dont invoke ?
+        _xAccumulator = Mathf.Lerp( _xAccumulator, _mouseX, snappiness * Time.deltaTime);
+        _rotateY(_xAccumulator*_sensitivityX);
         
         _yAccumulator = Mathf.Lerp( _yAccumulator, _mouseY, snappiness * Time.deltaTime);
-        _rotateX(_yAccumulator*sensitivityY);
+        _rotateX(_yAccumulator*_sensitivityY);
     }
 }

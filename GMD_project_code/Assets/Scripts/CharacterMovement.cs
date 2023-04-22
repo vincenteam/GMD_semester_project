@@ -17,6 +17,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     private Vector3 _movement; // the final movement applied to rigidbody
     private int _movingRigLft;
     private int _movingForward;
+    private bool _jumping;
     private float _combinedMaxSpeed; // max speed when moving diagonally
 
     private float _jumpHeight;
@@ -61,12 +62,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     public void Jump()
     {
-        if (_groundDetector.Grounded)
-        {
-            _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
-            _groundDetector.ForceCollisionOut(); // useless now ?
-            //_jump();
-        }
+        _jumping = true;
     }
 
     public void MoveRight()
@@ -129,6 +125,17 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void FixedUpdate()
     {
+        if (_jumping && _groundDetector.Grounded)
+        {
+            Vector3 vel = _rb.velocity;
+            vel.y = 0;
+            _rb.velocity = vel;
+            _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
+            _groundDetector.ForceCollisionOut(); // useless now ?
+            //_jump();
+        }
+        _jumping = false;
+        
         Vector3 force = new Vector3();
 
         bool forward = Convert.ToBoolean(_movingForward);
