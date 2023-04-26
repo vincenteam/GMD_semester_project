@@ -33,7 +33,7 @@ public class ConsumeBodies : MonoBehaviour
         Vector3 targetPoint = _center;
         float targetPointYShift = transform.InverseTransformPoint(col.transform.position).y;
 
-        float derivedAccumulator = 0;
+        float integralAccumulator = 0;
         float elapsedTime = 0;
 
         float size = bounds.size.y;
@@ -42,8 +42,8 @@ public class ConsumeBodies : MonoBehaviour
         {
             elapsedTime += Time.deltaTime*consumeRate;
             float linearFunc = centerAttraction * (elapsedTime + 1) + 1f;
-            derivedAccumulator += linearFunc*Time.deltaTime*consumeRate;
-            targetPoint.y = targetPointYShift - (derivedAccumulator);
+            integralAccumulator += linearFunc*Time.deltaTime*consumeRate;
+            targetPoint.y = targetPointYShift - (integralAccumulator);
             //print( "linear " + linearFunc + " target point " + targetPoint.y);
             
             Vector3 direction = targetPoint - transform.InverseTransformPoint(col.transform.position);

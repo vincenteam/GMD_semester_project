@@ -86,6 +86,11 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
             child.gameObject.layer = layer;
         }
 
+        if (_deathClip)
+        {
+            _deathClip.events = Array.Empty<AnimationEvent>();
+        }
+
         _deathClip = null;
         _deathClipEvent = null;
         

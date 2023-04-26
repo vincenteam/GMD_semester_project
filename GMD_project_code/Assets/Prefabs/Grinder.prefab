@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154d2d079cd6e9d1aa5515a59effc0b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumeRate: 1
+  consumeRate: 0.1
   bodiesTag: Body
   centerAttraction: 0
 --- !u!1 &5770962179192200449

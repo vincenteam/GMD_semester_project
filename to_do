@@ -1,13 +1,11 @@
-test build
 switch all internal references setup to Awake() instead of start
-add models
+add models (textures)
 add sound (only music ?)
 start menu and level transition
     playerpreferences
-    key binding
+    key binding (?)
     mouse sensitivity
     sound volume
-button
 doors
 enemy
 mapping
