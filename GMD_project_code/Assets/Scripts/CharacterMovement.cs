@@ -115,12 +115,14 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     {
         _maxSpeed = initialMaxSpeed * airControl;
         _acceleration = initialAcceleration * airControl;
+        _combinedMaxSpeed = Mathf.Cos(MathF.PI/4) * _maxSpeed;
     }
     
     private void SwitchToGroundControl() // call major Tom
     {
         _maxSpeed = initialMaxSpeed;
         _acceleration = initialAcceleration;
+        _combinedMaxSpeed = Mathf.Cos(MathF.PI/4) * _maxSpeed;
     }
 
     private void FixedUpdate()

@@ -246,7 +246,7 @@ MonoBehaviour:
   initialMaxSpeed: 8
   initialRotateSpeed: 1
   initialAcceleration: 30
-  airControl: 0.1
+  airControl: 0.4
 --- !u!114 &6143608744853637621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 0.01
-  snappiness: 8
+  snappiness: 15
 --- !u!114 &6396282159397729487
 MonoBehaviour:
   m_ObjectHideFlags: 0
