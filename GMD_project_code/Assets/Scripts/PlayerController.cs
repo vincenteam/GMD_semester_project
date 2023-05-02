@@ -13,11 +13,15 @@ public class PlayerController : MonoBehaviour
     private SkinManager _skinManager;
     private PlayerInput _playerInput;
     private Rigidbody _rb;
+    
+    [SerializeField] private AudioSource _audioSourceLand;
+    [SerializeField] private AudioSource _audioSourceDeath;
 
     [SerializeField] private GameObject newSkin;
 
     void Awake()
     {
+        
         _skinManager = gameObject.GetComponent<SkinManager>();
         
         _playerInput = gameObject.GetComponent<PlayerInput>();
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
             if (lifeActions is not null)
             {
                 _playerInput.OnSuicide += lifeActions.Suicide;
+                _playerInput.OnSuicide += _audioSourceDeath.Play;
             }
 
             if (_skinManager != null)
@@ -62,7 +67,11 @@ public class PlayerController : MonoBehaviour
         
         if (groundDetector is not null && _skinManager is not null)
         {
-            groundDetector.OnLand += delegate { _skinManager.AnimatorInstance.SetTrigger(Land);};
+            groundDetector.OnLand += delegate
+            {
+                _skinManager.AnimatorInstance.SetTrigger(Land);
+                _audioSourceLand.Play();
+            };
             groundDetector.OnLeaveGround += delegate { 
                 _skinManager.AnimatorInstance.SetTrigger(Jump);
                 _skinManager.AnimatorInstance.ResetTrigger(Land);
