@@ -10,6 +10,7 @@ public class ButtonPressed : MonoBehaviour
 
     public delegate void ActionDelegate();
     private ActionDelegate _pressed;
+    [SerializeField] private AudioSource audioSourcePressed;
 
     public ActionDelegate OnPressed
     {
@@ -27,6 +28,7 @@ public class ButtonPressed : MonoBehaviour
 
     public void Pressed()
     {
+        audioSourcePressed.Play();
         _pressed();
     }
     

@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5
-  _audioSourceBump: {fileID: 5269133247041852308}
+  audioSourceBump: {fileID: 5269133247041852308}
 --- !u!82 &5269133247041852308
 AudioSource:
   m_ObjectHideFlags: 0
