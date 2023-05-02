@@ -6,9 +6,9 @@ start menu and level transition
     key binding (?)
     mouse sensitivity
     sound volume
-doors
 enemy
 mapping
+cam
 change cam swap system to use multiple camMoutPoint instead positions list
 DONE ground detector : detecting the side where the collision comes from ?
 DONE grinder

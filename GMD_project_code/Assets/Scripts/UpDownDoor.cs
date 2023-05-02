@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GMDProject
@@ -12,9 +11,9 @@ namespace GMDProject
         private Vector3 _targetPoint;
         private Vector3 _startPoint;
         
-        private bool opening = false;
-        private bool closing = false;
-        private bool open = false;
+        private bool _opening = false;
+        private bool _closing = false;
+        private bool _open = false;
 
         void Awake()
         {
@@ -28,10 +27,10 @@ namespace GMDProject
 
         public void Open()
         {
-            if (!opening && !open)
+            if (!_opening && !_open)
             {
                 StartCoroutine(MoveTo(_targetPoint));
-                opening = true;
+                _opening = true;
             }
         }
 
@@ -53,16 +52,16 @@ namespace GMDProject
             
             _rb.position = target;
             
-            opening = false;
-            open = true;
+            _opening = false;
+            _open = true;
         }
 
         public void Close()
         {
-            if (open && !closing)
+            if (_open && !_closing)
             {
                 StartCoroutine(MoveTo(_startPoint));
-                closing = true;
+                _closing = true;
             }
         }
     }
