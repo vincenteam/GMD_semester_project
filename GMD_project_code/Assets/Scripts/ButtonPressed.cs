@@ -1,17 +1,28 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 public class ButtonPressed : MonoBehaviour
 {
-    public delegate void Delegate();
-    private Delegate _pressed;
+    [SerializeField] private List<MonoBehaviour> scriptsTarget = new();
+    [SerializeField] private List<string> methodTarget = new();
 
-    public Delegate OnPressed
+    public delegate void ActionDelegate();
+    private ActionDelegate _pressed;
+
+    public ActionDelegate OnPressed
     {
         get => _pressed;
         set => _pressed += value;
+    }
+
+    private void Start()
+    {
+        foreach ((MonoBehaviour, string) kvp in scriptsTarget.Zip(methodTarget, (script, str) => (script, str)))
+        {
+            _pressed += (ActionDelegate)Delegate.CreateDelegate(typeof(ActionDelegate), kvp.Item1, kvp.Item2, true, false);
+        }
     }
 
     public void Pressed()
