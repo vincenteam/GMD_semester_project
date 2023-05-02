@@ -7,6 +7,8 @@ namespace GMDProject
 {
     public class UpDownDoor : MonoBehaviour, IDoor
     {
+        [SerializeField] private float speed;
+        
         private Rigidbody _rb;
         private Vector3 _targetPoint;
 
@@ -26,7 +28,12 @@ namespace GMDProject
 
         /*private IEnumerator MoveTo(Vector3 target)
         {
-            return ;
+            Vector3 direction = target - _rb.position;
+
+            while (direction.magnitude > 0)
+            {
+                _rb.MovePosition(Vector3.Normalize(direction)*speed*Time.deltaTime);
+            }
         }*/
 
         public void Close()
