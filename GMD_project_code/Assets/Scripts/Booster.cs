@@ -3,8 +3,9 @@ using UnityEngine;
 public class Booster : MonoBehaviour
 {
     [SerializeField] private float power;
+    [SerializeField] private float maxVelocity;
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -12,16 +13,18 @@ public class Booster : MonoBehaviour
             Vector3 force = transform.forward;
             rb.AddForce(force*power, ForceMode.Impulse);
         }
-    }
+    }*/
 
-    /*private void OnCollisionStay(Collision collisionInfo)
+    private void OnCollisionStay(Collision collisionInfo)
     {
         Rigidbody rb = collisionInfo.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            //print("rb found");
-            Vector3 force = transform.forward;
-            rb.AddForce(force*1, ForceMode.Impulse);
+            if (transform.InverseTransformDirection(rb.velocity).z < maxVelocity)
+            {
+                Vector3 direction = transform.forward;
+                rb.AddForce(direction*power, ForceMode.Impulse);   
+            }
         }
-    }*/
+    }
 }

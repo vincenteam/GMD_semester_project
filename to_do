@@ -10,8 +10,11 @@ enemy
 mapping
 cam
 change cam swap system to use multiple camMoutPoint instead positions list
+change button collider (capsule to mesh)
+button with more detailed events (up & down)
 DONE ground detector : detecting the side where the collision comes from ?
 DONE grinder
 DONE make body fall down when player die
 DONE bumper
 DONE reduce air control 
+DONE doors
