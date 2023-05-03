@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,14 +22,13 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        
         _skinManager = gameObject.GetComponent<SkinManager>();
         
         _playerInput = gameObject.GetComponent<PlayerInput>();
         _rb = gameObject.GetComponent<Rigidbody>();
         CharacterMovement charMove = gameObject.GetComponent<CharacterMovement>();
         Alive lifeActions = gameObject.GetComponent<Alive>();
-
+        _playerInput.OnMenuPressed += delegate { SceneManager.LoadScene("TitleScreen");};
 
         if (_playerInput is not null)
         {
