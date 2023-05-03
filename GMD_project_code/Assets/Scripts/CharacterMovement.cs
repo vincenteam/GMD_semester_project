@@ -56,8 +56,15 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
     private void Start()
     {
         _groundDetector = gameObject.GetComponentInChildren<GroundDetector>();
-        _groundDetector.OnLand += SwitchToGroundControl;
-        _groundDetector.OnLeaveGround += SwitchToAirControl;
+        if (_groundDetector != null)
+        {
+            _groundDetector.OnLand += SwitchToGroundControl;
+            _groundDetector.OnLeaveGround += SwitchToAirControl;   
+        }
+        else
+        {
+            print("Groundetector is needed to use CharacterMovement");
+        }
     }
 
     public void Jump()

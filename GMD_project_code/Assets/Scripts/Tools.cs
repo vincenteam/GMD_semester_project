@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class Tools
+public static class Tools
 {
     public static Transform GetTransformByTag(Transform parent, string tagSearched)
     {

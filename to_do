@@ -1,17 +1,29 @@
-switch all internal references setup to Awake() instead of start
-add models (textures)
-add sound (only music ?)
-start menu and level transition
-    playerpreferences
+reset button
+cam
+change button collider (capsule to mesh)
+button with more detailed events (up & down)
+put scripts in folders
+transition between levels + end + start + win
+(easter egg)
+
+
+add textures
+add sound
+start menu and level transition (using playerpreferences)
     key binding (?)
     mouse sensitivity
     sound volume
 enemy
+    shoots at you when is range
+    run fast at you dies in contact with obstacle (hollow knight bat)
+    walk on predefine paths
+
+
 mapping
-cam
-change cam swap system to use multiple camMoutPoint instead positions list
-change button collider (capsule to mesh)
-button with more detailed events (up & down)
+report
+readme
+video
+
 DONE ground detector : detecting the side where the collision comes from ?
 DONE grinder
 DONE make body fall down when player die

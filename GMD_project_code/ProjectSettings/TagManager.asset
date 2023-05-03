@@ -7,6 +7,7 @@ TagManager:
   - CamMountPoint
   - Body
   - Skin
+  - WeaponMountPoint
   layers:
   - Default
   - TransparentFX

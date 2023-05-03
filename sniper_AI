@@ -1,0 +1,4 @@
+every s second get all oponents that are in a sphere
+
+foreach oponent, if there is no level element between the sniper and the oponent, turn at him and shoot (shoot the closest one)
+
