@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
 public class Booster : MonoBehaviour
 {
     [SerializeField] private float power;
     [SerializeField] private float maxVelocity;
-
+    [SerializeField] private AudioSource audioSourceBoost;
+    
     /*private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
@@ -14,6 +16,13 @@ public class Booster : MonoBehaviour
             rb.AddForce(force*power, ForceMode.Impulse);
         }
     }*/
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!audioSourceBoost.isPlaying)
+        {
+            audioSourceBoost.Play();
+        }
+    }
 
     private void OnCollisionStay(Collision collisionInfo)
     {

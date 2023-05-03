@@ -47,5 +47,6 @@ public class PlayerLifeCycleManager : MonoBehaviour
     private void EnablePlayer()
     {
         _newPlayer.SetActive(true);
+        _spawn.StartSpawnMusic();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSourceSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,5 +14,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject Spawn(GameObject go)
     {
         return Instantiate(go, transform.position, transform.rotation);
+    }
+
+    public void StartSpawnMusic()
+    {
+        audioSourceSpawn.Play();
     }
 }
