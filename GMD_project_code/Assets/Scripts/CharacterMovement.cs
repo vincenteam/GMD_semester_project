@@ -99,7 +99,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     public void RotateY(float amount)
     {
-        Quaternion q = Quaternion.Euler(0, amount*360*_rotateSpeed*Time.deltaTime, 0); // timedeltatime should already be in amount
+        Quaternion q = Quaternion.Euler(0, amount*360*_rotateSpeed, 0);
         _rb.MoveRotation(transform.rotation * q);
     }
 

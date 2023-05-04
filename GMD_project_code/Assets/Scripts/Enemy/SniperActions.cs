@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using GMDProject;
 using UnityEngine;
 
 namespace Enemy
@@ -10,7 +12,10 @@ namespace Enemy
         [SerializeField] string[] obstacleLayers = new[] { "Level", "Objects" };
 
         private Loadout _loadout;
+        private ICharacterMovement _movement;
+        
         private Coroutine _currentState;
+        
         private int _targetsLayersMask;
         private int _obstacleLayersMask;
         
@@ -20,6 +25,7 @@ namespace Enemy
         private void Awake()
         {
             _loadout = GetComponent<Loadout>();
+            _movement = GetComponent<EnemyMovement>();
 
             _targetsLayersMask = LayerMask.GetMask(targetLayers);
             _obstacleLayersMask = LayerMask.GetMask(obstacleLayers);
@@ -59,6 +65,8 @@ namespace Enemy
 
         public bool CanSee(GameObject target)
         {
+            if (target is null) return false;
+            
             Collider[] colls = target.GetComponentsInChildren<Collider>();
             var position = target.transform.position;
             float maxTop = position.y;
@@ -120,21 +128,47 @@ namespace Enemy
             return false;
         }
 
-
-        private IEnumerator AimAt(GameObject target)
+        public IEnumerator Track(GameObject target)
         {
-            print("aim at " + target);
-            yield return new WaitForSeconds(1f);
-            _currentState = StartCoroutine(nameof(CheckForTarget));
-            yield break;
+            Vector3 facedDirection = transform.TransformDirection(transform.forward);
+            Vector3 targetDirection;
+            
+            while (true)
+            {
+                if (target == null) break;
+                targetDirection = target.transform.position - transform.position;
+
+                Vector3 flatTargetDirection = targetDirection;
+                flatTargetDirection.y = 0;
+
+                Vector3 flatFacedDirection = facedDirection;
+                flatFacedDirection.y = 0;
+
+                float angleYToTarget = Vector3.Angle(flatTargetDirection, flatFacedDirection);
+                
+                
+                facedDirection = flatTargetDirection;
+
+                int turnDirection = Math.Sign(Vector3.Cross(flatFacedDirection, flatTargetDirection).y);
+                
+                _movement.RotateY(angleYToTarget*turnDirection);
+                yield return null;
+            }
         }
         
-        
-        private IEnumerator IdleShoot()
+        public IEnumerator DumbShoot()
         {
             while (true)
             {
-                _loadout.Gun.Fire();
+                FireArm gun = _loadout.Gun;
+                if (gun.Ammo <= 0)
+                {
+                    gun.StartReload();
+                }
+                else
+                {
+                    gun.Fire();
+                }
                 yield return new WaitForSeconds(1f);   
             }
         }
