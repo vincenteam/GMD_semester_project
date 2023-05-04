@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5f5c2ac8fcd7b9f84ee07c98332484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitVisual: {fileID: 0}
+  hitVisual: {fileID: 7924082872868216640, guid: d107836cb26b2a09aa83024a91419513,
+    type: 3}
   speed: 1
-  lifeTime: 3
+  maxTravelDistance: 10
   damage: 0

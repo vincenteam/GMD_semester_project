@@ -8,6 +8,8 @@ TagManager:
   - Body
   - Skin
   - WeaponMountPoint
+  - Friendly
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - UI
   - Ignore_moving
   - Level
-  - 
-  - 
+  - Objects
+  - Living
   - 
   - 
   - 

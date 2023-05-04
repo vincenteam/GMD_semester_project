@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 85156441850851341}
   - component: {fileID: -7655475606593703205}
   - component: {fileID: 3868064253789165874}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySniper
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7cca02c4fbdeacb86aa431bf14794e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookDistance: 100
+  checkFrequence: 0.25
+  targetLayers:
+  - Living
+  obstacleLayers:
+  - Level
+  - Objects
 --- !u!114 &-7655475606593703205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5629092140899879076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gunMountPoint
   m_TagString: WeaponMountPoint
   m_Icon: {fileID: 0}
@@ -223,7 +230,7 @@ GameObject:
   - component: {fileID: 5104968269086295614}
   - component: {fileID: 5544980891767618486}
   - component: {fileID: 1230265966113589770}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}

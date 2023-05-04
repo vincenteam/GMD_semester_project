@@ -116,5 +116,5 @@ MonoBehaviour:
   bullet: {fileID: 3823487402233358693, guid: ad39658f7880c4fdea3f8695f3d1e872, type: 3}
   coolDown: 1
   reloadTime: 1
-  clipSize: 1
-  ammoCapacity: 10
+  clipSize: 100
+  ammoCapacity: 100

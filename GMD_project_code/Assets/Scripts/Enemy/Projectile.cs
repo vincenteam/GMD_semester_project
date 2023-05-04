@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,31 +10,35 @@ namespace Enemy
     
         [SerializeField] private float speed;
 
-        [SerializeField] private float lifeTime = 3;
+        [SerializeField] private float maxTravelDistance = 3;
+        private float _distanceDone = 0;
         [SerializeField] private int damage;
         private Vector3 _move;
 
-        private int _blockingLayer;
+        private int _blockingLayers;
 
         private void Awake()
         {
-            _blockingLayer = LayerMask.NameToLayer("Level");
+            _blockingLayers = LayerMask.GetMask("Level", "Objects");
         }
 
-        void Start()
-        {
-            Invoke("Kill", lifeTime);
-        }
-    
         void FixedUpdate()
         {
-            transform.Translate(Time.deltaTime*speed*Vector3.forward);
+            float step = Time.deltaTime * speed;
+            transform.Translate(Vector3.forward * step);
+
+            _distanceDone += step;
+
+            if (_distanceDone > maxTravelDistance)
+            {
+                Invoke(nameof(Kill), 0);
+            }
         }
-    
+        
         void OnTriggerEnter(Collider other)
         {
             GameObject g = other.GameObject();
-            if (g.layer == _blockingLayer)
+            if (Convert.ToBoolean((1<<g.layer) & _blockingLayers))
             {
                 Kill();   
             }else
@@ -50,7 +55,10 @@ namespace Enemy
         private void Kill()
         {
             var transform1 = transform;
-            Instantiate(hitVisual, transform1.position, transform1.rotation);
+
+            Quaternion rotation = transform1.rotation;
+            rotation.y += 180;
+            Instantiate(hitVisual, transform1.position, rotation);
             Destroy(gameObject);
         }
     }
