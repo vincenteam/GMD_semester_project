@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -86,6 +87,14 @@ public class PlayerInput : MonoBehaviour
         get => _rotateX;
         set => _rotateX = value;
     }
+
+    public delegate void QuitDelegate();
+    private QuitDelegate _quitDelegate;
+    public QuitDelegate OnMenuPressed
+    {
+        get => _quitDelegate;
+        set => _quitDelegate = value;
+    }
     
     void Start()
     {
@@ -101,6 +110,11 @@ public class PlayerInput : MonoBehaviour
         _rgtLftInput = Input.GetAxis("RightLeft");
 
         _forwardInput = Input.GetAxis("Forward");
+
+        if (Input.GetButtonDown("EscapePressed"))
+        {
+            _quitDelegate();
+        }
 
         if (Input.GetButtonDown("Jump")) _jumpBtnDown = true;
         if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;
