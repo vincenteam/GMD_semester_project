@@ -10,6 +10,7 @@ TagManager:
   - WeaponMountPoint
   - Friendly
   - Enemy
+  - BackgroundMusic
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,6 @@ using Toggle = UnityEngine.UI.Toggle;
 
 public class ScreenTypeChange : MonoBehaviour
 {
-    
     public void  TypeChange()
     {
         Screen.fullScreen = !Screen.fullScreen;

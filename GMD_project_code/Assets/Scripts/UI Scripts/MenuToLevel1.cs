@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuToLevel1 : MonoBehaviour
 {
+    [SerializeField] private AudioSource menuMusic;
     public void ChangeScene()
     {
+        menuMusic.Pause();
         SceneManager.LoadScene("tests");
     }
 }
