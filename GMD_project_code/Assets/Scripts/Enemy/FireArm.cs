@@ -13,6 +13,8 @@ namespace Enemy
         [SerializeField] private int ammoCapacity;
         private int _clip;
         private int _ammo;
+
+        public int Ammo => _ammo;
     
         private bool _inCoolDown = false;
 
@@ -75,11 +77,6 @@ namespace Enemy
             }
 
             _inCoolDown = false;
-        }
-
-        public int GetAmmo()
-        {
-            return _ammo;
         }
 
         public bool AmmoIsFull()

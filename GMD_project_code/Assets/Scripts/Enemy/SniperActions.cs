@@ -65,6 +65,8 @@ namespace Enemy
 
         public bool CanSee(GameObject target)
         {
+            if (target is null) return false;
+            
             Collider[] colls = target.GetComponentsInChildren<Collider>();
             var position = target.transform.position;
             float maxTop = position.y;
@@ -133,6 +135,7 @@ namespace Enemy
             
             while (true)
             {
+                if (target == null) break;
                 targetDirection = target.transform.position - transform.position;
 
                 Vector3 flatTargetDirection = targetDirection;
@@ -153,11 +156,19 @@ namespace Enemy
             }
         }
         
-        private IEnumerator IdleShoot()
+        public IEnumerator DumbShoot()
         {
             while (true)
             {
-                _loadout.Gun.Fire();
+                FireArm gun = _loadout.Gun;
+                if (gun.Ammo <= 0)
+                {
+                    gun.StartReload();
+                }
+                else
+                {
+                    gun.Fire();
+                }
                 yield return new WaitForSeconds(1f);   
             }
         }
