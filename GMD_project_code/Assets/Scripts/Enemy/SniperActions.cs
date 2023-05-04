@@ -12,7 +12,7 @@ namespace Enemy
         [SerializeField] string[] obstacleLayers = new[] { "Level", "Objects" };
 
         private Loadout _loadout;
-        private ICharacterMovement _movement;
+        private EnemyMovement _movement;
         
         private Coroutine _currentState;
         
@@ -130,28 +130,11 @@ namespace Enemy
 
         public IEnumerator Track(GameObject target)
         {
-            Vector3 facedDirection = transform.TransformDirection(transform.forward);
-            Vector3 targetDirection;
-            
             while (true)
             {
                 if (target == null) break;
-                targetDirection = target.transform.position - transform.position;
-
-                Vector3 flatTargetDirection = targetDirection;
-                flatTargetDirection.y = 0;
-
-                Vector3 flatFacedDirection = facedDirection;
-                flatFacedDirection.y = 0;
-
-                float angleYToTarget = Vector3.Angle(flatTargetDirection, flatFacedDirection);
                 
-                
-                facedDirection = flatTargetDirection;
-
-                int turnDirection = Math.Sign(Vector3.Cross(flatFacedDirection, flatTargetDirection).y);
-                
-                _movement.RotateY(angleYToTarget*turnDirection);
+                _movement.RotateTowards(target.transform.position);
                 yield return null;
             }
         }

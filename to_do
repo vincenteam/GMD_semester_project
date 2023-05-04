@@ -10,12 +10,13 @@ death animation for every death possible
 
 add textures
 add sound
+    sound when enemy is alerted
+    sound on level exit
 start menu and level transition (using playerpreferences)
     key binding (?)
     mouse sensitivity
     sound volume
 enemy
-    shoots at you when is range
     run fast at you dies in contact with obstacle (hollow knight bat)
     walk on predefine paths
 
