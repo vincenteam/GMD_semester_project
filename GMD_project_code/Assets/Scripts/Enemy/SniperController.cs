@@ -6,11 +6,11 @@ namespace Enemy
     public class SniperController: MonoBehaviour
     {
         [SerializeField] private float checkInterval;
-        private SniperActions actions;
+        private SniperActions _actions;
 
         private void Awake()
         {
-            actions = gameObject.GetComponent<SniperActions>();
+            _actions = gameObject.GetComponent<SniperActions>();
         }
 
 
@@ -23,12 +23,27 @@ namespace Enemy
         {
             while (true)
             {
-                GameObject target = actions.CheckForTarget();
+                GameObject target = _actions.CheckForTarget();
                 if (target != null)
                 {   
                     print("aim to " + target);
-                    StartCoroutine(actions.Track(target));
-                    yield return null;
+                    StartCoroutine(Alerted(target));
+                    yield break;
+                }
+                yield return new WaitForSeconds(checkInterval);
+            }
+        }
+
+        public IEnumerator Alerted(GameObject target)
+        {
+            Coroutine tracking = StartCoroutine(_actions.Track(target));
+
+            while (true)
+            {
+                if (!_actions.CanSee(target))
+                {
+                    StopCoroutine(tracking);
+                    yield break;
                 }
                 yield return new WaitForSeconds(checkInterval);
             }

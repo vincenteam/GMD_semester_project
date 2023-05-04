@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using GMDProject;
 using UnityEngine;
@@ -125,19 +126,29 @@ namespace Enemy
             return false;
         }
 
-
-        private IEnumerator AimAt(GameObject target)
-        {
-            print("aim at " + target);
-            yield return new WaitForSeconds(1f);
-            _currentState = StartCoroutine(nameof(CheckForTarget));
-        }
-
         public IEnumerator Track(GameObject target)
         {
+            Vector3 facedDirection = transform.TransformDirection(transform.forward);
+            Vector3 targetDirection;
+            
             while (true)
             {
-                _movement.RotateY(10*Time.deltaTime);
+                targetDirection = target.transform.position - transform.position;
+
+                Vector3 flatTargetDirection = targetDirection;
+                flatTargetDirection.y = 0;
+
+                Vector3 flatFacedDirection = facedDirection;
+                flatFacedDirection.y = 0;
+
+                float angleYToTarget = Vector3.Angle(flatTargetDirection, flatFacedDirection);
+                
+                
+                facedDirection = flatTargetDirection;
+
+                int turnDirection = Math.Sign(Vector3.Cross(flatFacedDirection, flatTargetDirection).y);
+                
+                _movement.RotateY(angleYToTarget*turnDirection);
                 yield return null;
             }
         }

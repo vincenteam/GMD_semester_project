@@ -61,11 +61,9 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            
             float maxRotationStep = maxRotateYSpeed * Time.deltaTime;
             _rotationAngleY = _rotationYAccumulator > maxRotationStep ? maxRotationStep : _rotationYAccumulator;
             
-            print("acc " + _rotationYAccumulator + " " + _rotationAngleY);
             Quaternion q = Quaternion.Euler(0, _rotationAngleY, 0);
             _rb.MoveRotation(transform.rotation * q);
 
