@@ -28,7 +28,12 @@ public class PlayerController : MonoBehaviour
         _rb = gameObject.GetComponent<Rigidbody>();
         CharacterMovement charMove = gameObject.GetComponent<CharacterMovement>();
         Alive lifeActions = gameObject.GetComponent<Alive>();
-        _playerInput.OnMenuPressed += delegate { SceneManager.LoadScene("TitleScreen");};
+        _playerInput.OnMenuPressed += delegate
+        {
+            SceneManager.LoadScene("TitleScreen");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        };
 
         if (_playerInput is not null)
         {
