@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemy
 {
@@ -29,6 +27,8 @@ namespace Enemy
                 if (target != null)
                 {   
                     print("aim to " + target);
+                    StartCoroutine(actions.Track(target));
+                    yield return null;
                 }
                 yield return new WaitForSeconds(checkInterval);
             }

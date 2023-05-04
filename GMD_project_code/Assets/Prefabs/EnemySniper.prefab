@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 85156441850851824}
   - component: {fileID: 85156441850851827}
   - component: {fileID: 85156441850851343}
-  - component: {fileID: 85156441850851340}
   - component: {fileID: 85156441850851341}
   - component: {fileID: -7655475606593703205}
   - component: {fileID: 3868064253789165874}
   - component: {fileID: -5323174837894526553}
+  - component: {fileID: 803656820986120274}
   m_Layer: 9
   m_Name: EnemySniper
   m_TagString: Enemy
@@ -122,23 +122,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &85156441850851340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85156441850851826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7cb6e1b0998a2eeca8954a740235a74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialJumpHeight: 0
-  initialMaxSpeed: 0
-  initialRotateSpeed: 0
-  initialAcceleration: 0
-  airControl: 0
 --- !u!114 &85156441850851341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +183,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkInterval: 0.25
+--- !u!114 &803656820986120274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85156441850851826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feabe6bf249e40c49a17fc933ca1ece1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRotateYSpeed: 180
 --- !u!1 &4541252758495608969
 GameObject:
   m_ObjectHideFlags: 0

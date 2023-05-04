@@ -1,4 +1,5 @@
 using System.Collections;
+using GMDProject;
 using UnityEngine;
 
 namespace Enemy
@@ -10,7 +11,10 @@ namespace Enemy
         [SerializeField] string[] obstacleLayers = new[] { "Level", "Objects" };
 
         private Loadout _loadout;
+        private ICharacterMovement _movement;
+        
         private Coroutine _currentState;
+        
         private int _targetsLayersMask;
         private int _obstacleLayersMask;
         
@@ -20,6 +24,7 @@ namespace Enemy
         private void Awake()
         {
             _loadout = GetComponent<Loadout>();
+            _movement = GetComponent<EnemyMovement>();
 
             _targetsLayersMask = LayerMask.GetMask(targetLayers);
             _obstacleLayersMask = LayerMask.GetMask(obstacleLayers);
@@ -126,9 +131,16 @@ namespace Enemy
             print("aim at " + target);
             yield return new WaitForSeconds(1f);
             _currentState = StartCoroutine(nameof(CheckForTarget));
-            yield break;
         }
-        
+
+        public IEnumerator Track(GameObject target)
+        {
+            while (true)
+            {
+                _movement.RotateY(10*Time.deltaTime);
+                yield return null;
+            }
+        }
         
         private IEnumerator IdleShoot()
         {

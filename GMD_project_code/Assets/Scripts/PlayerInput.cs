@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -122,7 +121,7 @@ public class PlayerInput : MonoBehaviour
         _deathInput = Input.GetButtonDown("Death") || _deathInput;
         _changeSkinInput = Input.GetButtonDown("ChangeSkin") || _changeSkinInput;
 
-        _sensitivityX = mouseSensitivity * 20; // ???
+        _sensitivityX = mouseSensitivity/4;
         _sensitivityY = mouseSensitivity;
     }
     
