@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cb6e1b0998a2eeca8954a740235a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialJumpHeight: 5
+  initialJumpHeight: 4.5
   initialMaxSpeed: 8
   initialRotateSpeed: 1
   initialAcceleration: 30
