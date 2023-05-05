@@ -4,6 +4,7 @@ put scripts in folders
 transition between levels + end + start + win
 death animation for every death possible
 remove prints
+enemy keep tracking when respawn
 (easter egg)
 
 DONE button with more detailed events (up & down)
@@ -16,7 +17,7 @@ start menu and level transition (using playerpreferences)
     mouse sensitivity
     sound volume
 enemy
-    run fast at you dies in contact with obstacle (hollow knight bat)
+    DONE run fast at you dies in contact with obstacle (hollow knight bat)
     walk on predefine paths
 
 
