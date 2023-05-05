@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace GMDProject
+namespace LevelItems
 {
     public class UpDownDoor : MonoBehaviour, IDoor
     {
@@ -15,6 +15,8 @@ namespace GMDProject
         private bool _closing = false;
         private bool _open = false;
 
+        private Coroutine _movement;
+
         void Awake()
         {
             _rb = gameObject.GetComponent<Rigidbody>();
@@ -27,9 +29,10 @@ namespace GMDProject
 
         public void Open()
         {
-            if (!_opening && !_open)
+            if (_closing || !_open)
             {
-                StartCoroutine(MoveTo(_targetPoint));
+                if(_movement != null) StopCoroutine(_movement);
+                _movement = StartCoroutine(MoveTo(_targetPoint));
                 _opening = true;
             }
         }
@@ -51,16 +54,19 @@ namespace GMDProject
             }
             
             _rb.position = target;
-            
+
             _opening = false;
-            _open = true;
+            _open = !_open;
         }
 
         public void Close()
         {
-            if (_open && !_closing)
+            print(_opening + " " + _open);
+            if (_opening || _open)
             {
-                StartCoroutine(MoveTo(_startPoint));
+                print("close");
+                if(_movement != null) StopCoroutine(_movement);
+                _movement = StartCoroutine(MoveTo(_startPoint));
                 _closing = true;
             }
         }

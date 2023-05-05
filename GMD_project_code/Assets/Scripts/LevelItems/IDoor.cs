@@ -1,4 +1,4 @@
-namespace GMDProject
+namespace LevelItems
 {
     public interface IDoor
     {

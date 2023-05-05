@@ -50,13 +50,13 @@ namespace Enemy
             if (OnAlertedStart != null) OnAlertedStart();
             
             Coroutine tracking = StartCoroutine(_actions.Track(target));
-            Coroutine shooting = StartCoroutine(_actions.DumbShoot());
+            //Coroutine shooting = StartCoroutine(_actions.DumbShoot());
             while (true)
             {
                 if (target == null || !_actions.CanSee(target))
                 {
                     StopCoroutine(tracking);
-                    StopCoroutine(shooting);
+                    //StopCoroutine(shooting);
                     break;
                 }
                 yield return new WaitForSeconds(checkInterval);
