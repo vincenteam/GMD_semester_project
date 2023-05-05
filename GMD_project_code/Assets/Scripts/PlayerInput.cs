@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
 
     private bool _deathInput;
     private bool _changeSkinInput;
-    
+
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
     public ActionsDelegate OnJump
@@ -95,6 +95,13 @@ public class PlayerInput : MonoBehaviour
         set => _quitDelegate = value;
     }
     
+    private ActionsDelegate _reset;
+    public ActionsDelegate OnReset
+    {
+        get => _reset;
+        set => _reset = value;
+    }
+    
     void Start()
     {
         Cursor.visible = false;
@@ -110,10 +117,8 @@ public class PlayerInput : MonoBehaviour
 
         _forwardInput = Input.GetAxis("Forward");
 
-        if (Input.GetButtonDown("EscapePressed"))
-        {
-            _quitDelegate();
-        }
+        if (Input.GetButtonDown("EscapePressed")) _quitDelegate();
+        if (Input.GetButtonDown("Reset")) _reset();
 
         if (Input.GetButtonDown("Jump")) _jumpBtnDown = true;
         if (Input.GetButtonUp("Jump")) _jumpBtnUp = true;

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,8 +11,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private Rigidbody _rb;
     
-    [SerializeField] private AudioSource _audioSourceLand;
-    [SerializeField] private AudioSource _audioSourceDeath;
+    [SerializeField] private AudioSource audioSourceLand;
+    [SerializeField] private AudioSource audioSourceDeath;
 
     [SerializeField] private GameObject newSkin;
 
@@ -50,13 +46,15 @@ public class PlayerController : MonoBehaviour
             if (lifeActions is not null)
             {
                 _playerInput.OnSuicide += lifeActions.Suicide;
-                _playerInput.OnSuicide += _audioSourceDeath.Play;
+                _playerInput.OnSuicide += audioSourceDeath.Play;
             }
 
             if (_skinManager != null)
             {
                 _playerInput.OnChangeSkin += delegate {_skinManager.ChangeSkin(newSkin);};
             }
+            
+            _playerInput.OnReset += delegate { TransitionManager.TransitionInstance.Transition(SceneManager.GetActiveScene().name);};
         }
 
         HeadMovement headMove = gameObject.GetComponentInChildren<HeadMovement>();
@@ -75,7 +73,7 @@ public class PlayerController : MonoBehaviour
             groundDetector.OnLand += delegate
             {
                 _skinManager.AnimatorInstance.SetTrigger(Land);
-                _audioSourceLand.Play();
+                audioSourceLand.Play();
             };
             groundDetector.OnLeaveGround += delegate { 
                 _skinManager.AnimatorInstance.SetTrigger(Jump);

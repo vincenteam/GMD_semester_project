@@ -301,8 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78ba26ac125692ee814024427cb77e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSourceLand: {fileID: 8542211611985126954}
-  _audioSourceDeath: {fileID: 8796075319304160158}
+  audioSourceLand: {fileID: 8542211611985126954}
+  audioSourceDeath: {fileID: 8796075319304160158}
   newSkin: {fileID: 7735820481681255950, guid: 203ccc20359d7b2fcb77992da67ff9a3, type: 3}
 --- !u!82 &8542211611985126954
 AudioSource:

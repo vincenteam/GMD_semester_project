@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndLevel : MonoBehaviour
@@ -19,6 +17,6 @@ public class EndLevel : MonoBehaviour
     {
         audioSourceEnd.Play();
         yield return new WaitForSecondsRealtime((float)1.5);
-        TransitionManager.transitionInstance.ExitToMenu();
+        TransitionManager.TransitionInstance.ExitToMenu();
     }
 }

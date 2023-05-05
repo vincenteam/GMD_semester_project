@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
 {
-    public static TransitionManager transitionInstance;
+    public static TransitionManager TransitionInstance;
     void Awake(){
         DontDestroyOnLoad (this);
          
-        if (transitionInstance == null) {
-            transitionInstance = this;
+        if (TransitionInstance == null) {
+            TransitionInstance = this;
         } else {
             Destroy(gameObject);
         }
