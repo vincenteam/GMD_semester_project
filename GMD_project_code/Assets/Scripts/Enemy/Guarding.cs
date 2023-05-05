@@ -40,7 +40,6 @@ namespace Enemy
 
         public IEnumerator Vigilant()
         {
-            print("vigilant");
             if (OnVigilantStart != null) OnVigilantStart();
             GameObject target;
             while (true)
@@ -59,12 +58,10 @@ namespace Enemy
 
         public IEnumerator Alerted(GameObject target)
         {
-            print("alerted");
             if (OnAlertedStart != null) OnAlertedStart(target);
             while (true)
             {
                 if (AlertedActions != null) AlertedActions();
-                print((target == null) + " alerted " + (!CanSee(target)));
                 if (target == null || !CanSee(target))
                 {
                     print("alerted out");

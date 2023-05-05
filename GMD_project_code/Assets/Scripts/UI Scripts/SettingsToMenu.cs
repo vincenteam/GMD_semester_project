@@ -8,6 +8,6 @@ public class SettingsToMenu : MonoBehaviour
     [SerializeField] private string sceneName;
     public void ChangeScene()
     {
-        TransitionManager.transitionInstance.Transition(sceneName);
+        TransitionManager.TransitionInstance.Transition(sceneName);
     }
 }

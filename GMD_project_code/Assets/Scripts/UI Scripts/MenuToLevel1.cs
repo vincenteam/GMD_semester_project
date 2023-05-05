@@ -8,6 +8,6 @@ public class MenuToLevel1 : MonoBehaviour
     {
         _temp = GameObject.FindGameObjectWithTag("BackgroundMusic");
         Destroy(_temp);
-        TransitionManager.transitionInstance.Transition(sceneName);
+        TransitionManager.TransitionInstance.Transition(sceneName);
     }
 }

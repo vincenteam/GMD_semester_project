@@ -4,7 +4,7 @@ put scripts in folders
 transition between levels + end + start + win
 death animation for every death possible
 remove prints
-enemy keep tracking when respawn
+explaining controls
 (easter egg)
 
 DONE button with more detailed events (up & down)
@@ -15,7 +15,7 @@ add sound
 start menu and level transition (using playerpreferences)
     key binding (?)
     mouse sensitivity
-    sound volume
+    DONE sound volume
 enemy
     DONE run fast at you dies in contact with obstacle (hollow knight bat)
     walk on predefine paths
