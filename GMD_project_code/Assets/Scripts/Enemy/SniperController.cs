@@ -7,62 +7,23 @@ namespace Enemy
     {
         [SerializeField] private float checkInterval;
         private SniperActions _actions;
+        private Guarding _guarding;
 
-        public delegate void ActionDelegate();
-
-        public ActionDelegate OnVigilantStart;
-        public ActionDelegate OnVigilantEnd;
-        public ActionDelegate OnAlertedStart;
-        public ActionDelegate OnAlertedEnd;
-        
         private void Awake()
         {
             _actions = gameObject.GetComponent<SniperActions>();
-            OnAlertedEnd += delegate { StartCoroutine(nameof(Vigilant)); };
-        }
-        
-        void OnEnable()
-        {
-            StartCoroutine(nameof(Vigilant));
-        }
+            _guarding = gameObject.GetComponent<Guarding>();
+            
+            _guarding.OnVigilantEnd += delegate (GameObject target){ StartCoroutine(_guarding.Alerted(target)); };
+            _guarding.OnAlertedEnd += delegate { StartCoroutine(_guarding.Vigilant()); };
 
-        public IEnumerator Vigilant()
-        {
-            if (OnVigilantStart != null) OnVigilantStart();
-
-            while (true)
+            
+            _guarding.OnAlertedStart += delegate (GameObject target)
             {
-                GameObject target = _actions.CheckForTarget();
-                if (target != null)
-                {   
-                    print("aim to " + target);
-                    StartCoroutine(Alerted(target));
-                    break;
-                }
-                yield return new WaitForSeconds(checkInterval);
-            }
-            
-            if (OnVigilantEnd != null) OnVigilantEnd();
-        }
-
-        public IEnumerator Alerted(GameObject target)
-        {
-            if (OnAlertedStart != null) OnAlertedStart();
-            
-            Coroutine tracking = StartCoroutine(_actions.Track(target));
-            //Coroutine shooting = StartCoroutine(_actions.DumbShoot());
-            while (true)
-            {
-                if (target == null || !_actions.CanSee(target))
-                {
-                    StopCoroutine(tracking);
-                    //StopCoroutine(shooting);
-                    break;
-                }
-                yield return new WaitForSeconds(checkInterval);
-            }
-            
-            if (OnAlertedEnd != null) OnAlertedEnd();
+                StartCoroutine(_actions.Track(target));
+                StartCoroutine(_actions.DumbShoot());
+            };
+            _guarding.OnAlertedEnd += StopAllCoroutines;
         }
     }
 }
