@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Scene = UnityEditor.SearchService.Scene;
 
 public class MenuToLevel1 : MonoBehaviour
 {
-    [SerializeField] private AudioSource menuMusic;
+    //private AudioSource _menuMusic;
+    private GameObject _temp;
     public void ChangeScene()
     {
-        menuMusic.Pause();
+        _temp = GameObject.FindGameObjectWithTag("BackgroundMusic");
+        Destroy(_temp);
         SceneManager.LoadScene("tests");
     }
 }
