@@ -102,13 +102,13 @@ public class GroundDetector : MonoBehaviour
 
     private void LeaveGround()
     {
-        if (_grounded) _leaveGround();
+        if (_grounded && _leaveGround != null) _leaveGround();
         _grounded = false;
     }
 
     private void Land()
     {
-        if (!_grounded) _land(); 
+        if (!_grounded && _land != null) _land(); 
         //print("land");
         _grounded = true;
     }

@@ -7,16 +7,19 @@ namespace Enemy
 {
     public class EnemyMovement : MonoBehaviour, ICharacterMovement
     {
-        [FormerlySerializedAs("rotateYSpeed")] [SerializeField]
-        private float maxRotateYSpeed;
+        [SerializeField] private float maxRotateYSpeed;
 
+        [SerializeField] private float speed;
+        [SerializeField] private float maxVelocity;
+        
         private Rigidbody _rb;
-
-        private float _rotationYAccumulator;
+        
         private float _rotationAngleY;
 
         private bool _hasTarget;
         private Vector3 _targetPoint;
+
+        private bool _moveForward;
 
         private void Awake()
         {
@@ -41,7 +44,7 @@ namespace Enemy
 
         public void MoveForward()
         {
-            throw new System.NotImplementedException();
+            _moveForward = true;
         }
 
         public void MoveBackward()
@@ -56,7 +59,7 @@ namespace Enemy
 
         public void RotateY(float amount)
         {
-            _rotationYAccumulator = amount;
+            throw new System.NotImplementedException();
         }
 
         public void RotateTowards(Vector3 point)
@@ -100,6 +103,14 @@ namespace Enemy
                 }
 
                 _hasTarget = false;
+            }
+
+            if (_moveForward)
+            {
+                if (_rb.velocity.magnitude < maxVelocity)
+                {
+                    _rb.AddForce(transform.forward * (speed*Time.deltaTime), ForceMode.VelocityChange);
+                }
             }
         }
     }

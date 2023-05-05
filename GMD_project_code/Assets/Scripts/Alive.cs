@@ -44,7 +44,7 @@ public class Alive: MonoBehaviour
         if (!_suicided)
         {
             _suicided = true;
-            _suicide();
+            if(_suicide != null) _suicide();
             Die();   
         }
     }
@@ -54,13 +54,13 @@ public class Alive: MonoBehaviour
         if (!_dead) // you can only die once
         {
             _dead = true;
-            _onDeath();
+            if(_onDeath != null) _onDeath();
         }
     }
 
     public void TerminateDeath()
     {
-        _onDeathActionsExit();
-        _terminate(gameObject);
+        if(_onDeathActionsExit != null) _onDeathActionsExit();
+        if(_terminate != null) _terminate(gameObject);
     }
 }

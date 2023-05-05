@@ -5,7 +5,6 @@ namespace Enemy
 {
     public class SniperController: MonoBehaviour
     {
-        [SerializeField] private float checkInterval;
         private SniperActions _actions;
         private Guarding _guarding;
 
