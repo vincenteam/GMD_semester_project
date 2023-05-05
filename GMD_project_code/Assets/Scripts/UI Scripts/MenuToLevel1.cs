@@ -6,12 +6,12 @@ using Scene = UnityEditor.SearchService.Scene;
 
 public class MenuToLevel1 : MonoBehaviour
 {
-    //private AudioSource _menuMusic;
+    [SerializeField] private string sceneName;
     private GameObject _temp;
     public void ChangeScene()
     {
         _temp = GameObject.FindGameObjectWithTag("BackgroundMusic");
         Destroy(_temp);
-        SceneManager.LoadScene("tests");
+        TransitionManager.transitionInstance.Transition(sceneName);
     }
 }

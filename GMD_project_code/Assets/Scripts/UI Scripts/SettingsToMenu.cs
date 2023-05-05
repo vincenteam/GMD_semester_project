@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SettingsToMenu : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
     public void ChangeScene()
     {
-        SceneManager.LoadScene("TitleScreen");
+        TransitionManager.transitionInstance.Transition(sceneName);
     }
 }
