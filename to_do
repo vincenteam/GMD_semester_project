@@ -1,19 +1,16 @@
 reset button
 cam
-button with more detailed events (up & down)
 put scripts in folders
 transition between levels + end + start + win
 death animation for every death possible
 remove prints
-le putain de bug de ses morts est revenu
 (easter egg)
+
+DONE button with more detailed events (up & down)
 
 
 add textures
 add sound
-    sound when enemy is alerted
-    when firing
-    sound on level exit
 start menu and level transition (using playerpreferences)
     key binding (?)
     mouse sensitivity
