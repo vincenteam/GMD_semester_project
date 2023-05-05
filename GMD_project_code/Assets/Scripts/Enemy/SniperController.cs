@@ -14,15 +14,19 @@ namespace Enemy
             _guarding = gameObject.GetComponent<Guarding>();
             
             _guarding.OnVigilantEnd += delegate (GameObject target){ StartCoroutine(_guarding.Alerted(target)); };
-            _guarding.OnAlertedEnd += delegate { StartCoroutine(_guarding.Vigilant()); };
-
+            _guarding.OnAlertedEnd += delegate
+            {
+                StopAllCoroutines();
+                StartCoroutine(_guarding.Vigilant());
+            };
+            
             
             _guarding.OnAlertedStart += delegate (GameObject target)
             {
                 StartCoroutine(_actions.Track(target));
                 StartCoroutine(_actions.DumbShoot());
             };
-            _guarding.OnAlertedEnd += StopAllCoroutines;
+            
         }
     }
 }

@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class KillOnContact : MonoBehaviour
+namespace LevelItems
 {
-    private void OnTriggerEnter(Collider other)
+    public class KillOnContact : MonoBehaviour
     {
-        Alive life = other.gameObject.GetComponentInParent<Alive>();
-        if (life)
+        private void OnTriggerEnter(Collider other)
         {
-            life.Die();
+            Alive life = other.gameObject.GetComponentInParent<Alive>();
+            if (life)
+            {
+                life.Die();
+            }
         }
     }
 }
