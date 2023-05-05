@@ -5,10 +5,10 @@
 ### Player sounds : None
 
 ### Environment sounds :
-- Enemies (when alerted, firing)
-- Level end (Same as the player spawn, but reversed) -> To do when the gameobject will be created
+- Snipers (when alerted, firing)
+- Runners (when alerted, constant running sound)
 - Hover sound in UIs ?????
-
+- Change background music
 
 
 
@@ -24,4 +24,5 @@
 - Booster (https://www.101soundboards.com/sounds/50118-kart-boost)
 - Grinder (https://freesound.org/people/gorkylmz1/sounds/521416/)
 - Player spawn (https://freesound.org/people/MATRIXXX_/sounds/448754/)
-- Change background music
+- Level end (Same as the player spawn, but reversed)
+

@@ -20,4 +20,11 @@ public class TransitionManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("TitleScreen");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 }
