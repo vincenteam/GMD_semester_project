@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptsTarget: []
   methodTarget: []
+  eventTarget: []
   audioSourcePressed: {fileID: -1174898090973944197}
 --- !u!82 &-1174898090973944197
 AudioSource:
@@ -130,7 +131,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ff94841ad1dc6be47be15e31288713e3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.01
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0

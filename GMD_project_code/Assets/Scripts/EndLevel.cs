@@ -18,5 +18,6 @@ public class EndLevel : MonoBehaviour
         audioSourceEnd.Play();
         yield return new WaitForSecondsRealtime((float)1.5);
         //TransitionManager.TransitionInstance.ExitToMenu();
+        TransitionManager.TransitionInstance.Transition("tests");
     }
 }
