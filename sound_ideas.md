@@ -5,8 +5,8 @@
 ### Player sounds : None
 
 ### Environment sounds :
-- Snipers (when alerted, firing)
-- Runners (when alerted, constant running sound)
+- Snipers (when alerted + firing)
+- Runners (when alerted + constant running sound)
 - Hover sound in UIs ?????
 - Change background music
 
@@ -25,4 +25,4 @@
 - Grinder (https://freesound.org/people/gorkylmz1/sounds/521416/)
 - Player spawn (https://freesound.org/people/MATRIXXX_/sounds/448754/)
 - Level end (Same as the player spawn, but reversed)
-
+- Electric field sound (https://freesound.org/people/D4XX/sounds/567269/)

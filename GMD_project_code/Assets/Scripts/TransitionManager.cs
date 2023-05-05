@@ -16,7 +16,15 @@ public class TransitionManager : MonoBehaviour
     
     public void Transition(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        /*if (SceneManager.GetActiveScene().name == sceneName)
+        {
+            //If the user resets the current scene and doesn't go to another one, the background music somehow needs to persist
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {*/
+            SceneManager.LoadScene(sceneName);
+        //}
     }
 
     public void ExitToMenu()
