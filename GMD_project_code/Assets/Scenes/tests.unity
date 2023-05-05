@@ -1065,13 +1065,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
         type: 3}
+      propertyPath: eventTarget.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
+        type: 3}
       propertyPath: methodTarget.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
         type: 3}
       propertyPath: scriptsTarget.Array.size
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
+        type: 3}
+      propertyPath: eventTarget.Array.data[0]
+      value: ButtonDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
+        type: 3}
+      propertyPath: eventTarget.Array.data[1]
+      value: ButtonUp
       objectReference: {fileID: 0}
     - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
         type: 3}
@@ -1080,7 +1095,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
         type: 3}
+      propertyPath: methodTarget.Array.data[1]
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
+        type: 3}
       propertyPath: scriptsTarget.Array.data[0]
+      value: 
+      objectReference: {fileID: 6013849473301392066}
+    - target: {fileID: 903961180647778606, guid: b165dbfe1689353beae06f008d86c30e,
+        type: 3}
+      propertyPath: scriptsTarget.Array.data[1]
       value: 
       objectReference: {fileID: 6013849473301392066}
     m_RemovedComponents: []

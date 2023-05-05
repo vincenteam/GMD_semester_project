@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using LevelItems;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,8 +11,8 @@ public class ButtonTest : MonoBehaviour
     
     private void Start()
     {
-        button.OnPressed += FlyUp;
-        button.OnPressed += FlyInformations;
+        button.OnButtonDown += FlyUp;
+        button.OnButtonDown += FlyInformations;
         print(button);
     }
 
