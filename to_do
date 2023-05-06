@@ -1,10 +1,15 @@
-death animation for every death possible + sound
+<<<<<<< Updated upstream
+change gun for sniper
+=======
+>>>>>>> Stashed changes
 explaining controls
 door staying open when object go out of it
 put scripts in folders
+change key for menu to escape in final build
 (easter egg)
 remove prints
 
+DONE death animation for every death possible + sound
 DONE cam
 DONE transition between levels + end + start + win
 DONE button with more detailed events (up & down)

@@ -1,24 +1,20 @@
-using System;
 using System.Collections;
-using GMDProject;
 using UnityEngine;
 
 namespace Enemy
 {
     public class SniperActions : MonoBehaviour
     {
-        [SerializeField] private int lookDistance;
-        [SerializeField] string[] targetLayers = new[] { "Living" };
-        [SerializeField] string[] obstacleLayers = new[] { "Level", "Objects" };
-
         private Loadout _loadout;
         private EnemyMovement _movement;
+        private GunMovement _gunMovement;
         
         
         private void Awake()
         {
             _loadout = GetComponent<Loadout>();
             _movement = GetComponent<EnemyMovement>();
+            _gunMovement = GetComponentInChildren<GunMovement>();
         }
 
 
@@ -27,8 +23,9 @@ namespace Enemy
             while (true)
             {
                 if (target == null) break;
-                
-                _movement.RotateTowards(target.transform.position);
+                var position = target.transform.position;
+                _gunMovement.AimTowardsX(position);
+                _movement.RotateTowards(position);
                 yield return null;
             }
         }
