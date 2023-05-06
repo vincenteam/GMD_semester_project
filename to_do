@@ -15,6 +15,8 @@ DONE transition between levels + end + start + win
 DONE button with more detailed events (up & down)
 DONE reset button
 
+saccade webGL
+
 
 add textures
 add sound
@@ -26,6 +28,8 @@ enemy
     make sniper able to shoot up and down
     put alive on sniper
     DONE run fast at you dies in contact with obstacle (hollow knight bat)
+    sniper moving and se jeting dans le vide (webgl)
+    roomba -> augmenter taille collider
 
 
 mapping
