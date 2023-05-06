@@ -52,7 +52,7 @@ namespace Enemy
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+       private void OnTriggerEnter(Collider other)
         {
             if (_crashing )
             {
@@ -62,8 +62,8 @@ namespace Enemy
                 {
                     if (!(layer == _livingLayer && go.CompareTag("Friendly")))// non friendly Living objects are ignored
                     {
-                        _life.Die();
-                        _life.TerminateDeath();
+                        _life.Die(DamageTypes.Explode);
+                        _life.TerminateDeath(DamageTypes.Explode);
                     }
                 }
             }

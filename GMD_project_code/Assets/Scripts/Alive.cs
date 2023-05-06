@@ -1,37 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Alive: MonoBehaviour
 {
     // booleans to make sure some actions are performed only once
-    private bool _suicided = false;
     private bool _dead = false;
     
-    public delegate void ActionsDelegate();
+    public delegate void DeathDelegate(DamageTypes damageType);
     public delegate void TerminateDelegate(GameObject go);
     
-    private ActionsDelegate _suicide;
-    private ActionsDelegate _onDeath;
-    private ActionsDelegate _onDeathActionsExit;
+    private DeathDelegate _suicide;
+    private DeathDelegate _onDeath;
+    private DeathDelegate _onDeathDeathExit;
     private TerminateDelegate _terminate;
 
-    public ActionsDelegate OnSuicide
+    public DeathDelegate OnSuicide
     {
         get => _suicide;
         set => _suicide = value;
     }
     
-    public ActionsDelegate OnDeath
+    public DeathDelegate OnDeath
     {
         get => _onDeath;
         set => _onDeath = value;
     }
     
-    public ActionsDelegate OnDeathActionsExit
+    public DeathDelegate OnDeathDeathExit
     {
-        get => _onDeathActionsExit;
-        set => _onDeathActionsExit = value;
+        get => _onDeathDeathExit;
+        set => _onDeathDeathExit = value;
     }
     public TerminateDelegate Terminate
     {
@@ -39,28 +36,18 @@ public class Alive: MonoBehaviour
         set => _terminate = value;
     }
 
-    public void Suicide()
-    {
-        if (!_suicided)
-        {
-            _suicided = true;
-            if(_suicide != null) _suicide();
-            Die();   
-        }
-    }
-
-    public void Die()
+    public void Die(DamageTypes damageType)
     {
         if (!_dead) // you can only die once
         {
             _dead = true;
-            if(_onDeath != null) _onDeath();
+            if(_onDeath != null) _onDeath(damageType);
         }
     }
 
-    public void TerminateDeath()
+    public void TerminateDeath(DamageTypes damageType)
     {
-        if(_onDeathActionsExit != null) _onDeathActionsExit();
+        if(_onDeathDeathExit != null) _onDeathDeathExit(damageType);
         if(_terminate != null) _terminate(gameObject);
     }
 }

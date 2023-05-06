@@ -55,7 +55,7 @@ public class GroundDetector : MonoBehaviour
 
                 float angle = Vector3.Angle(contact.normal, transform.up);
                 Vector3 closestPoint = contact.otherCollider.ClosestPoint(new Vector3(0, feet.bounds.min.y, 0));
-                print("closestPoint " + closestPoint + " contact " + contact.point + " bounds " + feet.bounds.min);
+                //print("closestPoint " + closestPoint + " contact " + contact.point + " bounds " + feet.bounds.min);
 
                 //print("angle " + angle);
                 if (-groundTiltLimit < angle && angle < groundTiltLimit || Math.Abs(closestPoint.y - contact.point.y) < 0.00001)

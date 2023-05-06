@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     
     
     [SerializeField] private AudioSource audioSourceLand;
-    [SerializeField] private AudioSource audioSourceDeath;
+    
 
     [SerializeField] private GameObject newSkin;
 
@@ -47,8 +47,7 @@ public class PlayerController : MonoBehaviour
             
             if (lifeActions is not null)
             {
-                _playerInput.OnSuicide += lifeActions.Suicide;
-                _playerInput.OnSuicide += audioSourceDeath.Play;
+                _playerInput.OnSuicide += delegate { lifeActions.Die(DamageTypes.Suicide); };
             }
 
             if (_skinManager != null)

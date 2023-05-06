@@ -47,7 +47,7 @@ namespace Enemy
                 Alive l = g.GetComponent<Alive>();
                 if(l != null)
                 {
-                    l.Die();
+                    l.Die(DamageTypes.Shot);
                     Kill(); // no penetration
                 }
             }
