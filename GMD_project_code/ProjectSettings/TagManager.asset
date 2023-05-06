@@ -11,6 +11,7 @@ TagManager:
   - Friendly
   - Enemy
   - BackgroundMusic
+  - VirtualCamera
   layers:
   - Default
   - TransparentFX

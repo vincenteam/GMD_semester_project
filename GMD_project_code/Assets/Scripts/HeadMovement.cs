@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeadMovement : MonoBehaviour
@@ -17,14 +14,20 @@ public class HeadMovement : MonoBehaviour
             //localRotation = new Quaternion(0.5f, localRotation.y, localRotation.z, localRotation.w);
             localRotation.x = 0.5f;
             transform.localRotation = localRotation;
+            
         }else if ( transform.localRotation.x*360 + r.x < -180)
         {
             //localRotation = new Quaternion(-0.5f, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
             localRotation.x = -0.5f;
             transform.localRotation = localRotation;
+
         }
         else
         {
+            var transformLocalPosition = transform.localPosition;
+            transformLocalPosition.z = transform.localRotation.x*360;
+            transform.localPosition = transformLocalPosition;
+            print(transformLocalPosition + " local");
             transform.Rotate(r, Space.Self);
         }
     } 

@@ -1,25 +1,22 @@
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerLifeCycleManager : MonoBehaviour
 {
     private SpawnManager _spawn;
-    private FollowPlayer _cam;
-    private SwitchPosition _camView;
     [SerializeField] private GameObject player;
     private GameObject _newPlayer;
+
+    private CinemachineVirtualCamera _vCam;
     
     void Start()
     {
         GameObject spawnGo = GameObject.Find("PlayerSpawn");
         if (spawnGo) _spawn = spawnGo.GetComponent<SpawnManager>();
-        
-        GameObject cam = GameObject.Find("Main Camera");
-        if (cam)
-        {
-            _cam = cam.GetComponent<FollowPlayer>();
-            _camView = cam.GetComponent<SwitchPosition>();
-        }
 
+        GameObject cam = GameObject.FindGameObjectWithTag("VirtualCamera");
+        if (cam != null) _vCam = cam.GetComponent<CinemachineVirtualCamera>();
+        
         OnDeath(); //tmp ?
         EnablePlayer();
     }
@@ -28,24 +25,24 @@ public class PlayerLifeCycleManager : MonoBehaviour
     {
         if (_spawn)
         {
-             _newPlayer = _spawn.Spawn(player);
-             _newPlayer.SetActive(false);
+            _newPlayer = _spawn.Spawn(player); 
+            _newPlayer.SetActive(false);
+            
              
-             Alive playerLife = _newPlayer.GetComponent<Alive>();
-             if (playerLife is not null)
-             {
-                 playerLife.OnDeath += OnDeath;
-                 playerLife.OnDeath += delegate { _camView.SwitchTo("3person"); };
-                 playerLife.OnDeathActionsExit += EnablePlayer;
-                 playerLife.OnDeathActionsExit += _cam.UnLock;
-             }
-
-             _cam.ChangeFollowTarget(_newPlayer);
+            Alive playerLife = _newPlayer.GetComponent<Alive>();
+            if (playerLife is not null)
+            {
+                playerLife.OnDeath += OnDeath;
+                playerLife.OnDeathActionsExit += EnablePlayer;
+            }
         }
     }
 
     private void EnablePlayer()
     {
+        _vCam.Follow = _newPlayer.transform;
+        _vCam.LookAt = _newPlayer.GetComponentInChildren<HeadMovement>().gameObject.transform;
+        
         _newPlayer.SetActive(true);
         _spawn.StartSpawnMusic();
     }

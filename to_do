@@ -1,13 +1,13 @@
-reset button
 cam
-put scripts in folders
-transition between levels + end + start + win
-death animation for every death possible
-remove prints
+death animation for every death possible + sound
 explaining controls
+put scripts in folders
 (easter egg)
+remove prints
 
+DONE transition between levels + end + start + win
 DONE button with more detailed events (up & down)
+DONE reset button
 
 
 add textures
@@ -17,8 +17,9 @@ start menu and level transition (using playerpreferences)
     mouse sensitivity
     DONE sound volume
 enemy
+    make sniper able to shoot up and down
+    put alive on sniper
     DONE run fast at you dies in contact with obstacle (hollow knight bat)
-    walk on predefine paths
 
 
 mapping

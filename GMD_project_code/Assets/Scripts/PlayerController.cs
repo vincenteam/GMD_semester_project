@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     private PlayerInput _playerInput;
     private Rigidbody _rb;
     
+    
     [SerializeField] private AudioSource audioSourceLand;
     [SerializeField] private AudioSource audioSourceDeath;
 
     [SerializeField] private GameObject newSkin;
 
+    [SerializeField] private RotateToTarget rotate;
     void Awake()
     {
         _skinManager = gameObject.GetComponent<SkinManager>();
@@ -57,11 +59,14 @@ public class PlayerController : MonoBehaviour
             _playerInput.OnReset += delegate { TransitionManager.TransitionInstance.Transition(SceneManager.GetActiveScene().name);};
         }
 
+        
         HeadMovement headMove = gameObject.GetComponentInChildren<HeadMovement>();
-        if (headMove is not null && _playerInput is not null)
+        rotate = GameObject.Find("CM vcam1").GetComponent<RotateToTarget>();
+        if (rotate is not null && _playerInput is not null)
         {
-            _playerInput.OnRotateX += headMove.RotateX;
+            _playerInput.OnRotateX += rotate.RotateX;
         }
+        
     }
 
     private void Start()
