@@ -32,8 +32,8 @@ public class PlayerLifeCycleManager : MonoBehaviour
             Alive playerLife = _newPlayer.GetComponent<Alive>();
             if (playerLife is not null)
             {
-                playerLife.OnDeath += OnDeath;
-                playerLife.OnDeathActionsExit += EnablePlayer;
+                playerLife.OnDeath += _ => { OnDeath(); };
+                playerLife.OnDeathDeathExit += _ => { EnablePlayer(); };
             }
         }
     }

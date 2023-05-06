@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
             
             if (lifeActions is not null)
             {
-                _playerInput.OnSuicide += lifeActions.Suicide;
-                _playerInput.OnSuicide += audioSourceDeath.Play;
+                _playerInput.OnSuicide += delegate { lifeActions.Die(DamageTypes.Suicide); };
+                _playerInput.OnSuicide += audioSourceDeath.Play; // move in the appropriate death code in playerlifeactions
             }
 
             if (_skinManager != null)

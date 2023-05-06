@@ -9,7 +9,7 @@ namespace LevelItems
             Alive life = other.gameObject.GetComponentInParent<Alive>();
             if (life)
             {
-                life.Die();
+                life.Die(DamageTypes.Electrified);
             }
         }
     }

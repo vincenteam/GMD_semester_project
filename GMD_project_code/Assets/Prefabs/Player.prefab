@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeEvents: {fileID: 3192555506495567882}
   body: {fileID: 4506790581200680686, guid: ae14f216f1bcee59995af0c778619f9d, type: 3}
+  damageTypes: {fileID: 11400000, guid: 5a888e67a483747a8b3c97cad6153114, type: 2}
 --- !u!114 &827419624450678432
 MonoBehaviour:
   m_ObjectHideFlags: 0
