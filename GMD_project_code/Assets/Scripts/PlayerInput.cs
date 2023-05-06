@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -21,6 +22,9 @@ public class PlayerInput : MonoBehaviour
 
     private bool _deathInput;
     private bool _changeSkinInput;
+
+    private string _forwardKeyboardType;
+    private string _rightleftKeyboardType;
 
     public delegate void ActionsDelegate();
     private ActionsDelegate _jump;
@@ -101,6 +105,17 @@ public class PlayerInput : MonoBehaviour
         get => _reset;
         set => _reset = value;
     }
+
+    private void Awake()
+    {
+        Load();
+    }
+
+    private void Load()
+    {
+        _forwardKeyboardType = PlayerPrefs.GetString("Forward");
+        _rightleftKeyboardType = PlayerPrefs.GetString("RightLeft");
+    }
     
     void Start()
     {
@@ -113,9 +128,9 @@ public class PlayerInput : MonoBehaviour
         _mouseX = Input.GetAxis("Mouse X");
         _mouseY = Input.GetAxis("Mouse Y");
         
-        _rgtLftInput = Input.GetAxis("RightLeft");
+        _rgtLftInput = Input.GetAxis(_rightleftKeyboardType);
 
-        _forwardInput = Input.GetAxis("Forward");
+        _forwardInput = Input.GetAxis(_forwardKeyboardType);
 
         if (Input.GetButtonDown("EscapePressed")) _quitDelegate();
         if (Input.GetButtonDown("Reset")) _reset();
