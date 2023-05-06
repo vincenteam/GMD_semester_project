@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ namespace Enemy
 
             Quaternion rotation = transform1.rotation;
             rotation.y += 180;
-            Instantiate(hitVisual, transform1.position, rotation);
+            GameObject particles = Instantiate(hitVisual, transform1.position, rotation);
             Destroy(gameObject);
         }
     }

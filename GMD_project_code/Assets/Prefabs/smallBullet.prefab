@@ -116,7 +116,7 @@ Transform:
   m_Children:
   - {fileID: 481144}
   - {fileID: 419666}
-  - {fileID: 437342}
+  - {fileID: 3439443815320618695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5f5c2ac8fcd7b9f84ee07c98332484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitVisual: {fileID: 5752820010070488772, guid: 783a1e8b8417f38468cb28adbc9c3a08,
+  hitVisual: {fileID: 6948285376764943453, guid: 783a1e8b8417f38468cb28adbc9c3a08,
     type: 3}
   speed: 1
   maxTravelDistance: 10
@@ -5048,11 +5048,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6948285376764689891, guid: 783a1e8b8417f38468cb28adbc9c3a08,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6948285376764943453, guid: 783a1e8b8417f38468cb28adbc9c3a08,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 783a1e8b8417f38468cb28adbc9c3a08, type: 3}
---- !u!4 &437342 stripped
+--- !u!4 &3439443815320618695 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5752820010070742906, guid: 783a1e8b8417f38468cb28adbc9c3a08,
+  m_CorrespondingSourceObject: {fileID: 6948285376764689891, guid: 783a1e8b8417f38468cb28adbc9c3a08,
     type: 3}
   m_PrefabInstance: {fileID: 5752820010070326052}
   m_PrefabAsset: {fileID: 0}
