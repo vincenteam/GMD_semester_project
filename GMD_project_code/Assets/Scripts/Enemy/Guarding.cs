@@ -64,7 +64,7 @@ namespace Enemy
                 if (AlertedActions != null) AlertedActions();
                 if (target == null || !CanSee(target))
                 {
-                    print("alerted out");
+//                    print("alerted out");
                     break;
                 }
                 yield return new WaitForSeconds(checkInterval);

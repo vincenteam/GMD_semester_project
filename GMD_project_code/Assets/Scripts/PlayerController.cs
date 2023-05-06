@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
         {
             _playerInput.OnRotateX += rotate.RotateX;
         }
-        
     }
 
     private void Start()
