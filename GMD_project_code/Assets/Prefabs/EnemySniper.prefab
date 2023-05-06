@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunsPrefab:
-  - {fileID: 35533965132871269, guid: 49bb26813ea0b9e8fb2d32a23eccb8bc, type: 3}
+  - {fileID: 1576634372668950, guid: 32ca24d493f79754a94923210f088a44, type: 3}
   - {fileID: 3882830268019261181, guid: 7b234e43ee9c271b28252341145723de, type: 3}
   equippedGunInd: 0
 --- !u!114 &3868064253789165874
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxRotateYSpeed: 180
   speed: 0
+  maxVelocity: 0
 --- !u!114 &1119238496
 MonoBehaviour:
   m_ObjectHideFlags: 0
