@@ -16,7 +16,8 @@
 
 ### Player sounds :
 - Jump ??? / Landing (https://freesound.org/people/7of9Designs/sounds/640204/)
-- Death (The sound comes from Vincent)
+- Electric Death https://www.soundsnap.com/tags/electric_shock
+- Metal Bang https://www.fesliyanstudios.com/royalty-free-sound-effects-download/big-metal-hits-and-impact-122
 
 ### Environment sounds :
 - Bumper (https://www.youtube.com/watch?v=qRvI-qPmYO8)

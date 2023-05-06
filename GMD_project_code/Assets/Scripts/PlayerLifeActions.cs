@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using GMDProject;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
 {
@@ -12,6 +13,9 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
 
     [SerializeField] private Alive lifeEvents;
     [SerializeField] private GameObject body; // prefab
+    [SerializeField] private AudioSource audioSourceSuicide;
+    [SerializeField] private AudioSource audioSourceElectric;
+    [SerializeField] private AudioSource audioSourceShot;
 
     private SkinManager _skinManager;
     private Rigidbody _rb;
@@ -30,6 +34,8 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
         _rb = gameObject.GetComponent<Rigidbody>();
         
         deathActions.Add(DamageTypes.Suicide, OnSuicide);
+        deathActions.Add(DamageTypes.Electrified, OnElectrified);
+        deathActions.Add(DamageTypes.Shot, OnShot);
     }
 
     void Start()
@@ -41,8 +47,19 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
     private void OnSuicide()
     {
         Animator animator = _skinManager.AnimatorInstance;
+        audioSourceSuicide.Play(); // move in the appropriate death code in playerlifeactions
         animator.SetTrigger(Suicide);
         animator.SetBool(IsDead, true);
+    }
+
+    private void OnElectrified()
+    {
+        audioSourceElectric.Play();
+    }
+
+    private void OnShot()
+    {
+        audioSourceShot.Play();
     }
 
     private void OnDeath(DamageTypes damageType)
