@@ -9,7 +9,7 @@
 - Runners (when alerted + constant running sound)
 - Hover sound in UIs ?????
 - Change background music
-
+- death sounds (not by suicide)
 
 
 ## Sounds done :
