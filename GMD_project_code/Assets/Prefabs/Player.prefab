@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6396282159397729487}
   - component: {fileID: 4258143684200948585}
   - component: {fileID: 8759393206243217132}
+  - component: {fileID: 776165385788321980}
   - component: {fileID: 8542211611985126954}
   - component: {fileID: 8796075319304160158}
   - component: {fileID: 87102847120320197}
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cb6e1b0998a2eeca8954a740235a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpTimeOutLenght: 0.4
   initialJumpHeight: 4.5
   initialMaxSpeed: 8
   initialRotateSpeed: 1
@@ -309,6 +311,23 @@ MonoBehaviour:
   audioSourceLand: {fileID: 8542211611985126954}
   newSkin: {fileID: 7735820481681255950, guid: 203ccc20359d7b2fcb77992da67ff9a3, type: 3}
   rotate: {fileID: 0}
+--- !u!114 &776165385788321980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346832454061106574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f36a50f3514af039f480b802c69712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feet: {fileID: 7604621656814553623}
+  groundTiltLimit: 0
+  GroundedOffset: 1
+  GroundedRadius: 0.48
+  timeOutLenght: 0.1
 --- !u!82 &8542211611985126954
 AudioSource:
   m_ObjectHideFlags: 0

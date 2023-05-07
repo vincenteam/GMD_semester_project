@@ -4,8 +4,10 @@ using GMDProject;
 
 public class CharacterMovement : MonoBehaviour, ICharacterMovement
 {
-    private GroundDetector _groundDetector;
+    private GroundDetector2 _groundDetector;
     private Rigidbody _rb;
+    [SerializeField] private float jumpTimeOutLenght;
+    private bool _jumpInTimeOut;
 
     [SerializeField] private float initialJumpHeight;
     [SerializeField] private float initialMaxSpeed;
@@ -55,7 +57,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     private void Start()
     {
-        _groundDetector = gameObject.GetComponentInChildren<GroundDetector>();
+        _groundDetector = gameObject.GetComponentInChildren<GroundDetector2>();
         if (_groundDetector != null)
         {
             _groundDetector.OnLand += SwitchToGroundControl;
@@ -69,7 +71,18 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
 
     public void Jump()
     {
-        _jumping = true;
+        if (!_jumpInTimeOut)
+        {
+            _jumping = true;
+            _jumpInTimeOut = true;
+            Invoke(nameof(EndJumpTimeOut), jumpTimeOutLenght);
+        }
+        
+    }
+
+    private void EndJumpTimeOut()
+    {
+        _jumpInTimeOut = false;
     }
 
     public void MoveRight()
@@ -140,7 +153,7 @@ public class CharacterMovement : MonoBehaviour, ICharacterMovement
             vel.y = 0;
             _rb.velocity = vel;
             _rb.AddForce(_jumpHeight * transform.up, ForceMode.Impulse);
-            _groundDetector.ForceCollisionOut(); // useless now ?
+            //_groundDetector.ForceCollisionOut(); // useless now ?
             //_jump();
         }
         _jumping = false;
