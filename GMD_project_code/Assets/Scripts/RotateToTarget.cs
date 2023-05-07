@@ -16,7 +16,7 @@ public class RotateToTarget : MonoBehaviour
         vCam = GetComponent<CinemachineVirtualCamera>();
         _follow = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
         
-        _follow.ShoulderOffset.y = startOffset;
+        if(_follow != null) _follow.ShoulderOffset.y = startOffset;
     }
     
 
@@ -30,6 +30,6 @@ public class RotateToTarget : MonoBehaviour
         {
             _offset = topLimit;
         }
-        _follow.ShoulderOffset.y = _offset;
+        if(_follow != null) _follow.ShoulderOffset.y = _offset;
     }
 }

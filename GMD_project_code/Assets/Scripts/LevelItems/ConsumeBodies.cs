@@ -42,6 +42,10 @@ namespace LevelItems
             float consumed = 0;
             while (consumed < size)
             {
+                if (col != null)
+                {
+                    break;
+                }
                 elapsedTime += Time.deltaTime*consumeRate;
                 float linearFunc = centerAttraction * (elapsedTime + 1) + 1f;
                 integralAccumulator += linearFunc*Time.deltaTime*consumeRate;
