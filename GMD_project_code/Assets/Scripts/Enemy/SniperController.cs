@@ -24,7 +24,7 @@ namespace Enemy
             _guarding.OnAlertedStart += delegate (GameObject target)
             {
                 StartCoroutine(_actions.Track(target));
-                StartCoroutine(_actions.DumbShoot());
+                //StartCoroutine(_actions.DumbShoot());
             };
             
         }

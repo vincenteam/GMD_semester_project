@@ -81,7 +81,7 @@ public class GroundDetector2 : MonoBehaviour
 
     private void LeaveGround()
     {
-        print("leave ground");
+//        print("leave ground");
         if (_leaveGround != null) _leaveGround();
         _grounded = false;
     }
@@ -103,7 +103,7 @@ public class GroundDetector2 : MonoBehaviour
             _groundCurrentlyDetected = true;
             if (!_grounded && !_inTimeOut)
             {
-                print("start timeout");
+//                print("start timeout");
                 Invoke(nameof(Land), timeOutLenght);
                 _inTimeOut = true;
             }
@@ -122,11 +122,11 @@ public class GroundDetector2 : MonoBehaviour
 
     private void Land()
     {
-        print("end timeoute");
+//        print("end timeoute");
         _inTimeOut = false;
         if (_groundCurrentlyDetected)
         {
-            print("land");
+//            print("land");
             _grounded = true;
             if (_land != null) _land(); 
         }
