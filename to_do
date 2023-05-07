@@ -1,9 +1,8 @@
 background music for levels
 change gun for sniper
-explaining controls
+DONE explaining controls
 door staying open when object go out of it
 put scripts in folders
-change key for menu to escape in final build
 (easter egg)
 remove prints
 
@@ -14,7 +13,7 @@ DONE button with more detailed events (up & down)
 DONE reset button
 
 UI :
-Tutorial scene
+DONE Tutorial scene
 saccade webGL
 make a glow-up of the keyboard change
 example of a game scene in UI backgrounds
