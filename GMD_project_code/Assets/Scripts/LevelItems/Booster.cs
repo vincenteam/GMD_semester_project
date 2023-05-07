@@ -1,13 +1,16 @@
-using System;
 using UnityEngine;
 
-public class Booster : MonoBehaviour
+namespace LevelItems
 {
-    [SerializeField] private float power;
-    [SerializeField] private float maxVelocity;
-    [SerializeField] private AudioSource audioSourceBoost;
+    public class Booster : MonoBehaviour
+    {
+        [SerializeField] private float power;
+        [SerializeField] private float maxVelocity;
+        [SerializeField] private AudioSource audioSourceBoost;
+
+        [SerializeField] private Vector3 direction;
     
-    /*private void OnCollisionEnter(Collision collision)
+        /*private void OnCollisionEnter(Collision collision)
     {
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -16,23 +19,24 @@ public class Booster : MonoBehaviour
             rb.AddForce(force*power, ForceMode.Impulse);
         }
     }*/
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!audioSourceBoost.isPlaying)
+        private void OnCollisionEnter(Collision other)
         {
-            audioSourceBoost.Play();
-        }
-    }
-
-    private void OnCollisionStay(Collision collisionInfo)
-    {
-        Rigidbody rb = collisionInfo.gameObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            if (transform.InverseTransformDirection(rb.velocity).z < maxVelocity)
+            if (!audioSourceBoost.isPlaying)
             {
-                Vector3 direction = transform.forward;
-                rb.AddForce(direction*power, ForceMode.Impulse);   
+                audioSourceBoost.Play();
+            }
+        }
+
+        private void OnCollisionStay(Collision collisionInfo)
+        {
+            Rigidbody rb = collisionInfo.gameObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                if (transform.InverseTransformDirection(rb.velocity).z < maxVelocity)
+                {
+                    
+                    rb.AddForce(transform.TransformDirection(direction)*power, ForceMode.Impulse);   
+                }
             }
         }
     }
