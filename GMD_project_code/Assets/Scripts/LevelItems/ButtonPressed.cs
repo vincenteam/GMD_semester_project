@@ -62,8 +62,8 @@ namespace LevelItems
             _collisionCount++;
             if (!_isPressed && _buttonDown != null)
             {
+//                print("button down");
                 Pressed();
-                print("button down");
             }
         }
 
@@ -72,7 +72,7 @@ namespace LevelItems
             _collisionCount--;
             if (_collisionCount <= 0 && _buttonUp != null)
             {
-                print("button up");
+ //               print("button up");
                 _isPressed = false;
                 _buttonUp();
             }
