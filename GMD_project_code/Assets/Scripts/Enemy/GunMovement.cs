@@ -36,7 +36,7 @@ namespace Enemy
                 flatFacedDirection.x = 0;
 
                 float absAngleXToTarget = Vector3.Angle(flatTargetDirection, flatFacedDirection);
-                print("angle " + absAngleXToTarget);
+                
                 if (!Mathf.Approximately(absAngleXToTarget, 0))
                 { 
                     float turnDirection = Mathf.Sign(Vector3.Cross(flatFacedDirection, flatTargetDirection).x);

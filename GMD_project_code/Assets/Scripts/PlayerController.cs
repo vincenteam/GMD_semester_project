@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GroundDetector groundDetector = gameObject.GetComponentInChildren<GroundDetector>();
+        GroundDetector2 groundDetector = gameObject.GetComponentInChildren<GroundDetector2>();
         
         if (groundDetector is not null && _skinManager is not null)
         {

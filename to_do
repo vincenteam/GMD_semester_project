@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
 change gun for sniper
-=======
->>>>>>> Stashed changes
 explaining controls
 door staying open when object go out of it
 put scripts in folders
@@ -21,11 +18,11 @@ saccade webGL
 add textures
 add sound
 start menu and level transition (using playerpreferences)
-    key binding (?)
+    DONE key binding (?)
     mouse sensitivity
     DONE sound volume
 enemy
-    make sniper able to shoot up and down
+    DONE make sniper able to shoot up and down
     put alive on sniper
     DONE run fast at you dies in contact with obstacle (hollow knight bat)
     sniper moving and se jeting dans le vide (webgl)
