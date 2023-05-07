@@ -44,7 +44,7 @@ namespace LevelItems
             {
                 if (col == null)
                 {
-                    yield return null;
+                    yield break;
                 }
                 elapsedTime += Time.deltaTime*consumeRate;
                 float linearFunc = centerAttraction * (elapsedTime + 1) + 1f;
