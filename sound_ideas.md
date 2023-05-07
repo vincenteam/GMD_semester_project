@@ -7,15 +7,13 @@
 ### Environment sounds :
 - Snipers (when alerted + firing)
 - Runners (when alerted + constant running sound)
-- Hover sound in UIs ?????
 - Change background music
-- death sounds (not by suicide)
 
 
 ## Sounds done :
 
 ### Player sounds :
-- Jump ??? / Landing (https://freesound.org/people/7of9Designs/sounds/640204/)
+- Landing (https://freesound.org/people/7of9Designs/sounds/640204/)
 - Electric Death https://www.soundsnap.com/tags/electric_shock
 - Metal Bang https://www.fesliyanstudios.com/royalty-free-sound-effects-download/big-metal-hits-and-impact-122
 
