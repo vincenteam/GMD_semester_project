@@ -42,7 +42,7 @@ namespace LevelItems
             float consumed = 0;
             while (consumed < size)
             {
-                if (col != null)
+                if (col == null)
                 {
                     break;
                 }
