@@ -14,7 +14,6 @@ namespace Enemy
         private Alive _life;
 
         private bool _crashing;
-        [SerializeField] private Collider sensitiveCollider; 
 
         public bool Crashing
         {

@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3157126509549623518}
   m_Layer: 7
-  m_Name: Grinder
+  m_Name: GrinderFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
