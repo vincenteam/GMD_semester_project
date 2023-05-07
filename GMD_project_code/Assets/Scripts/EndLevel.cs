@@ -5,7 +5,7 @@ public class EndLevel : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSourceEnd;
     [SerializeField] private string sceneName;
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponentInChildren<PlayerInput>() != null)
         {
