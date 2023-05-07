@@ -27,3 +27,4 @@
 - Player spawn (https://freesound.org/people/MATRIXXX_/sounds/448754/)
 - Level end (Same as the player spawn, but reversed)
 - Electric field sound (https://freesound.org/people/D4XX/sounds/567269/)
+- alert when player is spotted https://www.myinstants.com/en/instant/metal-gear-solid-alert/
