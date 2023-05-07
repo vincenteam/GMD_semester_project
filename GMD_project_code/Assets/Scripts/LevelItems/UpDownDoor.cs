@@ -31,7 +31,12 @@ namespace LevelItems
         {
             if (_closing || !_open)
             {
-                if(_movement != null) StopCoroutine(_movement);
+//                print("opening");
+                if (_movement != null)
+                {
+                    StopCoroutine(_movement);
+                    _open = !_open;
+                }
                 _movement = StartCoroutine(MoveTo(_targetPoint));
                 _opening = true;
             }
@@ -57,15 +62,19 @@ namespace LevelItems
 
             _opening = false;
             _open = !_open;
+            _movement = null;
         }
 
         public void Close()
         {
-            print(_opening + " " + _open);
+//            print(_opening + " " + _open);
             if (_opening || _open)
             {
-                print("close");
-                if(_movement != null) StopCoroutine(_movement);
+                if (_movement != null)
+                {
+                    StopCoroutine(_movement);
+                    _open = !_open;
+                }
                 _movement = StartCoroutine(MoveTo(_startPoint));
                 _closing = true;
             }
