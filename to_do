@@ -16,12 +16,13 @@ DONE button with more detailed events (up & down)
 DONE reset button
 
 saccade webGL
-
+make a glow-up of the keyboard change
+example of a game scene in UI backgrounds
 
 add textures
 add sound
 start menu and level transition (using playerpreferences)
-    key binding (?)
+    DONE key binding (?)
     mouse sensitivity
     DONE sound volume
 enemy

@@ -108,13 +108,19 @@ public class PlayerInput : MonoBehaviour
 
     private void Awake()
     {
-        Load();
+        LoadKeyboardType();
+        LoadSensitivity();
     }
 
-    private void Load()
+    private void LoadKeyboardType()
     {
         _forwardKeyboardType = PlayerPrefs.GetString("Forward");
         _rightleftKeyboardType = PlayerPrefs.GetString("RightLeft");
+    }
+    
+    private void LoadSensitivity()
+    {
+        mouseSensitivity *= PlayerPrefs.GetFloat("Sensitivity");
     }
     
     void Start()
@@ -129,7 +135,6 @@ public class PlayerInput : MonoBehaviour
         _mouseY = Input.GetAxis("Mouse Y");
         
         _rgtLftInput = Input.GetAxis(_rightleftKeyboardType);
-
         _forwardInput = Input.GetAxis(_forwardKeyboardType);
 
         if (Input.GetButtonDown("EscapePressed")) _quitDelegate();
