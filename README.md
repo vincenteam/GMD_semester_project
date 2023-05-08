@@ -53,3 +53,16 @@ https://www.youtube.com/watch?v=yWCHaTwVblk&t=1s
 - Level end (Same as the player spawn, but reversed)
 - Electric field sound (https://freesound.org/people/D4XX/sounds/567269/)
 - alert when player is spotted https://www.myinstants.com/en/instant/metal-gear-solid-alert/
+
+### Textures and Assets
+- Metal used for most walls, doors, floors, ceiling, part of the sniper, and for the roomba https://assetstore.unity.com/packages/2d/textures-materials/metals/yughues-free-metal-materials-12949
+- Some floor and scenery https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-pbr-props-118783
+- Glass in level 3 https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
+- Player https://assetstore.unity.com/packages/3d/characters/robots/3d-character-sci-fi-robots-bundle-227142
+- Gun of sniper https://assetstore.unity.com/packages/3d/props/guns/turreta-93611
+- Projectile of sniper https://assetstore.unity.com/packages/3d/props/weapons/free-missile-72692
+- Electricity effect https://assetstore.unity.com/packages/tools/particles-effects/lightning-bolt-effect-for-unity-59471
+
+### Player Animation
+- Running animation https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271
+- other animations come from https://www.mixamo.com
