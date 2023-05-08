@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +8,8 @@ namespace Enemy
         [SerializeField] string[] obstacleLayers = new[] { "Level", "Objects", "Living"};
         private int _obstacleLayersMask;
         private int _livingLayer;
+        
+        [SerializeField] private Collider sensitiveCollider;
         
         private EnemyMovement _movement;
         private Alive _life;
@@ -51,9 +52,9 @@ namespace Enemy
             }
         }
 
-       private void OnTriggerEnter(Collider other)
+       private void OnCollisionEnter(Collision other)
         {
-            if (_crashing )
+            if (_crashing && other.contacts[0].thisCollider == sensitiveCollider)
             {
                 GameObject go = other.gameObject;
                 int layer = go.layer;

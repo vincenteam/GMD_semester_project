@@ -1,7 +1,7 @@
 background music for levels
-change gun for sniper
+DONE change gun for sniper
 DONE explaining controls
-door staying open when object go out of it
+DONE door staying open when object go out of it
 put scripts in folders
 (easter egg)
 remove prints
@@ -29,7 +29,7 @@ start menu and level transition (using playerpreferences)
 enemy
     DONE make sniper able to shoot up and down
     DONE roomba : run fast at you dies in contact with obstacle (hollow knight bat)
-    sniper moving and se jeting dans le vide (webgl)
+    DONE sniper moving and se jeting dans le vide (webgl)
     roomba -> augmenter taille collider
 
 

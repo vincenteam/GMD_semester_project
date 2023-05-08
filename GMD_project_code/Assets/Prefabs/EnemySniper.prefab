@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunsPrefab:
-  - {fileID: 1576634372668950, guid: 32ca24d493f79754a94923210f088a44, type: 3}
+  - {fileID: 3744529025110002073, guid: 1797226a0446b927d8711e002e0bbeba, type: 3}
   - {fileID: 3882830268019261181, guid: 7b234e43ee9c271b28252341145723de, type: 3}
   equippedGunInd: 0
 --- !u!114 &3868064253789165874
