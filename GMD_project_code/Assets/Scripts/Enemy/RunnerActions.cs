@@ -53,9 +53,11 @@ namespace Enemy
         }
 
        private void OnCollisionEnter(Collision other)
-        {
+       {
+           
             if (_crashing && other.contacts[0].thisCollider == sensitiveCollider)
             {
+                print("collision " + other.contacts[0].thisCollider.gameObject.name);
                 GameObject go = other.gameObject;
                 int layer = go.layer;
                 if ((1<<layer & _obstacleLayersMask) != 0)
