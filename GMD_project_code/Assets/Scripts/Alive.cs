@@ -17,6 +17,7 @@ public class Alive: MonoBehaviour
     private DeathDelegate _onDeath;
     private DeathDelegate _onDeathDeathExit;
     private TerminateDelegate _terminate;
+    private bool deathDone;
 
     public DeathDelegate OnDeath
     {
@@ -46,7 +47,11 @@ public class Alive: MonoBehaviour
 
     public void TerminateDeath(DamageTypes damageType)
     {
-        if(_onDeathDeathExit != null) _onDeathDeathExit(damageType);
-        if(_terminate != null) _terminate(gameObject);
+        if (!deathDone)
+        {
+            if(_onDeathDeathExit != null) _onDeathDeathExit(damageType);
+            if(_terminate != null) _terminate(gameObject);
+            deathDone = true;
+        }
     }
 }

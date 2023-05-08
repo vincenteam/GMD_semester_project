@@ -58,9 +58,8 @@ public class PlayerController : MonoBehaviour
             _playerInput.OnReset += delegate { TransitionManager.TransitionInstance.Transition(SceneManager.GetActiveScene().name);};
         }
 
-        
-        HeadMovement headMove = gameObject.GetComponentInChildren<HeadMovement>();
-        rotate = GameObject.Find("CM vcam1").GetComponent<RotateToTarget>();
+        GameObject go = GameObject.Find("CM vcam1");
+        if(go != null) rotate = go.GetComponent<RotateToTarget>();
         if (rotate is not null && _playerInput is not null)
         {
             _playerInput.OnRotateX += rotate.RotateX;

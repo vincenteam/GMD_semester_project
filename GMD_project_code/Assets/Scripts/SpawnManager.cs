@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -13,6 +11,6 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawnMusic()
     {
-        audioSourceSpawn.Play();
+        if(audioSourceSpawn != null) audioSourceSpawn.Play();
     }
 }

@@ -4,7 +4,6 @@ DONE explaining controls
 DONE door staying open when object go out of it
 put scripts in folders
 (easter egg)
-remove prints
 
 DONE death animation for every death possible + sound
 DONE cam
@@ -15,7 +14,7 @@ DONE reset button
 UI :
 DONE Tutorial scene
 saccade webGL
-make a glow-up of the keyboard change
+DONE make a glow-up of the keyboard change
 example of a game scene in UI backgrounds
 
 add textures
@@ -33,7 +32,7 @@ enemy
     roomba -> augmenter taille collider
 
 
-mapping
+DONE mapping
 report
 readme
 video

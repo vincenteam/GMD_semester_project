@@ -54,7 +54,10 @@ public class PlayerLifeActions : MonoBehaviour, IAnimationEventHandler
 
     private void OnElectrified()
     {
-        audioSourceElectric.Play();
+        Animator animator = _skinManager.AnimatorInstance;
+        audioSourceElectric.Play(); // move in the appropriate death code in playerlifeactions
+        animator.SetTrigger(Suicide);
+        animator.SetBool(IsDead, true);
     }
 
     private void OnShot()
