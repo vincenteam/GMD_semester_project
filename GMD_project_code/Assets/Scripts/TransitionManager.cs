@@ -23,14 +23,16 @@ public class TransitionManager : MonoBehaviour
         }
         else
         {*/
+        if (sceneName == "TitleScreen")
+        {
+            SceneManager.LoadScene("TitleScreen");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
             SceneManager.LoadScene(sceneName);
+        }
         //}
-    }
-
-    public void ExitToMenu()
-    {
-        SceneManager.LoadScene("TitleScreen");
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 }
