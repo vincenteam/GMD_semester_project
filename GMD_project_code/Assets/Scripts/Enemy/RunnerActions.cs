@@ -54,7 +54,7 @@ namespace Enemy
 
        private void OnCollisionEnter(Collision other)
        {
-           
+           print("collision");
             if (_crashing && other.contacts[0].thisCollider == sensitiveCollider)
             {
                 print("collision " + other.contacts[0].thisCollider.gameObject.name);
@@ -62,7 +62,7 @@ namespace Enemy
                 int layer = go.layer;
                 if ((1<<layer & _obstacleLayersMask) != 0)
                 {
-                    if (!(layer == _livingLayer && go.CompareTag("Friendly")))// non friendly Living objects are ignored
+                    if (!(layer == _livingLayer && !go.CompareTag("Friendly")))// non friendly Living objects are ignored
                     {
                         _life.Die(DamageTypes.Explode);
                         _life.TerminateDeath(DamageTypes.Explode);
