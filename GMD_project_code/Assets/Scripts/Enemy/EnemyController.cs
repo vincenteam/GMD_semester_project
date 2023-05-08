@@ -7,10 +7,11 @@ namespace Enemy
         [SerializeField] private AudioSource alertSound;
         private void Awake()
         {
-            Guarding guarding = GetComponent<Guarding>();
+            Guarding guarding = GetComponentInChildren<Guarding>();
             if (guarding != null)
             {
-                guarding.OnAlertedStart += _ => { alertSound.Play(); };
+                print("add sound");
+                guarding.OnAlertedStart += _ => { alertSound.Play(); print("sound"); };
             }
         }
     }
