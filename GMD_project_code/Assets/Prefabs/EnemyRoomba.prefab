@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 1945825577}
   - component: {fileID: 4602657587012774505}
   - component: {fileID: 4844071780210780585}
-  - component: {fileID: 8752427602140320684}
   m_Layer: 0
   m_Name: EnemyRoomba
   m_TagString: Untagged
@@ -156,11 +155,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3420121446615667869}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2390777, y: 0.25052595, z: 1.2369378}
-  m_Center: {x: -0.0033100247, y: 0.37473702, z: -0.008151531}
+  m_Size: {x: 1.1555867, y: 0.25052595, z: 1.1759108}
+  m_Center: {x: -0.0021309059, y: 0.37473702, z: -0.0035373569}
 --- !u!54 &3420121446615667868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRotateYSpeed: 360
-  speed: 10
+  speed: 20
   maxVelocity: 20
 --- !u!114 &1481661844662145418
 MonoBehaviour:
@@ -222,6 +221,7 @@ MonoBehaviour:
   - Level
   - Objects
   - Living
+  sensitiveCollider: {fileID: 8543245692721758752}
 --- !u!114 &7367082794025330490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,19 +374,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &8752427602140320684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3420121446615667869}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.752124, z: 1}
-  m_Center: {x: 0, y: 0.12393801, z: 0}
 --- !u!1 &5218599733363566198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.z
       value: 1.032203
+      objectReference: {fileID: 0}
+    - target: {fileID: 810889404724881347, guid: 912c462bbb33e31f7a9de0849fadd795,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 810889404724881347, guid: 912c462bbb33e31f7a9de0849fadd795,
         type: 3}
