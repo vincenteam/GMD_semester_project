@@ -49,7 +49,7 @@ MonoBehaviour:
   coolDown: 1
   reloadTime: 1
   clipSize: 100
-  ammoCapacity: 100
+  ammoCapacity: 1000
 --- !u!1 &7418713267457253265
 GameObject:
   m_ObjectHideFlags: 0
