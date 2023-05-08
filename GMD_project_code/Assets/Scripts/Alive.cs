@@ -4,21 +4,20 @@ public class Alive: MonoBehaviour
 {
     // booleans to make sure some actions are performed only once
     private bool _dead = false;
+
+    public bool Dead
+    {
+        get => _dead;
+        set => _dead = value;
+    }
     
     public delegate void DeathDelegate(DamageTypes damageType);
     public delegate void TerminateDelegate(GameObject go);
     
-    private DeathDelegate _suicide;
     private DeathDelegate _onDeath;
     private DeathDelegate _onDeathDeathExit;
     private TerminateDelegate _terminate;
 
-    public DeathDelegate OnSuicide
-    {
-        get => _suicide;
-        set => _suicide = value;
-    }
-    
     public DeathDelegate OnDeath
     {
         get => _onDeath;
