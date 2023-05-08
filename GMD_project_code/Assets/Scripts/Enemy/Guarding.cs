@@ -21,7 +21,7 @@ namespace Enemy
         public ActionDelegate AlertedActions;
         public ActionDelegate OnAlertedEnd;
         
-        private int _maxColliders = 100;
+        private int _maxColliders = 1000;
         private int _targetsLayersMask;
         private int _obstacleLayersMask;
         
@@ -88,6 +88,8 @@ namespace Enemy
                      {
                          return go;
                      }
+                 }else{ // could be a trigger
+                 
                  }
              }
              

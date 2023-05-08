@@ -28,8 +28,14 @@ namespace Enemy
                 StartCoroutine(_actions.Run());
             };
             _guarding.OnAlertedEnd += StopAllCoroutines;
-            
-            
+
+            _life.OnDeath += type => {
+                print("runner killed " + type);
+                if (type == DamageTypes.Electrified)
+                {
+                    _life.Dead = false;
+                }
+            };
             _life.Terminate = Destroy;
         }
     }
