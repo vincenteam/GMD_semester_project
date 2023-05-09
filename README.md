@@ -29,7 +29,7 @@ Of course the game contains more than that, but that will be for you to discover
 
 ## Demonstration of our game :
 
-[Insert youtube video link]
+https://youtu.be/r0eePsh2x_g
 
 
 ## Third party assets we used in our game :
