@@ -13,13 +13,6 @@ As French exchange students at VIA for a semester, we took part in the Game Deve
 So, we made this.
 
 
-## How to run the game :
-
-There are two ways for you to try the game.
-The first one is by clicking on the following WebGL link to play it in your browser : [Insert WebGL build link here]
-The second one requires you to be on Windows, and is you downloading the built game in /GMD_project_code/Builds
-
-
 ## Game description :
 
 Our game consists of the player trying to cross different levels.
@@ -29,7 +22,7 @@ Of course the game contains more than that, but that will be for you to discover
 
 ## Demonstration of our game :
 
-https://youtu.be/r0eePsh2x_g
+https://youtu.be/YnlK7GWI4HQ
 
 
 ## Third party assets we used in our game :
