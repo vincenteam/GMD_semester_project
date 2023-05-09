@@ -24,6 +24,9 @@ Of course the game contains more than that, but that will be for you to discover
 
 https://youtu.be/YnlK7GWI4HQ
 
+## How to play
+- you cant :) 💀
+- Final webGL build was too heavy to be put on git hub, and we couldn't get lfs to work, there is a very old build at https://vincenteam.github.io/GMD_semester_project/ that is from a previous version of the game and is not representative of the actual game, but demonstrate that it works.
 
 ## Third party assets we used in our game :
 
